@@ -20,7 +20,7 @@ export SEPOLIA_URL=https://arb-sepolia.g.alchemy.com/v2/your_api_key
 ```
 #### Create and Supply Pools
 ```shell
-npx hardhat run scripts/01create.ts --network arbitrumSepolia
+npx hardhat run scripts/00create.ts --network arbitrumSepolia
 npx hardhat run scripts/01liquidity.ts --network arbitrumSepolia
 ```
 #### Long and Short
