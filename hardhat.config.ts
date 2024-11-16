@@ -5,8 +5,8 @@ import { defaultRpcs } from "./utils/network";
 const getRpcUrl = (network) => {
     let rpcUrl = defaultRpcs[network];
     if (rpcUrl == undefined || rpcUrl ==""){
-        const { URL_SEPOLIA } = process.env;
-        if (URL_SEPOLIA) { return URL_SEPOLIA;}
+        const { SEPOLIA_URL } = process.env;
+        if (SEPOLIA_URL) { return SEPOLIA_URL;}
     }
     return rpcUrl;
 };
