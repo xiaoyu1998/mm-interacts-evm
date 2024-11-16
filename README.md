@@ -15,7 +15,7 @@ npm install
 #### Load Accounts And Sepolia Rpc
 ```shell
 export ACCOUNT_KEY="privateKey1,privateKey2"
-export urlSepolia=https://arb-sepolia.g.alchemy.com/v2/your_api_key
+export URL_SEPOLIA=https://arb-sepolia.g.alchemy.com/v2/your_api_key
 
 ```
 #### Create and Supply Pools
