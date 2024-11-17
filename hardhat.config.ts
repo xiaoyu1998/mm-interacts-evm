@@ -5,16 +5,16 @@ import { defaultRpcs } from "./utils/network";
 const getRpcUrl = (network) => {
     let rpcUrl = defaultRpcs[network];
     if (rpcUrl == undefined || rpcUrl ==""){
-        const { SEPOLIA_URL } = process.env;
-        if (SEPOLIA_URL) { return SEPOLIA_URL;}
+        const { sepolia_url } = process.env;
+        if (sepolia_url) { return sepolia_url;}
     }
     return rpcUrl;
 };
 
 const getEnvAccount = () => {
-    const { ACCOUNT_KEY } = process.env;
-    if (ACCOUNT_KEY) {
-        return ACCOUNT_KEY.split(",");
+    const { account_keys } = process.env;
+    if (account_keys) {
+        return account_keys.split(",");
     }
     return [];
 };
