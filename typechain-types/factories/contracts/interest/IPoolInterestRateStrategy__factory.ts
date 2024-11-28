@@ -15,7 +15,7 @@ const _abi = [
         components: [
           {
             internalType: "uint256",
-            name: "totalAvailableReserve",
+            name: "totalPoolBalance",
             type: "uint256",
           },
           {
@@ -58,9 +58,9 @@ const _abi = [
     name: "getRateSlope1",
     outputs: [
       {
-        internalType: "uint256",
+        internalType: "uint256[]",
         name: "",
-        type: "uint256",
+        type: "uint256[]",
       },
     ],
     stateMutability: "view",
@@ -71,9 +71,9 @@ const _abi = [
     name: "getRateSlope2",
     outputs: [
       {
-        internalType: "uint256",
+        internalType: "uint256[]",
         name: "",
-        type: "uint256",
+        type: "uint256[]",
       },
     ],
     stateMutability: "view",

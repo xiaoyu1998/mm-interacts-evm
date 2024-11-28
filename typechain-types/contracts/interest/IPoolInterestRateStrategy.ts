@@ -22,14 +22,14 @@ import type {
 
 export declare namespace InterestUtils {
   export type CalculateInterestRatesParamsStruct = {
-    totalAvailableReserve: BigNumberish;
+    totalPoolBalance: BigNumberish;
     totalDebt: BigNumberish;
   };
 
   export type CalculateInterestRatesParamsStructOutput = [
-    totalAvailableReserve: bigint,
+    totalPoolBalance: bigint,
     totalDebt: bigint
-  ] & { totalAvailableReserve: bigint; totalDebt: bigint };
+  ] & { totalPoolBalance: bigint; totalDebt: bigint };
 }
 
 export interface IPoolInterestRateStrategyInterface extends Interface {
@@ -136,9 +136,9 @@ export interface IPoolInterestRateStrategy extends BaseContract {
 
   getOptimalUsageRatio: TypedContractMethod<[], [bigint], "view">;
 
-  getRateSlope1: TypedContractMethod<[], [bigint], "view">;
+  getRateSlope1: TypedContractMethod<[], [bigint[]], "view">;
 
-  getRateSlope2: TypedContractMethod<[], [bigint], "view">;
+  getRateSlope2: TypedContractMethod<[], [bigint[]], "view">;
 
   getRatebase: TypedContractMethod<[], [bigint], "view">;
 
@@ -158,10 +158,10 @@ export interface IPoolInterestRateStrategy extends BaseContract {
   ): TypedContractMethod<[], [bigint], "view">;
   getFunction(
     nameOrSignature: "getRateSlope1"
-  ): TypedContractMethod<[], [bigint], "view">;
+  ): TypedContractMethod<[], [bigint[]], "view">;
   getFunction(
     nameOrSignature: "getRateSlope2"
-  ): TypedContractMethod<[], [bigint], "view">;
+  ): TypedContractMethod<[], [bigint[]], "view">;
   getFunction(
     nameOrSignature: "getRatebase"
   ): TypedContractMethod<[], [bigint], "view">;

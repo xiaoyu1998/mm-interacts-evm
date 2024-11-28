@@ -35,8 +35,8 @@ export function parsePool(pool) {
                 totalCollateral:pool[0][0][5],
                 totalCollateralWithDebt:pool[0][0][6],
                 totalScaledDebt:pool[0][0][7],
-                balance:pool[0][0][8],
-                actualLiquidity:pool[0][0][9],
+                poolBalance:pool[0][0][8],
+                priceLiquidity:pool[0][0][9],
                 avaiableLiquidity:pool[0][0][10],
                 loan:pool[0][0][11]
             },
@@ -49,8 +49,8 @@ export function parsePool(pool) {
                 totalCollateral:pool[0][1][5],
                 totalCollateralWithDebt:pool[0][1][6],
                 totalScaledDebt:pool[0][1][7],
-                balance:pool[0][1][8],
-                actualLiquidity:pool[0][1][9],
+                poolBalance:pool[0][1][8],
+                priceLiquidity:pool[0][1][9],
                 avaiableLiquidity:pool[0][1][10],
                 loan:pool[0][1][11]
             }

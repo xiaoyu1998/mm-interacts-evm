@@ -13,13 +13,66 @@ const _abi = [
     inputs: [
       {
         internalType: "address",
-        name: "underlyingAsset",
+        name: "adder",
         type: "address",
       },
       {
         internalType: "address",
-        name: "account",
+        name: "baseToken",
         type: "address",
+      },
+      {
+        internalType: "address",
+        name: "memeToken",
+        type: "address",
+      },
+      {
+        internalType: "address",
+        name: "to",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "amount0",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "amount1",
+        type: "uint256",
+      },
+    ],
+    name: "emitAdd",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "borrower",
+        type: "address",
+      },
+      {
+        internalType: "address",
+        name: "baseToken",
+        type: "address",
+      },
+      {
+        internalType: "address",
+        name: "memeToken",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "positionId",
+        type: "uint256",
+      },
+      {
+        internalType: "uint8",
+        name: "tokenIndex",
+        type: "uint8",
       },
       {
         internalType: "uint256",
@@ -32,14 +85,31 @@ const _abi = [
         type: "uint256",
       },
       {
-        internalType: "uint256",
-        name: "collateral",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "debtScaled",
-        type: "uint256",
+        components: [
+          {
+            internalType: "uint256",
+            name: "baseCollateral",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "baseDebtScaled",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "memeCollateral",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "memeDebtScaled",
+            type: "uint256",
+          },
+        ],
+        internalType: "struct Event.Liquidation",
+        name: "liquidation",
+        type: "tuple",
       },
     ],
     name: "emitBorrow",
@@ -112,65 +182,17 @@ const _abi = [
     inputs: [
       {
         internalType: "address",
-        name: "underlyingAsset",
+        name: "depositor",
         type: "address",
       },
       {
         internalType: "address",
-        name: "underlyingAssetUsd",
+        name: "baseToken",
         type: "address",
       },
       {
         internalType: "address",
-        name: "account",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "collateralAmountToSell",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "debtAmountClosed",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "remainAmount",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "remainAmountUsd",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "collateralUsd",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "debtScaledUsd",
-        type: "uint256",
-      },
-    ],
-    name: "emitClosePosition",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "underlyingAsset",
-        type: "address",
-      },
-      {
-        internalType: "address",
-        name: "account",
+        name: "memeToken",
         type: "address",
       },
       {
@@ -180,12 +202,22 @@ const _abi = [
       },
       {
         internalType: "uint256",
-        name: "collateral",
+        name: "baseCollateral",
         type: "uint256",
       },
       {
         internalType: "uint256",
-        name: "debtScaled",
+        name: "baseDebtScaled",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "memeCollateral",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "memeDebtScaled",
         type: "uint256",
       },
     ],
@@ -269,36 +301,41 @@ const _abi = [
     inputs: [
       {
         internalType: "address",
-        name: "liquidator",
+        name: "remover",
         type: "address",
       },
       {
         internalType: "address",
-        name: "underlyingAsset",
+        name: "baseToken",
         type: "address",
       },
       {
         internalType: "address",
-        name: "account",
+        name: "memeToken",
         type: "address",
       },
       {
         internalType: "uint256",
-        name: "collateral",
+        name: "liquidity",
+        type: "uint256",
+      },
+      {
+        internalType: "address",
+        name: "to",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "amount0",
         type: "uint256",
       },
       {
         internalType: "uint256",
-        name: "debt",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "price",
+        name: "amount1",
         type: "uint256",
       },
     ],
-    name: "emitPositionLiquidation",
+    name: "emitRemove",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
@@ -307,13 +344,28 @@ const _abi = [
     inputs: [
       {
         internalType: "address",
-        name: "underlyingAsset",
+        name: "repayer",
         type: "address",
       },
       {
         internalType: "address",
-        name: "repayer",
+        name: "baseToken",
         type: "address",
+      },
+      {
+        internalType: "address",
+        name: "memeToken",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "positionId",
+        type: "uint256",
+      },
+      {
+        internalType: "uint8",
+        name: "tokenIndex",
+        type: "uint8",
       },
       {
         internalType: "uint256",
@@ -321,19 +373,31 @@ const _abi = [
         type: "uint256",
       },
       {
-        internalType: "bool",
-        name: "useCollateral",
-        type: "bool",
-      },
-      {
-        internalType: "uint256",
-        name: "collateral",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "debtScaled",
-        type: "uint256",
+        components: [
+          {
+            internalType: "uint256",
+            name: "baseCollateral",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "baseDebtScaled",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "memeCollateral",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "memeDebtScaled",
+            type: "uint256",
+          },
+        ],
+        internalType: "struct Event.Liquidation",
+        name: "liquidation",
+        type: "tuple",
       },
     ],
     name: "emitRepay",
@@ -345,45 +409,17 @@ const _abi = [
     inputs: [
       {
         internalType: "address",
-        name: "underlyingAsset",
-        type: "address",
-      },
-      {
-        internalType: "address",
         name: "account",
         type: "address",
       },
       {
         internalType: "address",
-        name: "to",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "SupplyAmount",
-        type: "uint256",
-      },
-    ],
-    name: "emitSupply",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "underlyingAssetIn",
+        name: "tokenIn",
         type: "address",
       },
       {
         internalType: "address",
-        name: "underlyingAssetOut",
-        type: "address",
-      },
-      {
-        internalType: "address",
-        name: "account",
+        name: "tokenOut",
         type: "address",
       },
       {
@@ -402,24 +438,31 @@ const _abi = [
         type: "uint256",
       },
       {
-        internalType: "uint256",
-        name: "collateralIn",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "debtScaledIn",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "collateralOut",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "debtScaledOut",
-        type: "uint256",
+        components: [
+          {
+            internalType: "uint256",
+            name: "baseCollateral",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "baseDebtScaled",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "memeCollateral",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "memeDebtScaled",
+            type: "uint256",
+          },
+        ],
+        internalType: "struct Event.Liquidation",
+        name: "liquidation",
+        type: "tuple",
       },
     ],
     name: "emitSwap",
@@ -431,17 +474,17 @@ const _abi = [
     inputs: [
       {
         internalType: "address",
-        name: "underlyingAsset",
+        name: "withdrawer",
         type: "address",
       },
       {
         internalType: "address",
-        name: "account",
+        name: "baseToken",
         type: "address",
       },
       {
         internalType: "address",
-        name: "to",
+        name: "memeToken",
         type: "address",
       },
       {
@@ -450,41 +493,28 @@ const _abi = [
         type: "uint256",
       },
       {
-        internalType: "uint256",
-        name: "collateral",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "debtScaled",
-        type: "uint256",
-      },
-    ],
-    name: "emitWithdraw",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "underlyingAsset",
-        type: "address",
-      },
-      {
-        internalType: "address",
-        name: "account",
-        type: "address",
-      },
-      {
         internalType: "address",
         name: "to",
         type: "address",
       },
       {
         internalType: "uint256",
-        name: "withdrawAmount",
+        name: "baseCollateral",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "baseDebtScaled",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "memeCollateral",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "memeDebtScaled",
         type: "uint256",
       },
     ],

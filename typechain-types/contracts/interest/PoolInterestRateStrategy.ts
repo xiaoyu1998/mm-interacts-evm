@@ -20,30 +20,78 @@ import type {
   TypedContractMethod,
 } from "../../common";
 
+export declare namespace PoolInterestRateStrategy {
+  export type InterestRateStrategyParamsStruct = {
+    optimalUsageRatio: BigNumberish;
+    rate0: BigNumberish;
+    rateSlope1: BigNumberish[];
+    rateSlope2: BigNumberish[];
+  };
+
+  export type InterestRateStrategyParamsStructOutput = [
+    optimalUsageRatio: bigint,
+    rate0: bigint,
+    rateSlope1: bigint[],
+    rateSlope2: bigint[]
+  ] & {
+    optimalUsageRatio: bigint;
+    rate0: bigint;
+    rateSlope1: bigint[];
+    rateSlope2: bigint[];
+  };
+}
+
 export declare namespace InterestUtils {
   export type CalculateInterestRatesParamsStruct = {
-    totalAvailableReserve: BigNumberish;
+    totalPoolBalance: BigNumberish;
     totalDebt: BigNumberish;
   };
 
   export type CalculateInterestRatesParamsStructOutput = [
-    totalAvailableReserve: bigint,
+    totalPoolBalance: bigint,
     totalDebt: bigint
-  ] & { totalAvailableReserve: bigint; totalDebt: bigint };
+  ] & { totalPoolBalance: bigint; totalDebt: bigint };
 }
 
 export interface PoolInterestRateStrategyInterface extends Interface {
   getFunction(
     nameOrSignature:
+      | "BALANCE10000"
+      | "BALANCE1000000"
+      | "BALANCE5000"
+      | "BALANCE50000"
+      | "BALANCE500000"
       | "MAX_EXCESS_USAGE_RATIO"
       | "OPTIMAL_USAGE_RATIO"
+      | "SLOPESIZE"
       | "calculateInterestRates"
       | "getOptimalUsageRatio"
       | "getRateSlope1"
       | "getRateSlope2"
       | "getRatebase"
+      | "getSlopeIndex"
   ): FunctionFragment;
 
+  encodeFunctionData(
+    functionFragment: "BALANCE10000",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "BALANCE1000000",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "BALANCE5000",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "BALANCE50000",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "BALANCE500000",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "MAX_EXCESS_USAGE_RATIO",
     values?: undefined
@@ -52,6 +100,7 @@ export interface PoolInterestRateStrategyInterface extends Interface {
     functionFragment: "OPTIMAL_USAGE_RATIO",
     values?: undefined
   ): string;
+  encodeFunctionData(functionFragment: "SLOPESIZE", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "calculateInterestRates",
     values: [InterestUtils.CalculateInterestRatesParamsStruct]
@@ -72,7 +121,31 @@ export interface PoolInterestRateStrategyInterface extends Interface {
     functionFragment: "getRatebase",
     values?: undefined
   ): string;
+  encodeFunctionData(
+    functionFragment: "getSlopeIndex",
+    values: [BigNumberish]
+  ): string;
 
+  decodeFunctionResult(
+    functionFragment: "BALANCE10000",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "BALANCE1000000",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "BALANCE5000",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "BALANCE50000",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "BALANCE500000",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "MAX_EXCESS_USAGE_RATIO",
     data: BytesLike
@@ -81,6 +154,7 @@ export interface PoolInterestRateStrategyInterface extends Interface {
     functionFragment: "OPTIMAL_USAGE_RATIO",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "SLOPESIZE", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "calculateInterestRates",
     data: BytesLike
@@ -99,6 +173,10 @@ export interface PoolInterestRateStrategyInterface extends Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "getRatebase",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getSlopeIndex",
     data: BytesLike
   ): Result;
 }
@@ -146,9 +224,21 @@ export interface PoolInterestRateStrategy extends BaseContract {
     event?: TCEvent
   ): Promise<this>;
 
+  BALANCE10000: TypedContractMethod<[], [bigint], "view">;
+
+  BALANCE1000000: TypedContractMethod<[], [bigint], "view">;
+
+  BALANCE5000: TypedContractMethod<[], [bigint], "view">;
+
+  BALANCE50000: TypedContractMethod<[], [bigint], "view">;
+
+  BALANCE500000: TypedContractMethod<[], [bigint], "view">;
+
   MAX_EXCESS_USAGE_RATIO: TypedContractMethod<[], [bigint], "view">;
 
   OPTIMAL_USAGE_RATIO: TypedContractMethod<[], [bigint], "view">;
+
+  SLOPESIZE: TypedContractMethod<[], [bigint], "view">;
 
   calculateInterestRates: TypedContractMethod<
     [params: InterestUtils.CalculateInterestRatesParamsStruct],
@@ -158,21 +248,41 @@ export interface PoolInterestRateStrategy extends BaseContract {
 
   getOptimalUsageRatio: TypedContractMethod<[], [bigint], "view">;
 
-  getRateSlope1: TypedContractMethod<[], [bigint], "view">;
+  getRateSlope1: TypedContractMethod<[], [bigint[]], "view">;
 
-  getRateSlope2: TypedContractMethod<[], [bigint], "view">;
+  getRateSlope2: TypedContractMethod<[], [bigint[]], "view">;
 
   getRatebase: TypedContractMethod<[], [bigint], "view">;
+
+  getSlopeIndex: TypedContractMethod<[balance: BigNumberish], [bigint], "view">;
 
   getFunction<T extends ContractMethod = ContractMethod>(
     key: string | FunctionFragment
   ): T;
 
   getFunction(
+    nameOrSignature: "BALANCE10000"
+  ): TypedContractMethod<[], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "BALANCE1000000"
+  ): TypedContractMethod<[], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "BALANCE5000"
+  ): TypedContractMethod<[], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "BALANCE50000"
+  ): TypedContractMethod<[], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "BALANCE500000"
+  ): TypedContractMethod<[], [bigint], "view">;
+  getFunction(
     nameOrSignature: "MAX_EXCESS_USAGE_RATIO"
   ): TypedContractMethod<[], [bigint], "view">;
   getFunction(
     nameOrSignature: "OPTIMAL_USAGE_RATIO"
+  ): TypedContractMethod<[], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "SLOPESIZE"
   ): TypedContractMethod<[], [bigint], "view">;
   getFunction(
     nameOrSignature: "calculateInterestRates"
@@ -186,13 +296,16 @@ export interface PoolInterestRateStrategy extends BaseContract {
   ): TypedContractMethod<[], [bigint], "view">;
   getFunction(
     nameOrSignature: "getRateSlope1"
-  ): TypedContractMethod<[], [bigint], "view">;
+  ): TypedContractMethod<[], [bigint[]], "view">;
   getFunction(
     nameOrSignature: "getRateSlope2"
-  ): TypedContractMethod<[], [bigint], "view">;
+  ): TypedContractMethod<[], [bigint[]], "view">;
   getFunction(
     nameOrSignature: "getRatebase"
   ): TypedContractMethod<[], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "getSlopeIndex"
+  ): TypedContractMethod<[balance: BigNumberish], [bigint], "view">;
 
   filters: {};
 }

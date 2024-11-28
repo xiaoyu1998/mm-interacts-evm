@@ -31,8 +31,8 @@ export declare namespace ReaderPoolUtils {
     totalCollateral: BigNumberish;
     totalCollateralWithDebt: BigNumberish;
     totalDebtScaled: BigNumberish;
-    balance: BigNumberish;
-    actualLiquidity: BigNumberish;
+    poolBalance: BigNumberish;
+    priceLiquidity: BigNumberish;
     avaiableLiquidity: BigNumberish;
     loan: BigNumberish;
   };
@@ -46,8 +46,8 @@ export declare namespace ReaderPoolUtils {
     totalCollateral: bigint,
     totalCollateralWithDebt: bigint,
     totalDebtScaled: bigint,
-    balance: bigint,
-    actualLiquidity: bigint,
+    poolBalance: bigint,
+    priceLiquidity: bigint,
     avaiableLiquidity: bigint,
     loan: bigint
   ] & {
@@ -59,8 +59,8 @@ export declare namespace ReaderPoolUtils {
     totalCollateral: bigint;
     totalCollateralWithDebt: bigint;
     totalDebtScaled: bigint;
-    balance: bigint;
-    actualLiquidity: bigint;
+    poolBalance: bigint;
+    priceLiquidity: bigint;
     avaiableLiquidity: bigint;
     loan: bigint;
   };
