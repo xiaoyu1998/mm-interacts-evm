@@ -96,17 +96,6 @@ export interface PoolStoreUtilsInterface extends Interface {
       | "POOL_UNCLAIMED_FEE_0"
       | "POOL_UNCLAIMED_FEE_1"
       | "get"
-      | "getBorrowIndex"
-      | "getBorrowRate"
-      | "getConfiguration"
-      | "getDefaultInterestRateStrategy"
-      | "getDefaultPoolConfiguration"
-      | "getPoolBank"
-      | "getPoolSource"
-      | "getPoolTokenBase"
-      | "getTokenBase"
-      | "getUnclaimedFee"
-      | "validateTokenIndex"
   ): FunctionFragment;
 
   encodeFunctionData(functionFragment: "POOL_BANK", values?: undefined): string;
@@ -186,50 +175,6 @@ export interface PoolStoreUtilsInterface extends Interface {
     functionFragment: "get",
     values: [AddressLike, BytesLike]
   ): string;
-  encodeFunctionData(
-    functionFragment: "getBorrowIndex",
-    values: [AddressLike, BytesLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getBorrowRate",
-    values: [AddressLike, BytesLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getConfiguration",
-    values: [AddressLike, BytesLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getDefaultInterestRateStrategy",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getDefaultPoolConfiguration",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getPoolBank",
-    values: [AddressLike, BytesLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getPoolSource",
-    values: [AddressLike, BytesLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getPoolTokenBase",
-    values: [AddressLike, BytesLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getTokenBase",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getUnclaimedFee",
-    values: [AddressLike, BytesLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "validateTokenIndex",
-    values: [BigNumberish]
-  ): string;
 
   decodeFunctionResult(functionFragment: "POOL_BANK", data: BytesLike): Result;
   decodeFunctionResult(
@@ -305,50 +250,6 @@ export interface PoolStoreUtilsInterface extends Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "get", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "getBorrowIndex",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getBorrowRate",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getConfiguration",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getDefaultInterestRateStrategy",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getDefaultPoolConfiguration",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getPoolBank",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getPoolSource",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getPoolTokenBase",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getTokenBase",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getUnclaimedFee",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "validateTokenIndex",
-    data: BytesLike
-  ): Result;
 }
 
 export interface PoolStoreUtils extends BaseContract {
@@ -438,68 +339,6 @@ export interface PoolStoreUtils extends BaseContract {
     "view"
   >;
 
-  getBorrowIndex: TypedContractMethod<
-    [dataStoreAddress: AddressLike, key: BytesLike, tokenIndex: BigNumberish],
-    [bigint],
-    "view"
-  >;
-
-  getBorrowRate: TypedContractMethod<
-    [dataStoreAddress: AddressLike, key: BytesLike, tokenIndex: BigNumberish],
-    [bigint],
-    "view"
-  >;
-
-  getConfiguration: TypedContractMethod<
-    [dataStoreAddress: AddressLike, key: BytesLike],
-    [bigint],
-    "view"
-  >;
-
-  getDefaultInterestRateStrategy: TypedContractMethod<
-    [dataStore: AddressLike],
-    [string],
-    "view"
-  >;
-
-  getDefaultPoolConfiguration: TypedContractMethod<
-    [dataStore: AddressLike],
-    [bigint],
-    "view"
-  >;
-
-  getPoolBank: TypedContractMethod<
-    [dataStoreAddress: AddressLike, key: BytesLike],
-    [string],
-    "view"
-  >;
-
-  getPoolSource: TypedContractMethod<
-    [dataStoreAddress: AddressLike, key: BytesLike],
-    [string],
-    "view"
-  >;
-
-  getPoolTokenBase: TypedContractMethod<
-    [dataStoreAddress: AddressLike, key: BytesLike],
-    [string],
-    "view"
-  >;
-
-  getTokenBase: TypedContractMethod<[dataStore: AddressLike], [string], "view">;
-
-  getUnclaimedFee: TypedContractMethod<
-    [dataStoreAddress: AddressLike, key: BytesLike],
-    [bigint],
-    "view"
-  >;
-
-  validateTokenIndex: TypedContractMethod<
-    [tokenIndex: BigNumberish],
-    [void],
-    "view"
-  >;
-
   getFunction<T extends ContractMethod = ContractMethod>(
     key: string | FunctionFragment
   ): T;
@@ -568,67 +407,6 @@ export interface PoolStoreUtils extends BaseContract {
     [Pool.PropsStructOutput],
     "view"
   >;
-  getFunction(
-    nameOrSignature: "getBorrowIndex"
-  ): TypedContractMethod<
-    [dataStoreAddress: AddressLike, key: BytesLike, tokenIndex: BigNumberish],
-    [bigint],
-    "view"
-  >;
-  getFunction(
-    nameOrSignature: "getBorrowRate"
-  ): TypedContractMethod<
-    [dataStoreAddress: AddressLike, key: BytesLike, tokenIndex: BigNumberish],
-    [bigint],
-    "view"
-  >;
-  getFunction(
-    nameOrSignature: "getConfiguration"
-  ): TypedContractMethod<
-    [dataStoreAddress: AddressLike, key: BytesLike],
-    [bigint],
-    "view"
-  >;
-  getFunction(
-    nameOrSignature: "getDefaultInterestRateStrategy"
-  ): TypedContractMethod<[dataStore: AddressLike], [string], "view">;
-  getFunction(
-    nameOrSignature: "getDefaultPoolConfiguration"
-  ): TypedContractMethod<[dataStore: AddressLike], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "getPoolBank"
-  ): TypedContractMethod<
-    [dataStoreAddress: AddressLike, key: BytesLike],
-    [string],
-    "view"
-  >;
-  getFunction(
-    nameOrSignature: "getPoolSource"
-  ): TypedContractMethod<
-    [dataStoreAddress: AddressLike, key: BytesLike],
-    [string],
-    "view"
-  >;
-  getFunction(
-    nameOrSignature: "getPoolTokenBase"
-  ): TypedContractMethod<
-    [dataStoreAddress: AddressLike, key: BytesLike],
-    [string],
-    "view"
-  >;
-  getFunction(
-    nameOrSignature: "getTokenBase"
-  ): TypedContractMethod<[dataStore: AddressLike], [string], "view">;
-  getFunction(
-    nameOrSignature: "getUnclaimedFee"
-  ): TypedContractMethod<
-    [dataStoreAddress: AddressLike, key: BytesLike],
-    [bigint],
-    "view"
-  >;
-  getFunction(
-    nameOrSignature: "validateTokenIndex"
-  ): TypedContractMethod<[tokenIndex: BigNumberish], [void], "view">;
 
   filters: {};
 }

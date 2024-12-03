@@ -3,4 +3,3 @@
 /* eslint-disable */
 export type { Position } from "./Position";
 export type { PositionStoreUtils } from "./PositionStoreUtils";
-export type { PositionUtils } from "./PositionUtils";

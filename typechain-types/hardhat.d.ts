@@ -78,14 +78,6 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.StrictBank__factory>;
     getContractFactory(
-      name: "BorrowUtils",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.BorrowUtils__factory>;
-    getContractFactory(
-      name: "CloseUtils",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.CloseUtils__factory>;
-    getContractFactory(
       name: "Config",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Config__factory>;
@@ -101,10 +93,6 @@ declare module "hardhat/types/runtime" {
       name: "Keys",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Keys__factory>;
-    getContractFactory(
-      name: "DepositUtils",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.DepositUtils__factory>;
     getContractFactory(
       name: "Errors",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -186,10 +174,6 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.FeeHandler__factory>;
     getContractFactory(
-      name: "FeeStoreUtils",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.FeeStoreUtils__factory>;
-    getContractFactory(
       name: "IPoolInterestRateStrategy",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IPoolInterestRateStrategy__factory>;
@@ -197,10 +181,6 @@ declare module "hardhat/types/runtime" {
       name: "PoolInterestRateStrategy",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.PoolInterestRateStrategy__factory>;
-    getContractFactory(
-      name: "LiquidationUtils",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.LiquidationUtils__factory>;
     getContractFactory(
       name: "LiquidityUtils",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -226,10 +206,6 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.PoolStoreUtils__factory>;
     getContractFactory(
-      name: "PoolUtils",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.PoolUtils__factory>;
-    getContractFactory(
       name: "Position",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Position__factory>;
@@ -237,10 +213,6 @@ declare module "hardhat/types/runtime" {
       name: "PositionStoreUtils",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.PositionStoreUtils__factory>;
-    getContractFactory(
-      name: "PositionUtils",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.PositionUtils__factory>;
     getContractFactory(
       name: "Reader",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -278,10 +250,6 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Router__factory>;
     getContractFactory(
-      name: "SwapUtils",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.SwapUtils__factory>;
-    getContractFactory(
       name: "IPoolERC20",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IPoolERC20__factory>;
@@ -313,10 +281,6 @@ declare module "hardhat/types/runtime" {
       name: "Printer",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Printer__factory>;
-    getContractFactory(
-      name: "WithdrawUtils",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.WithdrawUtils__factory>;
 
     getContractAt(
       name: "IERC1155Errors",
@@ -399,16 +363,6 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.StrictBank>;
     getContractAt(
-      name: "BorrowUtils",
-      address: string | ethers.Addressable,
-      signer?: ethers.Signer
-    ): Promise<Contracts.BorrowUtils>;
-    getContractAt(
-      name: "CloseUtils",
-      address: string | ethers.Addressable,
-      signer?: ethers.Signer
-    ): Promise<Contracts.CloseUtils>;
-    getContractAt(
       name: "Config",
       address: string | ethers.Addressable,
       signer?: ethers.Signer
@@ -428,11 +382,6 @@ declare module "hardhat/types/runtime" {
       address: string | ethers.Addressable,
       signer?: ethers.Signer
     ): Promise<Contracts.Keys>;
-    getContractAt(
-      name: "DepositUtils",
-      address: string | ethers.Addressable,
-      signer?: ethers.Signer
-    ): Promise<Contracts.DepositUtils>;
     getContractAt(
       name: "Errors",
       address: string | ethers.Addressable,
@@ -534,11 +483,6 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.FeeHandler>;
     getContractAt(
-      name: "FeeStoreUtils",
-      address: string | ethers.Addressable,
-      signer?: ethers.Signer
-    ): Promise<Contracts.FeeStoreUtils>;
-    getContractAt(
       name: "IPoolInterestRateStrategy",
       address: string | ethers.Addressable,
       signer?: ethers.Signer
@@ -548,11 +492,6 @@ declare module "hardhat/types/runtime" {
       address: string | ethers.Addressable,
       signer?: ethers.Signer
     ): Promise<Contracts.PoolInterestRateStrategy>;
-    getContractAt(
-      name: "LiquidationUtils",
-      address: string | ethers.Addressable,
-      signer?: ethers.Signer
-    ): Promise<Contracts.LiquidationUtils>;
     getContractAt(
       name: "LiquidityUtils",
       address: string | ethers.Addressable,
@@ -584,11 +523,6 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.PoolStoreUtils>;
     getContractAt(
-      name: "PoolUtils",
-      address: string | ethers.Addressable,
-      signer?: ethers.Signer
-    ): Promise<Contracts.PoolUtils>;
-    getContractAt(
       name: "Position",
       address: string | ethers.Addressable,
       signer?: ethers.Signer
@@ -598,11 +532,6 @@ declare module "hardhat/types/runtime" {
       address: string | ethers.Addressable,
       signer?: ethers.Signer
     ): Promise<Contracts.PositionStoreUtils>;
-    getContractAt(
-      name: "PositionUtils",
-      address: string | ethers.Addressable,
-      signer?: ethers.Signer
-    ): Promise<Contracts.PositionUtils>;
     getContractAt(
       name: "Reader",
       address: string | ethers.Addressable,
@@ -649,11 +578,6 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.Router>;
     getContractAt(
-      name: "SwapUtils",
-      address: string | ethers.Addressable,
-      signer?: ethers.Signer
-    ): Promise<Contracts.SwapUtils>;
-    getContractAt(
       name: "IPoolERC20",
       address: string | ethers.Addressable,
       signer?: ethers.Signer
@@ -693,11 +617,6 @@ declare module "hardhat/types/runtime" {
       address: string | ethers.Addressable,
       signer?: ethers.Signer
     ): Promise<Contracts.Printer>;
-    getContractAt(
-      name: "WithdrawUtils",
-      address: string | ethers.Addressable,
-      signer?: ethers.Signer
-    ): Promise<Contracts.WithdrawUtils>;
 
     deployContract(
       name: "IERC1155Errors",
@@ -764,14 +683,6 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.StrictBank>;
     deployContract(
-      name: "BorrowUtils",
-      signerOrOptions?: ethers.Signer | DeployContractOptions
-    ): Promise<Contracts.BorrowUtils>;
-    deployContract(
-      name: "CloseUtils",
-      signerOrOptions?: ethers.Signer | DeployContractOptions
-    ): Promise<Contracts.CloseUtils>;
-    deployContract(
       name: "Config",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.Config>;
@@ -787,10 +698,6 @@ declare module "hardhat/types/runtime" {
       name: "Keys",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.Keys>;
-    deployContract(
-      name: "DepositUtils",
-      signerOrOptions?: ethers.Signer | DeployContractOptions
-    ): Promise<Contracts.DepositUtils>;
     deployContract(
       name: "Errors",
       signerOrOptions?: ethers.Signer | DeployContractOptions
@@ -872,10 +779,6 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.FeeHandler>;
     deployContract(
-      name: "FeeStoreUtils",
-      signerOrOptions?: ethers.Signer | DeployContractOptions
-    ): Promise<Contracts.FeeStoreUtils>;
-    deployContract(
       name: "IPoolInterestRateStrategy",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.IPoolInterestRateStrategy>;
@@ -883,10 +786,6 @@ declare module "hardhat/types/runtime" {
       name: "PoolInterestRateStrategy",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.PoolInterestRateStrategy>;
-    deployContract(
-      name: "LiquidationUtils",
-      signerOrOptions?: ethers.Signer | DeployContractOptions
-    ): Promise<Contracts.LiquidationUtils>;
     deployContract(
       name: "LiquidityUtils",
       signerOrOptions?: ethers.Signer | DeployContractOptions
@@ -912,10 +811,6 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.PoolStoreUtils>;
     deployContract(
-      name: "PoolUtils",
-      signerOrOptions?: ethers.Signer | DeployContractOptions
-    ): Promise<Contracts.PoolUtils>;
-    deployContract(
       name: "Position",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.Position>;
@@ -923,10 +818,6 @@ declare module "hardhat/types/runtime" {
       name: "PositionStoreUtils",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.PositionStoreUtils>;
-    deployContract(
-      name: "PositionUtils",
-      signerOrOptions?: ethers.Signer | DeployContractOptions
-    ): Promise<Contracts.PositionUtils>;
     deployContract(
       name: "Reader",
       signerOrOptions?: ethers.Signer | DeployContractOptions
@@ -964,10 +855,6 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.Router>;
     deployContract(
-      name: "SwapUtils",
-      signerOrOptions?: ethers.Signer | DeployContractOptions
-    ): Promise<Contracts.SwapUtils>;
-    deployContract(
       name: "IPoolERC20",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.IPoolERC20>;
@@ -999,10 +886,6 @@ declare module "hardhat/types/runtime" {
       name: "Printer",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.Printer>;
-    deployContract(
-      name: "WithdrawUtils",
-      signerOrOptions?: ethers.Signer | DeployContractOptions
-    ): Promise<Contracts.WithdrawUtils>;
 
     deployContract(
       name: "IERC1155Errors",
@@ -1085,16 +968,6 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.StrictBank>;
     deployContract(
-      name: "BorrowUtils",
-      args: any[],
-      signerOrOptions?: ethers.Signer | DeployContractOptions
-    ): Promise<Contracts.BorrowUtils>;
-    deployContract(
-      name: "CloseUtils",
-      args: any[],
-      signerOrOptions?: ethers.Signer | DeployContractOptions
-    ): Promise<Contracts.CloseUtils>;
-    deployContract(
       name: "Config",
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
@@ -1114,11 +987,6 @@ declare module "hardhat/types/runtime" {
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.Keys>;
-    deployContract(
-      name: "DepositUtils",
-      args: any[],
-      signerOrOptions?: ethers.Signer | DeployContractOptions
-    ): Promise<Contracts.DepositUtils>;
     deployContract(
       name: "Errors",
       args: any[],
@@ -1220,11 +1088,6 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.FeeHandler>;
     deployContract(
-      name: "FeeStoreUtils",
-      args: any[],
-      signerOrOptions?: ethers.Signer | DeployContractOptions
-    ): Promise<Contracts.FeeStoreUtils>;
-    deployContract(
       name: "IPoolInterestRateStrategy",
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
@@ -1234,11 +1097,6 @@ declare module "hardhat/types/runtime" {
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.PoolInterestRateStrategy>;
-    deployContract(
-      name: "LiquidationUtils",
-      args: any[],
-      signerOrOptions?: ethers.Signer | DeployContractOptions
-    ): Promise<Contracts.LiquidationUtils>;
     deployContract(
       name: "LiquidityUtils",
       args: any[],
@@ -1270,11 +1128,6 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.PoolStoreUtils>;
     deployContract(
-      name: "PoolUtils",
-      args: any[],
-      signerOrOptions?: ethers.Signer | DeployContractOptions
-    ): Promise<Contracts.PoolUtils>;
-    deployContract(
       name: "Position",
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
@@ -1284,11 +1137,6 @@ declare module "hardhat/types/runtime" {
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.PositionStoreUtils>;
-    deployContract(
-      name: "PositionUtils",
-      args: any[],
-      signerOrOptions?: ethers.Signer | DeployContractOptions
-    ): Promise<Contracts.PositionUtils>;
     deployContract(
       name: "Reader",
       args: any[],
@@ -1335,11 +1183,6 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.Router>;
     deployContract(
-      name: "SwapUtils",
-      args: any[],
-      signerOrOptions?: ethers.Signer | DeployContractOptions
-    ): Promise<Contracts.SwapUtils>;
-    deployContract(
       name: "IPoolERC20",
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
@@ -1379,11 +1222,6 @@ declare module "hardhat/types/runtime" {
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.Printer>;
-    deployContract(
-      name: "WithdrawUtils",
-      args: any[],
-      signerOrOptions?: ethers.Signer | DeployContractOptions
-    ): Promise<Contracts.WithdrawUtils>;
 
     // default types
     getContractFactory(

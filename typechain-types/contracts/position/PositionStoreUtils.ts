@@ -95,8 +95,6 @@ export interface PositionStoreUtilsInterface extends Interface {
       | "POS_TYPE_0"
       | "POS_TYPE_1"
       | "get"
-      | "getDebtSafetyFactor"
-      | "getMarginLevelThreshold"
   ): FunctionFragment;
 
   encodeFunctionData(
@@ -184,14 +182,6 @@ export interface PositionStoreUtilsInterface extends Interface {
     functionFragment: "get",
     values: [AddressLike, BytesLike]
   ): string;
-  encodeFunctionData(
-    functionFragment: "getDebtSafetyFactor",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getMarginLevelThreshold",
-    values: [AddressLike]
-  ): string;
 
   decodeFunctionResult(
     functionFragment: "ACCOUNT_POSITION",
@@ -269,14 +259,6 @@ export interface PositionStoreUtilsInterface extends Interface {
   decodeFunctionResult(functionFragment: "POS_TYPE_0", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "POS_TYPE_1", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "get", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "getDebtSafetyFactor",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getMarginLevelThreshold",
-    data: BytesLike
-  ): Result;
 }
 
 export interface PositionStoreUtils extends BaseContract {
@@ -370,18 +352,6 @@ export interface PositionStoreUtils extends BaseContract {
     "view"
   >;
 
-  getDebtSafetyFactor: TypedContractMethod<
-    [dataStore: AddressLike],
-    [bigint],
-    "view"
-  >;
-
-  getMarginLevelThreshold: TypedContractMethod<
-    [dataStore: AddressLike],
-    [bigint],
-    "view"
-  >;
-
   getFunction<T extends ContractMethod = ContractMethod>(
     key: string | FunctionFragment
   ): T;
@@ -456,12 +426,6 @@ export interface PositionStoreUtils extends BaseContract {
     [Position.PropsStructOutput],
     "view"
   >;
-  getFunction(
-    nameOrSignature: "getDebtSafetyFactor"
-  ): TypedContractMethod<[dataStore: AddressLike], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "getMarginLevelThreshold"
-  ): TypedContractMethod<[dataStore: AddressLike], [bigint], "view">;
 
   filters: {};
 }

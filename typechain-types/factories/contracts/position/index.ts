@@ -3,4 +3,3 @@
 /* eslint-disable */
 export { Position__factory } from "./Position__factory";
 export { PositionStoreUtils__factory } from "./PositionStoreUtils__factory";
-export { PositionUtils__factory } from "./PositionUtils__factory";

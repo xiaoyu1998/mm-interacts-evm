@@ -2,4 +2,3 @@
 /* tslint:disable */
 /* eslint-disable */
 export { FeeHandler__factory } from "./FeeHandler__factory";
-export { FeeStoreUtils__factory } from "./FeeStoreUtils__factory";
