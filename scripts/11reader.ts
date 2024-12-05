@@ -1,10 +1,10 @@
 import { contractAt, getContract, sendTxn } from "../utils/deploy"
 import { bigNumberify, expandDecimals} from "../utils/math"
 import { POOL_BASE, POOL_MEME,CREATE_POSITION_ID, REPAYMENT_PARTIAL} from "../utils/constants";
-import { getPools, getPositions } from "../utils/reader"
+import { getPools, getPositions, parsePool} from "../utils/reader"
 
 async function main() {
-    const [owner] = await ethers.getSigners();
+    const [owner, user1, user2] = await ethers.getSigners();
 
     const exchangeRouter = await getContract("ExchangeRouter"); 
     const router = await getContract("Router");
@@ -14,7 +14,10 @@ async function main() {
 
     const poolCount = await reader.getPoolsCount(dataStore);
     const pools = await reader.getPools(dataStore, 0, poolCount);
-    console.dir(pools,  {depth: null, colors: true });
+    console.dir(parsePool(pools[2]),  {depth: null, colors: true });
+
+    const positions = await getPositions(dataStore, reader, user2.address);
+    console.dir(positions[0], {depth: null, colors: true });
 
     const pool0 = pools[0];
     const usdtAddress = pool0.assets[POOL_BASE].token;
@@ -29,6 +32,7 @@ async function main() {
         0
     );
     console.log(amountOut);
+
 }
 
 
