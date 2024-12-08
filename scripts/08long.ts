@@ -28,7 +28,7 @@ async function main() {
     // const usdtBalancePool0 = await usdt.balanceOf(pool0.bank);
 
     const usdtAmount = expandDecimals(100000, usdtDecimals);
-    const uniAmount = expandDecimals(12000, uniDecimals);
+    const uniAmount = expandDecimals(2000, uniDecimals);
     await sendTxn(usdt.approve(router.target, usdtAmount), `usdt.approve(${router.target})`) 
     const paramsDeposit: DepositUtils.DepositParamsStructOutput = {
         positionId: CREATE_POSITION_ID,
