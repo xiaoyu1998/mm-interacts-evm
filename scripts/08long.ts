@@ -14,6 +14,7 @@ async function main() {
     const roleStore = await getContract("RoleStore"); 
     const dataStore = await getContract("DataStore"); 
     const reader = await getContract("Reader"); 
+    console.log("ExchangeRouter", exchangeRouter.target);
 
     const pools =  await getPools(dataStore, reader);
     const pool0 = pools[0];
@@ -28,7 +29,16 @@ async function main() {
     // const usdtBalancePool0 = await usdt.balanceOf(pool0.bank);
 
     const usdtAmount = expandDecimals(100000, usdtDecimals);
-    const uniAmount = expandDecimals(2000, uniDecimals);
+    //const uniAmount = expandDecimals(12000, uniDecimals);
+    const uniAmount = await reader.calcAmountOut(
+        dataStore,
+        usdtAddress,
+        uniAddress,
+        usdtAmount*bigNumberify(2),
+        0
+    );
+    console.log(uniAmount);
+
     await sendTxn(usdt.approve(router.target, usdtAmount), `usdt.approve(${router.target})`) 
     const paramsDeposit: DepositUtils.DepositParamsStructOutput = {
         positionId: CREATE_POSITION_ID,
@@ -43,7 +53,7 @@ async function main() {
     };
     const paramsSwapInPosition: SwapInPositionUtils.SwapInPositionParamsStructOutput = {
         positionId: bigNumberify(1),
-        amount0In: usdtAmount,
+        amount0In: usdtAmount*bigNumberify(2),
         amount1In: bigNumberify(0),
         amount0Out: bigNumberify(0),
         amount1Out: uniAmount
@@ -54,7 +64,15 @@ async function main() {
         exchangeRouter.interface.encodeFunctionData("executeBorrow", [paramsBorrow]),
         exchangeRouter.interface.encodeFunctionData("executeSwapInPosition", [paramsSwapInPosition]),
     ];
-    await sendTxn(exchangeRouter.multicall(multicallArgs), "exchangeRouter.multicall");
+    try {
+        await sendTxn(exchangeRouter.multicall(multicallArgs), "exchangeRouter.multicall");
+    } catch (err) {
+        for (const key in err) {
+            if (err.hasOwnProperty(key)) {
+                console.log(`${key}: ${err[key]}`);
+            }
+        }
+    }
 
     // const usdtBalance1 = await usdt.balanceOf(owner.address);
     // const usdtBalancePool1 = await usdt.balanceOf(pool0.bank);
