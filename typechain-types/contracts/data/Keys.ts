@@ -32,6 +32,7 @@ export interface KeysInterface extends Interface {
       | "POSITION"
       | "POSITION_LIST"
       | "REENTRANCY_GUARD_STATUS"
+      | "SHORT_LIQUIDITY_THRESHOLD"
       | "TOKEN_BASE"
       | "TREASURY"
       | "WNT"
@@ -66,6 +67,10 @@ export interface KeysInterface extends Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "REENTRANCY_GUARD_STATUS",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "SHORT_LIQUIDITY_THRESHOLD",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -104,6 +109,10 @@ export interface KeysInterface extends Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "REENTRANCY_GUARD_STATUS",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "SHORT_LIQUIDITY_THRESHOLD",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "TOKEN_BASE", data: BytesLike): Result;
@@ -174,6 +183,8 @@ export interface Keys extends BaseContract {
 
   REENTRANCY_GUARD_STATUS: TypedContractMethod<[], [string], "view">;
 
+  SHORT_LIQUIDITY_THRESHOLD: TypedContractMethod<[], [string], "view">;
+
   TOKEN_BASE: TypedContractMethod<[], [string], "view">;
 
   TREASURY: TypedContractMethod<[], [string], "view">;
@@ -213,6 +224,9 @@ export interface Keys extends BaseContract {
   ): TypedContractMethod<[], [string], "view">;
   getFunction(
     nameOrSignature: "REENTRANCY_GUARD_STATUS"
+  ): TypedContractMethod<[], [string], "view">;
+  getFunction(
+    nameOrSignature: "SHORT_LIQUIDITY_THRESHOLD"
   ): TypedContractMethod<[], [string], "view">;
   getFunction(
     nameOrSignature: "TOKEN_BASE"

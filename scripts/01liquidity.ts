@@ -25,7 +25,7 @@ async function main() {
     const uniDecimals = pool0.assets[1].decimals;
     const uni = await contractAt("MintableToken", uniAddress);  
 
-    const addAmountUsdt = expandDecimals(800000, usdtDecimals);
+    const addAmountUsdt = expandDecimals(1000000, usdtDecimals);
     await sendTxn(usdt.approve(router.target, addAmountUsdt), `usdt.approve(${router.target})`)  
     const addAmountUni = expandDecimals(100000, uniDecimals);
     await sendTxn(uni.approve(router.target, addAmountUni), `uni.approve(${router.target})`) 

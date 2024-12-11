@@ -31,6 +31,7 @@ async function main() {
         config.interface.encodeFunctionData("setTreasury", [owner.address]),
         config.interface.encodeFunctionData("setMarginLevelThreshold", [expandDecimals(150, 25)]),//150%
         config.interface.encodeFunctionData("setDebtSafetyFactor", [expandDecimals(2, 27)]),//2x
+        config.interface.encodeFunctionData("setShortLiquidityThreshold", [expandDecimals(1000000, 27)]),//1millon
     ];
     await sendTxn(config.multicall(multicallArgs), "config.multicall");
 
@@ -55,7 +56,7 @@ async function main() {
 
     const pools = await getPools(dataStore, reader);
     console.dir(pools, {depth: null, colors: true });
-    //console.log(pools[0].configuration.toString(16));
+    console.log(pools[0].configuration.toString(16));
     //console.log(await getTokens(dataStore, reader));
 }
 

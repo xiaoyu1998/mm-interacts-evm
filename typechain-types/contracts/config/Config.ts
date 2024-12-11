@@ -31,6 +31,7 @@ export interface ConfigInterface extends Interface {
       | "setDefaultInterestRateStrategy"
       | "setDefaultPoolConfiguration"
       | "setMarginLevelThreshold"
+      | "setShortLiquidityThreshold"
       | "setSwapFeeFactor"
       | "setTokenBase"
       | "setTreasury"
@@ -57,6 +58,10 @@ export interface ConfigInterface extends Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "setMarginLevelThreshold",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setShortLiquidityThreshold",
     values: [BigNumberish]
   ): string;
   encodeFunctionData(
@@ -93,6 +98,10 @@ export interface ConfigInterface extends Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "setMarginLevelThreshold",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setShortLiquidityThreshold",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -186,6 +195,12 @@ export interface Config extends BaseContract {
     "nonpayable"
   >;
 
+  setShortLiquidityThreshold: TypedContractMethod<
+    [shortLiquidityThreshold: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
+
   setSwapFeeFactor: TypedContractMethod<
     [token0: AddressLike, token1: AddressLike, feeFactor: BigNumberish],
     [void],
@@ -235,6 +250,13 @@ export interface Config extends BaseContract {
   getFunction(
     nameOrSignature: "setMarginLevelThreshold"
   ): TypedContractMethod<[threshold: BigNumberish], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "setShortLiquidityThreshold"
+  ): TypedContractMethod<
+    [shortLiquidityThreshold: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
   getFunction(
     nameOrSignature: "setSwapFeeFactor"
   ): TypedContractMethod<

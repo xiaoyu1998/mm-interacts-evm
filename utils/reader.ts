@@ -61,7 +61,8 @@ export function parsePool(pool) {
         lastUpdateTimestamp:pool[4],
         priceDecimals: pool[5],
         price: pool[6],
-        source: pool[7]
+        source: pool[7],
+        shortEnabled:pool[8],
     };
     return p;
 }
