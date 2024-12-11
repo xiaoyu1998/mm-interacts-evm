@@ -17,8 +17,6 @@ import type * as fee from "./fee";
 export type { fee };
 import type * as interest from "./interest";
 export type { interest };
-import type * as liquidity from "./liquidity";
-export type { liquidity };
 import type * as mock from "./mock";
 export type { mock };
 import type * as pool from "./pool";

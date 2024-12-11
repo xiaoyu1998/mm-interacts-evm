@@ -186,6 +186,8 @@ export interface ReaderInterface extends Interface {
   getFunction(
     nameOrSignature:
       | "calcAmountOut"
+      | "calcLiquidityOut"
+      | "calcTokenPairOut"
       | "getDefaultInterestRateStrategy"
       | "getDefaultPoolConfiguration"
       | "getPools(address)"
@@ -199,6 +201,14 @@ export interface ReaderInterface extends Interface {
   encodeFunctionData(
     functionFragment: "calcAmountOut",
     values: [AddressLike, AddressLike, AddressLike, BigNumberish, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "calcLiquidityOut",
+    values: [AddressLike, AddressLike, AddressLike, BigNumberish, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "calcTokenPairOut",
+    values: [AddressLike, AddressLike, AddressLike, BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "getDefaultInterestRateStrategy",
@@ -235,6 +245,14 @@ export interface ReaderInterface extends Interface {
 
   decodeFunctionResult(
     functionFragment: "calcAmountOut",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "calcLiquidityOut",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "calcTokenPairOut",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -323,7 +341,30 @@ export interface Reader extends BaseContract {
       tokenInIndex: BigNumberish
     ],
     [bigint],
-    "nonpayable"
+    "view"
+  >;
+
+  calcLiquidityOut: TypedContractMethod<
+    [
+      dataStore: AddressLike,
+      token0: AddressLike,
+      token1: AddressLike,
+      amount0: BigNumberish,
+      amount1: BigNumberish
+    ],
+    [bigint],
+    "view"
+  >;
+
+  calcTokenPairOut: TypedContractMethod<
+    [
+      dataStore: AddressLike,
+      token0: AddressLike,
+      token1: AddressLike,
+      liquidity: BigNumberish
+    ],
+    [[bigint, bigint]],
+    "view"
   >;
 
   getDefaultInterestRateStrategy: TypedContractMethod<
@@ -381,7 +422,32 @@ export interface Reader extends BaseContract {
       tokenInIndex: BigNumberish
     ],
     [bigint],
-    "nonpayable"
+    "view"
+  >;
+  getFunction(
+    nameOrSignature: "calcLiquidityOut"
+  ): TypedContractMethod<
+    [
+      dataStore: AddressLike,
+      token0: AddressLike,
+      token1: AddressLike,
+      amount0: BigNumberish,
+      amount1: BigNumberish
+    ],
+    [bigint],
+    "view"
+  >;
+  getFunction(
+    nameOrSignature: "calcTokenPairOut"
+  ): TypedContractMethod<
+    [
+      dataStore: AddressLike,
+      token0: AddressLike,
+      token1: AddressLike,
+      liquidity: BigNumberish
+    ],
+    [[bigint, bigint]],
+    "view"
   >;
   getFunction(
     nameOrSignature: "getDefaultInterestRateStrategy"

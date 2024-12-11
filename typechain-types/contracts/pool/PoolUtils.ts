@@ -3,7 +3,9 @@
 /* eslint-disable */
 import type {
   BaseContract,
+  BytesLike,
   FunctionFragment,
+  Result,
   Interface,
   ContractRunner,
   ContractMethod,
@@ -14,9 +16,22 @@ import type {
   TypedDeferredTopicFilter,
   TypedEventLog,
   TypedListener,
+  TypedContractMethod,
 } from "../../common";
 
-export interface PoolUtilsInterface extends Interface {}
+export interface PoolUtilsInterface extends Interface {
+  getFunction(nameOrSignature: "MINIMUM_LIQUIDITY"): FunctionFragment;
+
+  encodeFunctionData(
+    functionFragment: "MINIMUM_LIQUIDITY",
+    values?: undefined
+  ): string;
+
+  decodeFunctionResult(
+    functionFragment: "MINIMUM_LIQUIDITY",
+    data: BytesLike
+  ): Result;
+}
 
 export interface PoolUtils extends BaseContract {
   connect(runner?: ContractRunner | null): PoolUtils;
@@ -61,9 +76,15 @@ export interface PoolUtils extends BaseContract {
     event?: TCEvent
   ): Promise<this>;
 
+  MINIMUM_LIQUIDITY: TypedContractMethod<[], [bigint], "view">;
+
   getFunction<T extends ContractMethod = ContractMethod>(
     key: string | FunctionFragment
   ): T;
+
+  getFunction(
+    nameOrSignature: "MINIMUM_LIQUIDITY"
+  ): TypedContractMethod<[], [bigint], "view">;
 
   filters: {};
 }

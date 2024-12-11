@@ -56,7 +56,7 @@ async function main() {
         amount0In: usdtAmount*bigNumberify(2),
         amount1In: bigNumberify(0),
         amount0Out: bigNumberify(0),
-        amount1Out: uniAmount
+        amount1Out: uniAmount-expandDecimals(1, uniDecimals)//should a little less than uniAmount
     };
     const multicallArgs = [
         exchangeRouter.interface.encodeFunctionData("sendTokens", [usdtAddress, pool0.bank, usdtAmount]),

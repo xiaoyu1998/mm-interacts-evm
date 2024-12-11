@@ -90,8 +90,6 @@ export type { IPoolInterestRateStrategy } from "./contracts/interest/IPoolIntere
 export { IPoolInterestRateStrategy__factory } from "./factories/contracts/interest/IPoolInterestRateStrategy__factory";
 export type { PoolInterestRateStrategy } from "./contracts/interest/PoolInterestRateStrategy";
 export { PoolInterestRateStrategy__factory } from "./factories/contracts/interest/PoolInterestRateStrategy__factory";
-export type { LiquidityUtils } from "./contracts/liquidity/LiquidityUtils";
-export { LiquidityUtils__factory } from "./factories/contracts/liquidity/LiquidityUtils__factory";
 export type { MintableToken } from "./contracts/mock/MintableToken";
 export { MintableToken__factory } from "./factories/contracts/mock/MintableToken__factory";
 export type { Pool } from "./contracts/pool/Pool";
@@ -102,6 +100,8 @@ export type { PoolFactory } from "./contracts/pool/PoolFactory";
 export { PoolFactory__factory } from "./factories/contracts/pool/PoolFactory__factory";
 export type { PoolStoreUtils } from "./contracts/pool/PoolStoreUtils";
 export { PoolStoreUtils__factory } from "./factories/contracts/pool/PoolStoreUtils__factory";
+export type { PoolUtils } from "./contracts/pool/PoolUtils";
+export { PoolUtils__factory } from "./factories/contracts/pool/PoolUtils__factory";
 export type { Position } from "./contracts/position/Position";
 export { Position__factory } from "./factories/contracts/position/Position__factory";
 export type { PositionStoreUtils } from "./contracts/position/PositionStoreUtils";

@@ -182,10 +182,6 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.PoolInterestRateStrategy__factory>;
     getContractFactory(
-      name: "LiquidityUtils",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.LiquidityUtils__factory>;
-    getContractFactory(
       name: "MintableToken",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.MintableToken__factory>;
@@ -205,6 +201,10 @@ declare module "hardhat/types/runtime" {
       name: "PoolStoreUtils",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.PoolStoreUtils__factory>;
+    getContractFactory(
+      name: "PoolUtils",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.PoolUtils__factory>;
     getContractFactory(
       name: "Position",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -493,11 +493,6 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.PoolInterestRateStrategy>;
     getContractAt(
-      name: "LiquidityUtils",
-      address: string | ethers.Addressable,
-      signer?: ethers.Signer
-    ): Promise<Contracts.LiquidityUtils>;
-    getContractAt(
       name: "MintableToken",
       address: string | ethers.Addressable,
       signer?: ethers.Signer
@@ -522,6 +517,11 @@ declare module "hardhat/types/runtime" {
       address: string | ethers.Addressable,
       signer?: ethers.Signer
     ): Promise<Contracts.PoolStoreUtils>;
+    getContractAt(
+      name: "PoolUtils",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.PoolUtils>;
     getContractAt(
       name: "Position",
       address: string | ethers.Addressable,
@@ -787,10 +787,6 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.PoolInterestRateStrategy>;
     deployContract(
-      name: "LiquidityUtils",
-      signerOrOptions?: ethers.Signer | DeployContractOptions
-    ): Promise<Contracts.LiquidityUtils>;
-    deployContract(
       name: "MintableToken",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.MintableToken>;
@@ -810,6 +806,10 @@ declare module "hardhat/types/runtime" {
       name: "PoolStoreUtils",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.PoolStoreUtils>;
+    deployContract(
+      name: "PoolUtils",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.PoolUtils>;
     deployContract(
       name: "Position",
       signerOrOptions?: ethers.Signer | DeployContractOptions
@@ -1098,11 +1098,6 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.PoolInterestRateStrategy>;
     deployContract(
-      name: "LiquidityUtils",
-      args: any[],
-      signerOrOptions?: ethers.Signer | DeployContractOptions
-    ): Promise<Contracts.LiquidityUtils>;
-    deployContract(
       name: "MintableToken",
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
@@ -1127,6 +1122,11 @@ declare module "hardhat/types/runtime" {
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.PoolStoreUtils>;
+    deployContract(
+      name: "PoolUtils",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.PoolUtils>;
     deployContract(
       name: "Position",
       args: any[],

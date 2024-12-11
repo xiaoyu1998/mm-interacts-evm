@@ -9,7 +9,6 @@ export * as event from "./event";
 export * as exchange from "./exchange";
 export * as fee from "./fee";
 export * as interest from "./interest";
-export * as liquidity from "./liquidity";
 export * as mock from "./mock";
 export * as pool from "./pool";
 export * as position from "./position";

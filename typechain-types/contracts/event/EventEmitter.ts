@@ -160,7 +160,6 @@ export interface EventEmitterInterface extends Interface {
       AddressLike,
       AddressLike,
       AddressLike,
-      AddressLike,
       BigNumberish,
       BigNumberish,
       BigNumberish,
@@ -264,10 +263,10 @@ export namespace BorrowEvent {
     tokenIndex: BigNumberish,
     borrowAmount: BigNumberish,
     borrowRate: BigNumberish,
-    collateralIn: BigNumberish,
-    debtScaledIn: BigNumberish,
-    collateralOut: BigNumberish,
-    debtScaledOut: BigNumberish
+    baseCollateral: BigNumberish,
+    baseDebtScaled: BigNumberish,
+    memeCollateral: BigNumberish,
+    memeDebtScaled: BigNumberish
   ];
   export type OutputTuple = [
     borrower: string,
@@ -277,10 +276,10 @@ export namespace BorrowEvent {
     tokenIndex: bigint,
     borrowAmount: bigint,
     borrowRate: bigint,
-    collateralIn: bigint,
-    debtScaledIn: bigint,
-    collateralOut: bigint,
-    debtScaledOut: bigint
+    baseCollateral: bigint,
+    baseDebtScaled: bigint,
+    memeCollateral: bigint,
+    memeDebtScaled: bigint
   ];
   export interface OutputObject {
     borrower: string;
@@ -290,10 +289,10 @@ export namespace BorrowEvent {
     tokenIndex: bigint;
     borrowAmount: bigint;
     borrowRate: bigint;
-    collateralIn: bigint;
-    debtScaledIn: bigint;
-    collateralOut: bigint;
-    debtScaledOut: bigint;
+    baseCollateral: bigint;
+    baseDebtScaled: bigint;
+    memeCollateral: bigint;
+    memeDebtScaled: bigint;
   }
   export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
   export type Filter = TypedDeferredTopicFilter<Event>;
@@ -492,10 +491,10 @@ export namespace RepayEvent {
     positionId: BigNumberish,
     tokenIndex: BigNumberish,
     repayAmount: BigNumberish,
-    collateralIn: BigNumberish,
-    debtScaledIn: BigNumberish,
-    collateralOut: BigNumberish,
-    debtScaledOut: BigNumberish
+    baseCollateral: BigNumberish,
+    baseDebtScaled: BigNumberish,
+    memeCollateral: BigNumberish,
+    memeDebtScaled: BigNumberish
   ];
   export type OutputTuple = [
     repayer: string,
@@ -504,10 +503,10 @@ export namespace RepayEvent {
     positionId: bigint,
     tokenIndex: bigint,
     repayAmount: bigint,
-    collateralIn: bigint,
-    debtScaledIn: bigint,
-    collateralOut: bigint,
-    debtScaledOut: bigint
+    baseCollateral: bigint,
+    baseDebtScaled: bigint,
+    memeCollateral: bigint,
+    memeDebtScaled: bigint
   ];
   export interface OutputObject {
     repayer: string;
@@ -516,10 +515,10 @@ export namespace RepayEvent {
     positionId: bigint;
     tokenIndex: bigint;
     repayAmount: bigint;
-    collateralIn: bigint;
-    debtScaledIn: bigint;
-    collateralOut: bigint;
-    debtScaledOut: bigint;
+    baseCollateral: bigint;
+    baseDebtScaled: bigint;
+    memeCollateral: bigint;
+    memeDebtScaled: bigint;
   }
   export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
   export type Filter = TypedDeferredTopicFilter<Event>;
@@ -535,10 +534,10 @@ export namespace SwapEvent {
     amountIn: BigNumberish,
     amountOut: BigNumberish,
     fee: BigNumberish,
-    collateralIn: BigNumberish,
-    debtScaledIn: BigNumberish,
-    collateralOut: BigNumberish,
-    debtScaledOut: BigNumberish
+    baseCollateral: BigNumberish,
+    baseDebtScaled: BigNumberish,
+    memeCollateral: BigNumberish,
+    memeDebtScaled: BigNumberish
   ];
   export type OutputTuple = [
     account: string,
@@ -547,10 +546,10 @@ export namespace SwapEvent {
     amountIn: bigint,
     amountOut: bigint,
     fee: bigint,
-    collateralIn: bigint,
-    debtScaledIn: bigint,
-    collateralOut: bigint,
-    debtScaledOut: bigint
+    baseCollateral: bigint,
+    baseDebtScaled: bigint,
+    memeCollateral: bigint,
+    memeDebtScaled: bigint
   ];
   export interface OutputObject {
     account: string;
@@ -559,10 +558,10 @@ export namespace SwapEvent {
     amountIn: bigint;
     amountOut: bigint;
     fee: bigint;
-    collateralIn: bigint;
-    debtScaledIn: bigint;
-    collateralOut: bigint;
-    debtScaledOut: bigint;
+    baseCollateral: bigint;
+    baseDebtScaled: bigint;
+    memeCollateral: bigint;
+    memeDebtScaled: bigint;
   }
   export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
   export type Filter = TypedDeferredTopicFilter<Event>;
@@ -760,7 +759,6 @@ export interface EventEmitter extends BaseContract {
 
   emitRepay: TypedContractMethod<
     [
-      eventEmitter: AddressLike,
       repayer: AddressLike,
       baseToken: AddressLike,
       memeToken: AddressLike,
@@ -926,7 +924,6 @@ export interface EventEmitter extends BaseContract {
     nameOrSignature: "emitRepay"
   ): TypedContractMethod<
     [
-      eventEmitter: AddressLike,
       repayer: AddressLike,
       baseToken: AddressLike,
       memeToken: AddressLike,

@@ -5,3 +5,4 @@ export { Pool__factory } from "./Pool__factory";
 export { PoolConfigurationUtils__factory } from "./PoolConfigurationUtils__factory";
 export { PoolFactory__factory } from "./PoolFactory__factory";
 export { PoolStoreUtils__factory } from "./PoolStoreUtils__factory";
+export { PoolUtils__factory } from "./PoolUtils__factory";

@@ -5,3 +5,4 @@ export type { Pool } from "./Pool";
 export type { PoolConfigurationUtils } from "./PoolConfigurationUtils";
 export type { PoolFactory } from "./PoolFactory";
 export type { PoolStoreUtils } from "./PoolStoreUtils";
+export type { PoolUtils } from "./PoolUtils";
