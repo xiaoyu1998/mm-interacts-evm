@@ -89,14 +89,26 @@ export async function getContract(name) {
         return await contractAtOptions(name, address);
     }
 
+    if (name == "ReaderPoolUtils") {
+        const poolStoreUtils = await getContract("PoolStoreUtils");
+        const address = getContractAddress(name);
+        return await contractAtOptions(name, address, {
+            libraries: {
+                PoolStoreUtils: poolStoreUtils
+            },         
+        });
+    }
+
     if (name == "Reader") {
         const poolStoreUtils = await getContract("PoolStoreUtils");
         const positionStoreUtils = await getContract("PositionStoreUtils");
+        const readerPoolUtils = await getContract("ReaderPoolUtils");
         const address = getContractAddress(name);
         return await contractAtOptions(name, address, {
             libraries: {
                 PoolStoreUtils: poolStoreUtils,
                 PositionStoreUtils: positionStoreUtils,
+                ReaderPoolUtils: readerPoolUtils,
             },         
         });
     }

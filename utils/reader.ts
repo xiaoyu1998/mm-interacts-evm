@@ -63,6 +63,7 @@ export function parsePool(pool) {
         price: pool[6],
         source: pool[7],
         shortEnabled:pool[8],
+        createdTimestamp:pool[9],
     };
     return p;
 }
@@ -88,6 +89,8 @@ export function parsePosition(position) {
                 netWorth:position[0][POOL_BASE][5],
                 maxRedeemAmount:position[0][POOL_BASE][6],
                 borrowApy:position[0][POOL_BASE][7],
+                equity:position[0][POOL_BASE][8],
+                equityValue:position[0][POOL_BASE][9],
             },
             {
                 token:position[0][POOL_MEME][0],
@@ -98,18 +101,18 @@ export function parsePosition(position) {
                 netWorth:position[0][POOL_MEME][5],
                 maxRedeemAmount:position[0][POOL_MEME][6],
                 borrowApy:position[0][POOL_MEME][7],
+                equity:position[0][POOL_MEME][8],
+                equityValue:position[0][POOL_MEME][9],
             }
         ],
         id: position[1],
         account: position[2],
         marginLevel: position[3],
-        equity: position[4],
-        equityValue: position[5],
-        entryPrice: position[6],
-        IndexPrice: position[7],
-        pnl: position[8],
-        liquidationPrice: position[9],
-        toLiquidationPrice: position[10],
+        entryPrice: position[4],
+        IndexPrice: position[5],
+        pnl: position[6],
+        liquidationPrice: position[7],
+        toLiquidationPrice: position[8],
     };
     return p;
 }
