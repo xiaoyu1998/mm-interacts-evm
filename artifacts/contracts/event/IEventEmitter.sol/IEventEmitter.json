@@ -262,6 +262,34 @@
       "inputs": [
         {
           "internalType": "address",
+          "name": "baseToken",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "memeToken",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "source",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "createdTimestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "emitPoolCreated",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
           "name": "underlyingAsset",
           "type": "address"
         },

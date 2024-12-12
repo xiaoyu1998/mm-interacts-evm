@@ -75,6 +75,7 @@ export declare namespace ReaderPoolUtils {
     price: BigNumberish;
     source: AddressLike;
     shortEnabled: boolean;
+    createdTimestamp: BigNumberish;
   };
 
   export type GetPoolStructOutput = [
@@ -89,7 +90,8 @@ export declare namespace ReaderPoolUtils {
     priceDecimals: bigint,
     price: bigint,
     source: string,
-    shortEnabled: boolean
+    shortEnabled: boolean,
+    createdTimestamp: bigint
   ] & {
     assets: [
       ReaderPoolUtils.AssetStructOutput,
@@ -103,6 +105,7 @@ export declare namespace ReaderPoolUtils {
     price: bigint;
     source: string;
     shortEnabled: boolean;
+    createdTimestamp: bigint;
   };
 }
 
@@ -116,6 +119,8 @@ export declare namespace ReaderPositionUtils {
     netWorth: BigNumberish;
     maxRedeemAmount: BigNumberish;
     borrowApy: BigNumberish;
+    equity: BigNumberish;
+    equityValue: BigNumberish;
   };
 
   export type AssetStructOutput = [
@@ -126,7 +131,9 @@ export declare namespace ReaderPositionUtils {
     debt: bigint,
     netWorth: bigint,
     maxRedeemAmount: bigint,
-    borrowApy: bigint
+    borrowApy: bigint,
+    equity: bigint,
+    equityValue: bigint
   ] & {
     token: string;
     symbol: string;
@@ -136,6 +143,8 @@ export declare namespace ReaderPositionUtils {
     netWorth: bigint;
     maxRedeemAmount: bigint;
     borrowApy: bigint;
+    equity: bigint;
+    equityValue: bigint;
   };
 
   export type GetPositionStruct = {
@@ -143,8 +152,6 @@ export declare namespace ReaderPositionUtils {
     id: BigNumberish;
     account: AddressLike;
     marginLevel: BigNumberish;
-    equity: BigNumberish;
-    equityValue: BigNumberish;
     entryPrice: BigNumberish;
     IndexPrice: BigNumberish;
     pnl: BigNumberish;
@@ -160,8 +167,6 @@ export declare namespace ReaderPositionUtils {
     id: bigint,
     account: string,
     marginLevel: bigint,
-    equity: bigint,
-    equityValue: bigint,
     entryPrice: bigint,
     IndexPrice: bigint,
     pnl: bigint,
@@ -175,8 +180,6 @@ export declare namespace ReaderPositionUtils {
     id: bigint;
     account: string;
     marginLevel: bigint;
-    equity: bigint;
-    equityValue: bigint;
     entryPrice: bigint;
     IndexPrice: bigint;
     pnl: bigint;
@@ -343,7 +346,7 @@ export interface Reader extends BaseContract {
       amountIn: BigNumberish,
       tokenInIndex: BigNumberish
     ],
-    [bigint],
+    [[bigint, bigint, bigint]],
     "view"
   >;
 
@@ -424,7 +427,7 @@ export interface Reader extends BaseContract {
       amountIn: BigNumberish,
       tokenInIndex: BigNumberish
     ],
-    [bigint],
+    [[bigint, bigint, bigint]],
     "view"
   >;
   getFunction(

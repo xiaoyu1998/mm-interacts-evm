@@ -2,3 +2,4 @@
 /* tslint:disable */
 /* eslint-disable */
 export { Reader__factory } from "./Reader__factory";
+export { ReaderPoolUtils__factory } from "./ReaderPoolUtils__factory";

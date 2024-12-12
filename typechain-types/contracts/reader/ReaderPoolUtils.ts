@@ -3,8 +3,12 @@
 /* eslint-disable */
 import type {
   BaseContract,
+  BigNumberish,
+  BytesLike,
   FunctionFragment,
+  Result,
   Interface,
+  AddressLike,
   ContractRunner,
   ContractMethod,
   Listener,
@@ -14,9 +18,137 @@ import type {
   TypedDeferredTopicFilter,
   TypedEventLog,
   TypedListener,
+  TypedContractMethod,
 } from "../../common";
 
-export interface ReaderPoolUtilsInterface extends Interface {}
+export declare namespace ReaderPoolUtils {
+  export type AssetStruct = {
+    token: AddressLike;
+    symbol: string;
+    decimals: BigNumberish;
+    borrowIndex: BigNumberish;
+    borrowApy: BigNumberish;
+    totalCollateral: BigNumberish;
+    totalCollateralWithDebt: BigNumberish;
+    totalDebtScaled: BigNumberish;
+    poolBalance: BigNumberish;
+    priceLiquidity: BigNumberish;
+    avaiableLiquidity: BigNumberish;
+    loan: BigNumberish;
+  };
+
+  export type AssetStructOutput = [
+    token: string,
+    symbol: string,
+    decimals: bigint,
+    borrowIndex: bigint,
+    borrowApy: bigint,
+    totalCollateral: bigint,
+    totalCollateralWithDebt: bigint,
+    totalDebtScaled: bigint,
+    poolBalance: bigint,
+    priceLiquidity: bigint,
+    avaiableLiquidity: bigint,
+    loan: bigint
+  ] & {
+    token: string;
+    symbol: string;
+    decimals: bigint;
+    borrowIndex: bigint;
+    borrowApy: bigint;
+    totalCollateral: bigint;
+    totalCollateralWithDebt: bigint;
+    totalDebtScaled: bigint;
+    poolBalance: bigint;
+    priceLiquidity: bigint;
+    avaiableLiquidity: bigint;
+    loan: bigint;
+  };
+
+  export type GetPoolStruct = {
+    assets: [ReaderPoolUtils.AssetStruct, ReaderPoolUtils.AssetStruct];
+    bank: AddressLike;
+    interestRateStrategy: AddressLike;
+    configuration: BigNumberish;
+    lastUpdateTimestamp: BigNumberish;
+    priceDecimals: BigNumberish;
+    price: BigNumberish;
+    source: AddressLike;
+    shortEnabled: boolean;
+    createdTimestamp: BigNumberish;
+  };
+
+  export type GetPoolStructOutput = [
+    assets: [
+      ReaderPoolUtils.AssetStructOutput,
+      ReaderPoolUtils.AssetStructOutput
+    ],
+    bank: string,
+    interestRateStrategy: string,
+    configuration: bigint,
+    lastUpdateTimestamp: bigint,
+    priceDecimals: bigint,
+    price: bigint,
+    source: string,
+    shortEnabled: boolean,
+    createdTimestamp: bigint
+  ] & {
+    assets: [
+      ReaderPoolUtils.AssetStructOutput,
+      ReaderPoolUtils.AssetStructOutput
+    ];
+    bank: string;
+    interestRateStrategy: string;
+    configuration: bigint;
+    lastUpdateTimestamp: bigint;
+    priceDecimals: bigint;
+    price: bigint;
+    source: string;
+    shortEnabled: boolean;
+    createdTimestamp: bigint;
+  };
+}
+
+export interface ReaderPoolUtilsInterface extends Interface {
+  getFunction(
+    nameOrSignature:
+      | "calcAmountOut"
+      | "calcLiquidityOut"
+      | "calcTokenPairOut"
+      | "getPools"
+  ): FunctionFragment;
+
+  encodeFunctionData(
+    functionFragment: "calcAmountOut",
+    values: [AddressLike, AddressLike, AddressLike, BigNumberish, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "calcLiquidityOut",
+    values: [AddressLike, AddressLike, AddressLike, BigNumberish, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "calcTokenPairOut",
+    values: [AddressLike, AddressLike, AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getPools",
+    values: [AddressLike, BigNumberish, BigNumberish]
+  ): string;
+
+  decodeFunctionResult(
+    functionFragment: "calcAmountOut",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "calcLiquidityOut",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "calcTokenPairOut",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "getPools", data: BytesLike): Result;
+}
 
 export interface ReaderPoolUtils extends BaseContract {
   connect(runner?: ContractRunner | null): ReaderPoolUtils;
@@ -61,9 +193,96 @@ export interface ReaderPoolUtils extends BaseContract {
     event?: TCEvent
   ): Promise<this>;
 
+  calcAmountOut: TypedContractMethod<
+    [
+      dataStore: AddressLike,
+      token0: AddressLike,
+      token1: AddressLike,
+      amountIn: BigNumberish,
+      tokenInIndex: BigNumberish
+    ],
+    [[bigint, bigint, bigint]],
+    "view"
+  >;
+
+  calcLiquidityOut: TypedContractMethod<
+    [
+      dataStore: AddressLike,
+      token0: AddressLike,
+      token1: AddressLike,
+      amount0: BigNumberish,
+      amount1: BigNumberish
+    ],
+    [bigint],
+    "view"
+  >;
+
+  calcTokenPairOut: TypedContractMethod<
+    [
+      dataStore: AddressLike,
+      token0: AddressLike,
+      token1: AddressLike,
+      liquidity: BigNumberish
+    ],
+    [[bigint, bigint]],
+    "view"
+  >;
+
+  getPools: TypedContractMethod<
+    [dataStore: AddressLike, start: BigNumberish, end: BigNumberish],
+    [ReaderPoolUtils.GetPoolStructOutput[]],
+    "view"
+  >;
+
   getFunction<T extends ContractMethod = ContractMethod>(
     key: string | FunctionFragment
   ): T;
+
+  getFunction(
+    nameOrSignature: "calcAmountOut"
+  ): TypedContractMethod<
+    [
+      dataStore: AddressLike,
+      token0: AddressLike,
+      token1: AddressLike,
+      amountIn: BigNumberish,
+      tokenInIndex: BigNumberish
+    ],
+    [[bigint, bigint, bigint]],
+    "view"
+  >;
+  getFunction(
+    nameOrSignature: "calcLiquidityOut"
+  ): TypedContractMethod<
+    [
+      dataStore: AddressLike,
+      token0: AddressLike,
+      token1: AddressLike,
+      amount0: BigNumberish,
+      amount1: BigNumberish
+    ],
+    [bigint],
+    "view"
+  >;
+  getFunction(
+    nameOrSignature: "calcTokenPairOut"
+  ): TypedContractMethod<
+    [
+      dataStore: AddressLike,
+      token0: AddressLike,
+      token1: AddressLike,
+      liquidity: BigNumberish
+    ],
+    [[bigint, bigint]],
+    "view"
+  >;
+  getFunction(
+    nameOrSignature: "getPools"
+  ): TypedContractMethod<
+    [dataStore: AddressLike, start: BigNumberish, end: BigNumberish],
+    [ReaderPoolUtils.GetPoolStructOutput[]],
+    "view"
+  >;
 
   filters: {};
 }

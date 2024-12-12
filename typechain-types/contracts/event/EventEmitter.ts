@@ -53,6 +53,7 @@ export interface EventEmitterInterface extends Interface {
       | "emitClose"
       | "emitDeposit"
       | "emitLiquidation"
+      | "emitPoolCreated"
       | "emitPoolUpdated"
       | "emitRemove"
       | "emitRepay"
@@ -69,6 +70,7 @@ export interface EventEmitterInterface extends Interface {
       | "Close"
       | "Deposit"
       | "Liquidation"
+      | "PoolCreated"
       | "PoolUpdated"
       | "Remove"
       | "Repay"
@@ -131,6 +133,10 @@ export interface EventEmitterInterface extends Interface {
       BigNumberish,
       BigNumberish
     ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "emitPoolCreated",
+    values: [AddressLike, AddressLike, AddressLike, BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "emitPoolUpdated",
@@ -207,6 +213,10 @@ export interface EventEmitterInterface extends Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "emitLiquidation",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "emitPoolCreated",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -414,6 +424,31 @@ export namespace LiquidationEvent {
     marginLevelLiquidationThreshold: bigint;
     totalCollateralUsd: bigint;
     totalDebtUsd: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace PoolCreatedEvent {
+  export type InputTuple = [
+    baseToken: AddressLike,
+    memeToken: AddressLike,
+    source: AddressLike,
+    createdTimestamp: BigNumberish
+  ];
+  export type OutputTuple = [
+    baseToken: string,
+    memeToken: string,
+    source: string,
+    createdTimestamp: bigint
+  ];
+  export interface OutputObject {
+    baseToken: string;
+    memeToken: string;
+    source: string;
+    createdTimestamp: bigint;
   }
   export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
   export type Filter = TypedDeferredTopicFilter<Event>;
@@ -731,6 +766,17 @@ export interface EventEmitter extends BaseContract {
     "nonpayable"
   >;
 
+  emitPoolCreated: TypedContractMethod<
+    [
+      baseToken: AddressLike,
+      memeToken: AddressLike,
+      source: AddressLike,
+      createdTimestamp: BigNumberish
+    ],
+    [void],
+    "nonpayable"
+  >;
+
   emitPoolUpdated: TypedContractMethod<
     [
       underlyingAsset: AddressLike,
@@ -893,6 +939,18 @@ export interface EventEmitter extends BaseContract {
     "nonpayable"
   >;
   getFunction(
+    nameOrSignature: "emitPoolCreated"
+  ): TypedContractMethod<
+    [
+      baseToken: AddressLike,
+      memeToken: AddressLike,
+      source: AddressLike,
+      createdTimestamp: BigNumberish
+    ],
+    [void],
+    "nonpayable"
+  >;
+  getFunction(
     nameOrSignature: "emitPoolUpdated"
   ): TypedContractMethod<
     [
@@ -1014,6 +1072,13 @@ export interface EventEmitter extends BaseContract {
     LiquidationEvent.OutputObject
   >;
   getEvent(
+    key: "PoolCreated"
+  ): TypedContractEvent<
+    PoolCreatedEvent.InputTuple,
+    PoolCreatedEvent.OutputTuple,
+    PoolCreatedEvent.OutputObject
+  >;
+  getEvent(
     key: "PoolUpdated"
   ): TypedContractEvent<
     PoolUpdatedEvent.InputTuple,
@@ -1114,6 +1179,17 @@ export interface EventEmitter extends BaseContract {
       LiquidationEvent.InputTuple,
       LiquidationEvent.OutputTuple,
       LiquidationEvent.OutputObject
+    >;
+
+    "PoolCreated(address,address,address,uint256)": TypedContractEvent<
+      PoolCreatedEvent.InputTuple,
+      PoolCreatedEvent.OutputTuple,
+      PoolCreatedEvent.OutputObject
+    >;
+    PoolCreated: TypedContractEvent<
+      PoolCreatedEvent.InputTuple,
+      PoolCreatedEvent.OutputTuple,
+      PoolCreatedEvent.OutputObject
     >;
 
     "PoolUpdated(address,uint256,uint256,uint256,uint256)": TypedContractEvent<

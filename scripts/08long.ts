@@ -30,13 +30,13 @@ async function main() {
 
     const usdtAmount = expandDecimals(100000, usdtDecimals);
     //const uniAmount = expandDecimals(12000, uniDecimals);
-    const uniAmount = await reader.calcAmountOut(
+    const uniAmount = (await reader.calcAmountOut(
         dataStore,
         usdtAddress,
         uniAddress,
         usdtAmount*bigNumberify(2),
         0
-    );
+    ))[0];//the first one in tokenOut
     console.log(uniAmount);
 
     await sendTxn(usdt.approve(router.target, usdtAmount), `usdt.approve(${router.target})`) 

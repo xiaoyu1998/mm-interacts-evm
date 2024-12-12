@@ -108,6 +108,8 @@ export type { PositionStoreUtils } from "./contracts/position/PositionStoreUtils
 export { PositionStoreUtils__factory } from "./factories/contracts/position/PositionStoreUtils__factory";
 export type { Reader } from "./contracts/reader/Reader";
 export { Reader__factory } from "./factories/contracts/reader/Reader__factory";
+export type { ReaderPoolUtils } from "./contracts/reader/ReaderPoolUtils";
+export { ReaderPoolUtils__factory } from "./factories/contracts/reader/ReaderPoolUtils__factory";
 export type { RepayUtils } from "./contracts/repay/RepayUtils";
 export { RepayUtils__factory } from "./factories/contracts/repay/RepayUtils__factory";
 export type { Role } from "./contracts/role/Role";

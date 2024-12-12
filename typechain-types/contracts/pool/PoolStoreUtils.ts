@@ -82,6 +82,7 @@ export interface PoolStoreUtilsInterface extends Interface {
       | "POOL_BORROW_RATE_0"
       | "POOL_BORROW_RATE_1"
       | "POOL_CONFIGURATION"
+      | "POOL_CREATED_TIME_STAMP"
       | "POOL_INTEREST_RATE_STRATEGY"
       | "POOL_LAST_UPDATE_TIME_STAMP"
       | "POOL_SOURCE"
@@ -117,6 +118,10 @@ export interface PoolStoreUtilsInterface extends Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "POOL_CONFIGURATION",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "POOL_CREATED_TIME_STAMP",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -195,6 +200,10 @@ export interface PoolStoreUtilsInterface extends Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "POOL_CONFIGURATION",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "POOL_CREATED_TIME_STAMP",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -307,6 +316,8 @@ export interface PoolStoreUtils extends BaseContract {
 
   POOL_CONFIGURATION: TypedContractMethod<[], [string], "view">;
 
+  POOL_CREATED_TIME_STAMP: TypedContractMethod<[], [string], "view">;
+
   POOL_INTEREST_RATE_STRATEGY: TypedContractMethod<[], [string], "view">;
 
   POOL_LAST_UPDATE_TIME_STAMP: TypedContractMethod<[], [string], "view">;
@@ -360,6 +371,9 @@ export interface PoolStoreUtils extends BaseContract {
   ): TypedContractMethod<[], [string], "view">;
   getFunction(
     nameOrSignature: "POOL_CONFIGURATION"
+  ): TypedContractMethod<[], [string], "view">;
+  getFunction(
+    nameOrSignature: "POOL_CREATED_TIME_STAMP"
   ): TypedContractMethod<[], [string], "view">;
   getFunction(
     nameOrSignature: "POOL_INTEREST_RATE_STRATEGY"

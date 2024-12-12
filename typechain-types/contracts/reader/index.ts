@@ -2,3 +2,4 @@
 /* tslint:disable */
 /* eslint-disable */
 export type { Reader } from "./Reader";
+export type { ReaderPoolUtils } from "./ReaderPoolUtils";

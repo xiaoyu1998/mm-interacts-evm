@@ -51,6 +51,7 @@ export interface IEventEmitterInterface extends Interface {
       | "emitClose"
       | "emitDeposit"
       | "emitLiquidation"
+      | "emitPoolCreated"
       | "emitPoolUpdated"
       | "emitRemove"
       | "emitRepay"
@@ -113,6 +114,10 @@ export interface IEventEmitterInterface extends Interface {
       BigNumberish,
       BigNumberish
     ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "emitPoolCreated",
+    values: [AddressLike, AddressLike, AddressLike, BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "emitPoolUpdated",
@@ -188,6 +193,10 @@ export interface IEventEmitterInterface extends Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "emitLiquidation",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "emitPoolCreated",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -320,6 +329,17 @@ export interface IEventEmitter extends BaseContract {
       marginLevelLiquidationThreshold: BigNumberish,
       totalCollateralUsd: BigNumberish,
       totalDebtUsd: BigNumberish
+    ],
+    [void],
+    "nonpayable"
+  >;
+
+  emitPoolCreated: TypedContractMethod<
+    [
+      baseToken: AddressLike,
+      memeToken: AddressLike,
+      source: AddressLike,
+      createdTimestamp: BigNumberish
     ],
     [void],
     "nonpayable"
@@ -480,6 +500,18 @@ export interface IEventEmitter extends BaseContract {
       marginLevelLiquidationThreshold: BigNumberish,
       totalCollateralUsd: BigNumberish,
       totalDebtUsd: BigNumberish
+    ],
+    [void],
+    "nonpayable"
+  >;
+  getFunction(
+    nameOrSignature: "emitPoolCreated"
+  ): TypedContractMethod<
+    [
+      baseToken: AddressLike,
+      memeToken: AddressLike,
+      source: AddressLike,
+      createdTimestamp: BigNumberish
     ],
     [void],
     "nonpayable"

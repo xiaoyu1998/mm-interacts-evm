@@ -26,14 +26,14 @@ async function main() {
     const usdtDecimals = pool0.assets[POOL_BASE].decimals;
     const uniAddress = pool0.assets[POOL_MEME].token;
     const uniDecimals = pool0.assets[POOL_MEME].decimals;
-    const amountOut = await reader.calcAmountOut(
+    const ret = await reader.calcAmountOut(
         dataStore,
         usdtAddress,
         uniAddress,
         expandDecimals(10000, usdtDecimals),
         0
     );
-    console.log("amountOut", amountOut);
+    console.log("amountOut",ret[0], "fee", ret[1], "priceImpact", ret[2]);
 
     //calcLiquidityOut
     const liquidity = await reader.calcLiquidityOut(
@@ -52,7 +52,7 @@ async function main() {
         uniAddress,
         liquidity,
     );
-    console.log("tokenPair", tokenPair);
+    console.log("baseToken", tokenPair[0], "memToken", tokenPair[1]);
 
 }
 

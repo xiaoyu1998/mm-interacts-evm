@@ -85,7 +85,7 @@ export declare namespace Pool {
 
 export interface PoolFactoryInterface extends Interface {
   getFunction(
-    nameOrSignature: "createPool" | "dataStore" | "roleStore"
+    nameOrSignature: "createPool" | "dataStore" | "eventEmitter" | "roleStore"
   ): FunctionFragment;
 
   encodeFunctionData(
@@ -93,10 +93,18 @@ export interface PoolFactoryInterface extends Interface {
     values: [CreatePoolParamsStruct]
   ): string;
   encodeFunctionData(functionFragment: "dataStore", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "eventEmitter",
+    values?: undefined
+  ): string;
   encodeFunctionData(functionFragment: "roleStore", values?: undefined): string;
 
   decodeFunctionResult(functionFragment: "createPool", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "dataStore", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "eventEmitter",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "roleStore", data: BytesLike): Result;
 }
 
@@ -151,6 +159,8 @@ export interface PoolFactory extends BaseContract {
 
   dataStore: TypedContractMethod<[], [string], "view">;
 
+  eventEmitter: TypedContractMethod<[], [string], "view">;
+
   roleStore: TypedContractMethod<[], [string], "view">;
 
   getFunction<T extends ContractMethod = ContractMethod>(
@@ -166,6 +176,9 @@ export interface PoolFactory extends BaseContract {
   >;
   getFunction(
     nameOrSignature: "dataStore"
+  ): TypedContractMethod<[], [string], "view">;
+  getFunction(
+    nameOrSignature: "eventEmitter"
   ): TypedContractMethod<[], [string], "view">;
   getFunction(
     nameOrSignature: "roleStore"

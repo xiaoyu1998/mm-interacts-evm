@@ -218,6 +218,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Reader__factory>;
     getContractFactory(
+      name: "ReaderPoolUtils",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ReaderPoolUtils__factory>;
+    getContractFactory(
       name: "RepayUtils",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.RepayUtils__factory>;
@@ -538,6 +542,11 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.Reader>;
     getContractAt(
+      name: "ReaderPoolUtils",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ReaderPoolUtils>;
+    getContractAt(
       name: "RepayUtils",
       address: string | ethers.Addressable,
       signer?: ethers.Signer
@@ -823,6 +832,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.Reader>;
     deployContract(
+      name: "ReaderPoolUtils",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ReaderPoolUtils>;
+    deployContract(
       name: "RepayUtils",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.RepayUtils>;
@@ -1142,6 +1155,11 @@ declare module "hardhat/types/runtime" {
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.Reader>;
+    deployContract(
+      name: "ReaderPoolUtils",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ReaderPoolUtils>;
     deployContract(
       name: "RepayUtils",
       args: any[],
