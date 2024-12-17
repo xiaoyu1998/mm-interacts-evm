@@ -279,6 +279,16 @@
           "internalType": "uint256",
           "name": "createdTimestamp",
           "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "baseDecimals",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "memeDecimals",
+          "type": "uint256"
         }
       ],
       "name": "emitPoolCreated",
