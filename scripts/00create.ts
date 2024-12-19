@@ -32,6 +32,7 @@ async function main() {
         config.interface.encodeFunctionData("setMarginLevelThreshold", [expandDecimals(150, 25)]),//150%
         config.interface.encodeFunctionData("setDebtSafetyFactor", [expandDecimals(2, 27)]),//2x
         config.interface.encodeFunctionData("setShortLiquidityThreshold", [expandDecimals(1000000, 27)]),//1millon
+        config.interface.encodeFunctionData("setBorrowRateThreshold", [expandDecimals(8, 26)]),//80%
     ];
     await sendTxn(config.multicall(multicallArgs), "config.multicall");
 
