@@ -89,7 +89,7 @@ export interface IEventEmitterInterface extends Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "emitClose",
-    values: [AddressLike, AddressLike, BigNumberish, BigNumberish, BigNumberish]
+    values: [AddressLike, BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "emitDeposit",
@@ -97,6 +97,7 @@ export interface IEventEmitterInterface extends Interface {
       AddressLike,
       AddressLike,
       AddressLike,
+      BigNumberish,
       BigNumberish,
       BigNumberish,
       BigNumberish,
@@ -112,12 +113,21 @@ export interface IEventEmitterInterface extends Interface {
       BigNumberish,
       BigNumberish,
       BigNumberish,
+      BigNumberish,
+      BigNumberish,
       BigNumberish
     ]
   ): string;
   encodeFunctionData(
     functionFragment: "emitPoolCreated",
-    values: [AddressLike, AddressLike, AddressLike, BigNumberish]
+    values: [
+      AddressLike,
+      AddressLike,
+      AddressLike,
+      BigNumberish,
+      BigNumberish,
+      BigNumberish
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "emitPoolUpdated",
@@ -295,13 +305,7 @@ export interface IEventEmitter extends BaseContract {
   >;
 
   emitClose: TypedContractMethod<
-    [
-      underlyingAssetUsd: AddressLike,
-      account: AddressLike,
-      amountUsdStartClose: BigNumberish,
-      amountUsdAfterRepayAndSellCollateral: BigNumberish,
-      amountUsdAfterBuyCollateralAndRepay: BigNumberish
-    ],
+    [account: AddressLike, positionId: BigNumberish],
     [void],
     "nonpayable"
   >;
@@ -311,6 +315,7 @@ export interface IEventEmitter extends BaseContract {
       depositor: AddressLike,
       baseToken: AddressLike,
       memeToken: AddressLike,
+      positionId: BigNumberish,
       depositAmount: BigNumberish,
       baseCollateral: BigNumberish,
       baseDebtScaled: BigNumberish,
@@ -325,10 +330,12 @@ export interface IEventEmitter extends BaseContract {
     [
       liquidator: AddressLike,
       account: AddressLike,
+      positionId: BigNumberish,
       marginLevel: BigNumberish,
       marginLevelLiquidationThreshold: BigNumberish,
       totalCollateralUsd: BigNumberish,
-      totalDebtUsd: BigNumberish
+      totalDebtUsd: BigNumberish,
+      memePrice: BigNumberish
     ],
     [void],
     "nonpayable"
@@ -339,7 +346,9 @@ export interface IEventEmitter extends BaseContract {
       baseToken: AddressLike,
       memeToken: AddressLike,
       source: AddressLike,
-      createdTimestamp: BigNumberish
+      createdTimestamp: BigNumberish,
+      baseDecimals: BigNumberish,
+      memeDecimals: BigNumberish
     ],
     [void],
     "nonpayable"
@@ -464,13 +473,7 @@ export interface IEventEmitter extends BaseContract {
   getFunction(
     nameOrSignature: "emitClose"
   ): TypedContractMethod<
-    [
-      underlyingAssetUsd: AddressLike,
-      account: AddressLike,
-      amountUsdStartClose: BigNumberish,
-      amountUsdAfterRepayAndSellCollateral: BigNumberish,
-      amountUsdAfterBuyCollateralAndRepay: BigNumberish
-    ],
+    [account: AddressLike, positionId: BigNumberish],
     [void],
     "nonpayable"
   >;
@@ -481,6 +484,7 @@ export interface IEventEmitter extends BaseContract {
       depositor: AddressLike,
       baseToken: AddressLike,
       memeToken: AddressLike,
+      positionId: BigNumberish,
       depositAmount: BigNumberish,
       baseCollateral: BigNumberish,
       baseDebtScaled: BigNumberish,
@@ -496,10 +500,12 @@ export interface IEventEmitter extends BaseContract {
     [
       liquidator: AddressLike,
       account: AddressLike,
+      positionId: BigNumberish,
       marginLevel: BigNumberish,
       marginLevelLiquidationThreshold: BigNumberish,
       totalCollateralUsd: BigNumberish,
-      totalDebtUsd: BigNumberish
+      totalDebtUsd: BigNumberish,
+      memePrice: BigNumberish
     ],
     [void],
     "nonpayable"
@@ -511,7 +517,9 @@ export interface IEventEmitter extends BaseContract {
       baseToken: AddressLike,
       memeToken: AddressLike,
       source: AddressLike,
-      createdTimestamp: BigNumberish
+      createdTimestamp: BigNumberish,
+      baseDecimals: BigNumberish,
+      memeDecimals: BigNumberish
     ],
     [void],
     "nonpayable"

@@ -27,6 +27,7 @@ export interface KeysInterface extends Interface {
       | "DEFAULT_INTEREST_RATE_STRATEGY"
       | "DEFAULT_POOL_CONFIGURATION"
       | "MARGIN_LEVELL_THRESHOLD"
+      | "MAX_BORROW_RATE"
       | "POOL"
       | "POOL_LIST"
       | "POSITION"
@@ -56,6 +57,10 @@ export interface KeysInterface extends Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "MARGIN_LEVELL_THRESHOLD",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "MAX_BORROW_RATE",
     values?: undefined
   ): string;
   encodeFunctionData(functionFragment: "POOL", values?: undefined): string;
@@ -98,6 +103,10 @@ export interface KeysInterface extends Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "MARGIN_LEVELL_THRESHOLD",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "MAX_BORROW_RATE",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "POOL", data: BytesLike): Result;
@@ -173,6 +182,8 @@ export interface Keys extends BaseContract {
 
   MARGIN_LEVELL_THRESHOLD: TypedContractMethod<[], [string], "view">;
 
+  MAX_BORROW_RATE: TypedContractMethod<[], [string], "view">;
+
   POOL: TypedContractMethod<[], [string], "view">;
 
   POOL_LIST: TypedContractMethod<[], [string], "view">;
@@ -209,6 +220,9 @@ export interface Keys extends BaseContract {
   ): TypedContractMethod<[], [string], "view">;
   getFunction(
     nameOrSignature: "MARGIN_LEVELL_THRESHOLD"
+  ): TypedContractMethod<[], [string], "view">;
+  getFunction(
+    nameOrSignature: "MAX_BORROW_RATE"
   ): TypedContractMethod<[], [string], "view">;
   getFunction(
     nameOrSignature: "POOL"

@@ -21,7 +21,7 @@ async function main() {
     await sendTxn(eth.mint(owner.address, expandDecimals(10000, ethDecimals)), "eth.mint");
 
     //configuration
-    const configuration = bigNumberify(0x12060032006400000000000000);
+    const configuration = bigNumberify(0x12060046006400000000000000);
     const poolInterestRateStrategy = await getContract("PoolInterestRateStrategy");
     const config = await getContract("Config");
     const multicallArgs = [
@@ -29,10 +29,10 @@ async function main() {
         config.interface.encodeFunctionData("setTokenBase", [usdt.target]),
         config.interface.encodeFunctionData("setDefaultInterestRateStrategy", [poolInterestRateStrategy.target]),
         config.interface.encodeFunctionData("setTreasury", [owner.address]),
-        config.interface.encodeFunctionData("setMarginLevelThreshold", [expandDecimals(150, 25)]),//150%
+        config.interface.encodeFunctionData("setMarginLevelThreshold", [expandDecimals(110, 25)]),//110%
         config.interface.encodeFunctionData("setDebtSafetyFactor", [expandDecimals(2, 27)]),//2x
         config.interface.encodeFunctionData("setShortLiquidityThreshold", [expandDecimals(1000000, 27)]),//1millon
-        config.interface.encodeFunctionData("setBorrowRateThreshold", [expandDecimals(8, 26)]),//80%
+        config.interface.encodeFunctionData("setMaxBorrowRate", [expandDecimals(8, 26)]),//80%
     ];
     await sendTxn(config.multicall(multicallArgs), "config.multicall");
 
@@ -46,9 +46,9 @@ async function main() {
     // // pools configuration
     // const multicallArgs2 = [
     //     config.interface.encodeFunctionData("setSwapFeeFactor", [usdt.target, uni.target, 100]), //1%
-    //     config.interface.encodeFunctionData("setTreasuryFeeFactor", [usdt.target, uni.target, 50]), //0.5%
-    //     config.interface.encodeFunctionData("setSwapFeeFactor", [usdt.target, eth.target, 100]), //1%
-    //     config.interface.encodeFunctionData("setTreasuryFeeFactor", [usdt.target, eth.target, 50]), //0.5%
+    //     config.interface.encodeFunctionData("setTreasuryFeeFactor", [usdt.target, uni.target, 70]), //0.7%
+    //     // config.interface.encodeFunctionData("setSwapFeeFactor", [usdt.target, eth.target, 100]), //1%
+    //     // config.interface.encodeFunctionData("setTreasuryFeeFactor", [usdt.target, eth.target, 70]), //0.7%
     // ];
     // await sendTxn(
     //     config.multicall(multicallArgs2),
@@ -57,8 +57,8 @@ async function main() {
 
     const pools = await getPools(dataStore, reader);
     console.dir(pools, {depth: null, colors: true });
-    console.log(pools[0].configuration.toString(16));
-    //console.log(await getTokens(dataStore, reader));
+    //console.log(pools[0].configuration.toString(16));
+
 }
 
 

@@ -14,7 +14,7 @@ async function main() {
     const roleStore = await getContract("RoleStore"); 
     const dataStore = await getContract("DataStore"); 
     const reader = await getContract("Reader"); 
-    console.log("ExchangeRouter", exchangeRouter.target);
+    //console.log("ExchangeRouter", exchangeRouter.target);
 
     const pools =  await getPools(dataStore, reader);
     const pool0 = pools[0];
@@ -24,9 +24,6 @@ async function main() {
     const uniAddress = pool0.assets[POOL_MEME].token;
     const uniDecimals = pool0.assets[POOL_MEME].decimals;
     const uni = await contractAt("MintableToken", uniAddress);  
-
-    // const usdtBalance0 = await usdt.balanceOf(owner.address);
-    // const usdtBalancePool0 = await usdt.balanceOf(pool0.bank);
 
     const usdtAmount = expandDecimals(100000, usdtDecimals);
     //const uniAmount = expandDecimals(12000, uniDecimals);
@@ -73,9 +70,6 @@ async function main() {
             }
         }
     }
-
-    // const usdtBalance1 = await usdt.balanceOf(owner.address);
-    // const usdtBalancePool1 = await usdt.balanceOf(pool0.bank);
 
     console.dir(await getPools(dataStore, reader), {depth: null, colors: true });
     console.dir(await getPositions(dataStore, reader, owner.address), {depth: null, colors: true });

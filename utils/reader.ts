@@ -37,8 +37,8 @@ export function parsePool(pool) {
                 totalScaledDebt:pool[0][0][7],
                 poolBalance:pool[0][0][8],
                 priceLiquidity:pool[0][0][9],
-                avaiableLiquidity:pool[0][0][10],
-                avaiableLoan:pool[0][0][11]
+                avaiableLoan:pool[0][0][10],
+                actualTradable:pool[0][0][11],
             },
             {
                 token:pool[0][1][0],
@@ -51,8 +51,8 @@ export function parsePool(pool) {
                 totalScaledDebt:pool[0][1][7],
                 poolBalance:pool[0][1][8],
                 priceLiquidity:pool[0][1][9],
-                avaiableLiquidity:pool[0][1][10],
-                avaiableLoan:pool[0][1][11]
+                avaiableLoan:pool[0][1][10],
+                actualTradable:pool[0][1][11],
             }
         ],
         bank: pool[1],

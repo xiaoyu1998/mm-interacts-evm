@@ -149,27 +149,12 @@ const _abi = [
     inputs: [
       {
         internalType: "address",
-        name: "underlyingAssetUsd",
-        type: "address",
-      },
-      {
-        internalType: "address",
         name: "account",
         type: "address",
       },
       {
         internalType: "uint256",
-        name: "amountUsdStartClose",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "amountUsdAfterRepayAndSellCollateral",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "amountUsdAfterBuyCollateralAndRepay",
+        name: "positionId",
         type: "uint256",
       },
     ],
@@ -194,6 +179,11 @@ const _abi = [
         internalType: "address",
         name: "memeToken",
         type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "positionId",
+        type: "uint256",
       },
       {
         internalType: "uint256",
@@ -240,6 +230,11 @@ const _abi = [
       },
       {
         internalType: "uint256",
+        name: "positionId",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
         name: "marginLevel",
         type: "uint256",
       },
@@ -256,6 +251,11 @@ const _abi = [
       {
         internalType: "uint256",
         name: "totalDebtUsd",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "memePrice",
         type: "uint256",
       },
     ],
@@ -284,6 +284,16 @@ const _abi = [
       {
         internalType: "uint256",
         name: "createdTimestamp",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "baseDecimals",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "memeDecimals",
         type: "uint256",
       },
     ],

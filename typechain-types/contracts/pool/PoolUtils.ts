@@ -20,13 +20,23 @@ import type {
 } from "../../common";
 
 export interface PoolUtilsInterface extends Interface {
-  getFunction(nameOrSignature: "MINIMUM_LIQUIDITY"): FunctionFragment;
+  getFunction(
+    nameOrSignature: "IGNORE_CALC_LOAN" | "MINIMUM_LIQUIDITY"
+  ): FunctionFragment;
 
+  encodeFunctionData(
+    functionFragment: "IGNORE_CALC_LOAN",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "MINIMUM_LIQUIDITY",
     values?: undefined
   ): string;
 
+  decodeFunctionResult(
+    functionFragment: "IGNORE_CALC_LOAN",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "MINIMUM_LIQUIDITY",
     data: BytesLike
@@ -76,12 +86,17 @@ export interface PoolUtils extends BaseContract {
     event?: TCEvent
   ): Promise<this>;
 
+  IGNORE_CALC_LOAN: TypedContractMethod<[], [bigint], "view">;
+
   MINIMUM_LIQUIDITY: TypedContractMethod<[], [bigint], "view">;
 
   getFunction<T extends ContractMethod = ContractMethod>(
     key: string | FunctionFragment
   ): T;
 
+  getFunction(
+    nameOrSignature: "IGNORE_CALC_LOAN"
+  ): TypedContractMethod<[], [bigint], "view">;
   getFunction(
     nameOrSignature: "MINIMUM_LIQUIDITY"
   ): TypedContractMethod<[], [bigint], "view">;

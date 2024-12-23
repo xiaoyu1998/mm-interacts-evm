@@ -108,7 +108,7 @@ export interface EventEmitterInterface extends Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "emitClose",
-    values: [AddressLike, AddressLike, BigNumberish, BigNumberish, BigNumberish]
+    values: [AddressLike, BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "emitDeposit",
@@ -116,6 +116,7 @@ export interface EventEmitterInterface extends Interface {
       AddressLike,
       AddressLike,
       AddressLike,
+      BigNumberish,
       BigNumberish,
       BigNumberish,
       BigNumberish,
@@ -131,12 +132,20 @@ export interface EventEmitterInterface extends Interface {
       BigNumberish,
       BigNumberish,
       BigNumberish,
+      BigNumberish,
       BigNumberish
     ]
   ): string;
   encodeFunctionData(
     functionFragment: "emitPoolCreated",
-    values: [AddressLike, AddressLike, AddressLike, BigNumberish]
+    values: [
+      AddressLike,
+      AddressLike,
+      AddressLike,
+      BigNumberish,
+      BigNumberish,
+      BigNumberish
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "emitPoolUpdated",
@@ -336,26 +345,11 @@ export namespace ClaimFeesEvent {
 }
 
 export namespace CloseEvent {
-  export type InputTuple = [
-    poolUsd: AddressLike,
-    account: AddressLike,
-    amountUsdStartClose: BigNumberish,
-    amountUsdAfterRepayAndSellCollateral: BigNumberish,
-    amountUsdAfterBuyCollateralAndRepay: BigNumberish
-  ];
-  export type OutputTuple = [
-    poolUsd: string,
-    account: string,
-    amountUsdStartClose: bigint,
-    amountUsdAfterRepayAndSellCollateral: bigint,
-    amountUsdAfterBuyCollateralAndRepay: bigint
-  ];
+  export type InputTuple = [account: AddressLike, positionId: BigNumberish];
+  export type OutputTuple = [account: string, positionId: bigint];
   export interface OutputObject {
-    poolUsd: string;
     account: string;
-    amountUsdStartClose: bigint;
-    amountUsdAfterRepayAndSellCollateral: bigint;
-    amountUsdAfterBuyCollateralAndRepay: bigint;
+    positionId: bigint;
   }
   export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
   export type Filter = TypedDeferredTopicFilter<Event>;
@@ -368,6 +362,7 @@ export namespace DepositEvent {
     depositor: AddressLike,
     baseToken: AddressLike,
     memeToken: AddressLike,
+    positionId: BigNumberish,
     depositAmount: BigNumberish,
     baseCollateral: BigNumberish,
     baseDebtScaled: BigNumberish,
@@ -378,6 +373,7 @@ export namespace DepositEvent {
     depositor: string,
     baseToken: string,
     memeToken: string,
+    positionId: bigint,
     depositAmount: bigint,
     baseCollateral: bigint,
     baseDebtScaled: bigint,
@@ -388,6 +384,7 @@ export namespace DepositEvent {
     depositor: string;
     baseToken: string;
     memeToken: string;
+    positionId: bigint;
     depositAmount: bigint;
     baseCollateral: bigint;
     baseDebtScaled: bigint;
@@ -407,7 +404,8 @@ export namespace LiquidationEvent {
     marginLevel: BigNumberish,
     marginLevelLiquidationThreshold: BigNumberish,
     totalCollateralUsd: BigNumberish,
-    totalDebtUsd: BigNumberish
+    totalDebtUsd: BigNumberish,
+    memePrice: BigNumberish
   ];
   export type OutputTuple = [
     liquidator: string,
@@ -415,7 +413,8 @@ export namespace LiquidationEvent {
     marginLevel: bigint,
     marginLevelLiquidationThreshold: bigint,
     totalCollateralUsd: bigint,
-    totalDebtUsd: bigint
+    totalDebtUsd: bigint,
+    memePrice: bigint
   ];
   export interface OutputObject {
     liquidator: string;
@@ -424,6 +423,7 @@ export namespace LiquidationEvent {
     marginLevelLiquidationThreshold: bigint;
     totalCollateralUsd: bigint;
     totalDebtUsd: bigint;
+    memePrice: bigint;
   }
   export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
   export type Filter = TypedDeferredTopicFilter<Event>;
@@ -436,19 +436,25 @@ export namespace PoolCreatedEvent {
     baseToken: AddressLike,
     memeToken: AddressLike,
     source: AddressLike,
-    createdTimestamp: BigNumberish
+    createdTimestamp: BigNumberish,
+    baseDecimals: BigNumberish,
+    memeDecimals: BigNumberish
   ];
   export type OutputTuple = [
     baseToken: string,
     memeToken: string,
     source: string,
-    createdTimestamp: bigint
+    createdTimestamp: bigint,
+    baseDecimals: bigint,
+    memeDecimals: bigint
   ];
   export interface OutputObject {
     baseToken: string;
     memeToken: string;
     source: string;
     createdTimestamp: bigint;
+    baseDecimals: bigint;
+    memeDecimals: bigint;
   }
   export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
   export type Filter = TypedDeferredTopicFilter<Event>;
@@ -727,13 +733,7 @@ export interface EventEmitter extends BaseContract {
   >;
 
   emitClose: TypedContractMethod<
-    [
-      underlyingAssetUsd: AddressLike,
-      account: AddressLike,
-      amountUsdStartClose: BigNumberish,
-      amountUsdAfterRepayAndSellCollateral: BigNumberish,
-      amountUsdAfterBuyCollateralAndRepay: BigNumberish
-    ],
+    [account: AddressLike, positionId: BigNumberish],
     [void],
     "nonpayable"
   >;
@@ -743,6 +743,7 @@ export interface EventEmitter extends BaseContract {
       depositor: AddressLike,
       baseToken: AddressLike,
       memeToken: AddressLike,
+      positionId: BigNumberish,
       depositAmount: BigNumberish,
       baseCollateral: BigNumberish,
       baseDebtScaled: BigNumberish,
@@ -760,7 +761,8 @@ export interface EventEmitter extends BaseContract {
       marginLevel: BigNumberish,
       marginLevelLiquidationThreshold: BigNumberish,
       totalCollateralUsd: BigNumberish,
-      totalDebtUsd: BigNumberish
+      totalDebtUsd: BigNumberish,
+      memePrice: BigNumberish
     ],
     [void],
     "nonpayable"
@@ -771,7 +773,9 @@ export interface EventEmitter extends BaseContract {
       baseToken: AddressLike,
       memeToken: AddressLike,
       source: AddressLike,
-      createdTimestamp: BigNumberish
+      createdTimestamp: BigNumberish,
+      baseDecimals: BigNumberish,
+      memeDecimals: BigNumberish
     ],
     [void],
     "nonpayable"
@@ -898,13 +902,7 @@ export interface EventEmitter extends BaseContract {
   getFunction(
     nameOrSignature: "emitClose"
   ): TypedContractMethod<
-    [
-      underlyingAssetUsd: AddressLike,
-      account: AddressLike,
-      amountUsdStartClose: BigNumberish,
-      amountUsdAfterRepayAndSellCollateral: BigNumberish,
-      amountUsdAfterBuyCollateralAndRepay: BigNumberish
-    ],
+    [account: AddressLike, positionId: BigNumberish],
     [void],
     "nonpayable"
   >;
@@ -915,6 +913,7 @@ export interface EventEmitter extends BaseContract {
       depositor: AddressLike,
       baseToken: AddressLike,
       memeToken: AddressLike,
+      positionId: BigNumberish,
       depositAmount: BigNumberish,
       baseCollateral: BigNumberish,
       baseDebtScaled: BigNumberish,
@@ -933,7 +932,8 @@ export interface EventEmitter extends BaseContract {
       marginLevel: BigNumberish,
       marginLevelLiquidationThreshold: BigNumberish,
       totalCollateralUsd: BigNumberish,
-      totalDebtUsd: BigNumberish
+      totalDebtUsd: BigNumberish,
+      memePrice: BigNumberish
     ],
     [void],
     "nonpayable"
@@ -945,7 +945,9 @@ export interface EventEmitter extends BaseContract {
       baseToken: AddressLike,
       memeToken: AddressLike,
       source: AddressLike,
-      createdTimestamp: BigNumberish
+      createdTimestamp: BigNumberish,
+      baseDecimals: BigNumberish,
+      memeDecimals: BigNumberish
     ],
     [void],
     "nonpayable"
@@ -1148,7 +1150,7 @@ export interface EventEmitter extends BaseContract {
       ClaimFeesEvent.OutputObject
     >;
 
-    "Close(address,address,uint256,uint256,uint256)": TypedContractEvent<
+    "Close(address,uint256)": TypedContractEvent<
       CloseEvent.InputTuple,
       CloseEvent.OutputTuple,
       CloseEvent.OutputObject
@@ -1159,7 +1161,7 @@ export interface EventEmitter extends BaseContract {
       CloseEvent.OutputObject
     >;
 
-    "Deposit(address,address,address,uint256,uint256,uint256,uint256,uint256)": TypedContractEvent<
+    "Deposit(address,address,address,uint256,uint256,uint256,uint256,uint256,uint256)": TypedContractEvent<
       DepositEvent.InputTuple,
       DepositEvent.OutputTuple,
       DepositEvent.OutputObject
@@ -1170,7 +1172,7 @@ export interface EventEmitter extends BaseContract {
       DepositEvent.OutputObject
     >;
 
-    "Liquidation(address,address,uint256,uint256,uint256,uint256)": TypedContractEvent<
+    "Liquidation(address,address,uint256,uint256,uint256,uint256,uint256)": TypedContractEvent<
       LiquidationEvent.InputTuple,
       LiquidationEvent.OutputTuple,
       LiquidationEvent.OutputObject
@@ -1181,7 +1183,7 @@ export interface EventEmitter extends BaseContract {
       LiquidationEvent.OutputObject
     >;
 
-    "PoolCreated(address,address,address,uint256)": TypedContractEvent<
+    "PoolCreated(address,address,address,uint256,uint256,uint256)": TypedContractEvent<
       PoolCreatedEvent.InputTuple,
       PoolCreatedEvent.OutputTuple,
       PoolCreatedEvent.OutputObject

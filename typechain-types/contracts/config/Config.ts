@@ -31,6 +31,7 @@ export interface ConfigInterface extends Interface {
       | "setDefaultInterestRateStrategy"
       | "setDefaultPoolConfiguration"
       | "setMarginLevelThreshold"
+      | "setMaxBorrowRate"
       | "setShortLiquidityThreshold"
       | "setSwapFeeFactor"
       | "setTokenBase"
@@ -58,6 +59,10 @@ export interface ConfigInterface extends Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "setMarginLevelThreshold",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setMaxBorrowRate",
     values: [BigNumberish]
   ): string;
   encodeFunctionData(
@@ -98,6 +103,10 @@ export interface ConfigInterface extends Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "setMarginLevelThreshold",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setMaxBorrowRate",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -195,6 +204,12 @@ export interface Config extends BaseContract {
     "nonpayable"
   >;
 
+  setMaxBorrowRate: TypedContractMethod<
+    [maxBorrowRate: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
+
   setShortLiquidityThreshold: TypedContractMethod<
     [shortLiquidityThreshold: BigNumberish],
     [void],
@@ -250,6 +265,9 @@ export interface Config extends BaseContract {
   getFunction(
     nameOrSignature: "setMarginLevelThreshold"
   ): TypedContractMethod<[threshold: BigNumberish], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "setMaxBorrowRate"
+  ): TypedContractMethod<[maxBorrowRate: BigNumberish], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "setShortLiquidityThreshold"
   ): TypedContractMethod<

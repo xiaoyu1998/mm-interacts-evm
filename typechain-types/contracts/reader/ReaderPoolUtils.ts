@@ -33,8 +33,8 @@ export declare namespace ReaderPoolUtils {
     totalDebtScaled: BigNumberish;
     poolBalance: BigNumberish;
     priceLiquidity: BigNumberish;
-    avaiableLiquidity: BigNumberish;
-    loan: BigNumberish;
+    avaiableLoan: BigNumberish;
+    actualTradable: BigNumberish;
   };
 
   export type AssetStructOutput = [
@@ -48,8 +48,8 @@ export declare namespace ReaderPoolUtils {
     totalDebtScaled: bigint,
     poolBalance: bigint,
     priceLiquidity: bigint,
-    avaiableLiquidity: bigint,
-    loan: bigint
+    avaiableLoan: bigint,
+    actualTradable: bigint
   ] & {
     token: string;
     symbol: string;
@@ -61,8 +61,8 @@ export declare namespace ReaderPoolUtils {
     totalDebtScaled: bigint;
     poolBalance: bigint;
     priceLiquidity: bigint;
-    avaiableLiquidity: bigint;
-    loan: bigint;
+    avaiableLoan: bigint;
+    actualTradable: bigint;
   };
 
   export type GetPoolStruct = {

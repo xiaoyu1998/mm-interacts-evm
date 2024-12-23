@@ -33,8 +33,8 @@ export declare namespace ReaderPoolUtils {
     totalDebtScaled: BigNumberish;
     poolBalance: BigNumberish;
     priceLiquidity: BigNumberish;
-    avaiableLiquidity: BigNumberish;
-    loan: BigNumberish;
+    avaiableLoan: BigNumberish;
+    actualTradable: BigNumberish;
   };
 
   export type AssetStructOutput = [
@@ -48,8 +48,8 @@ export declare namespace ReaderPoolUtils {
     totalDebtScaled: bigint,
     poolBalance: bigint,
     priceLiquidity: bigint,
-    avaiableLiquidity: bigint,
-    loan: bigint
+    avaiableLoan: bigint,
+    actualTradable: bigint
   ] & {
     token: string;
     symbol: string;
@@ -61,8 +61,8 @@ export declare namespace ReaderPoolUtils {
     totalDebtScaled: bigint;
     poolBalance: bigint;
     priceLiquidity: bigint;
-    avaiableLiquidity: bigint;
-    loan: bigint;
+    avaiableLoan: bigint;
+    actualTradable: bigint;
   };
 
   export type GetPoolStruct = {
@@ -196,6 +196,7 @@ export interface ReaderInterface extends Interface {
       | "calcTokenPairOut"
       | "getDefaultInterestRateStrategy"
       | "getDefaultPoolConfiguration"
+      | "getMarginLevelThreshold"
       | "getPools(address)"
       | "getPools(address,uint256,uint256)"
       | "getPoolsCount"
@@ -222,6 +223,10 @@ export interface ReaderInterface extends Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "getDefaultPoolConfiguration",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getMarginLevelThreshold",
     values: [AddressLike]
   ): string;
   encodeFunctionData(
@@ -267,6 +272,10 @@ export interface ReaderInterface extends Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "getDefaultPoolConfiguration",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getMarginLevelThreshold",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -385,6 +394,12 @@ export interface Reader extends BaseContract {
     "view"
   >;
 
+  getMarginLevelThreshold: TypedContractMethod<
+    [dataStore: AddressLike],
+    [bigint],
+    "view"
+  >;
+
   "getPools(address)": TypedContractMethod<
     [dataStore: AddressLike],
     [ReaderPoolUtils.GetPoolStructOutput[]],
@@ -460,6 +475,9 @@ export interface Reader extends BaseContract {
   ): TypedContractMethod<[dataStore: AddressLike], [string], "view">;
   getFunction(
     nameOrSignature: "getDefaultPoolConfiguration"
+  ): TypedContractMethod<[dataStore: AddressLike], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "getMarginLevelThreshold"
   ): TypedContractMethod<[dataStore: AddressLike], [bigint], "view">;
   getFunction(
     nameOrSignature: "getPools(address)"
