@@ -172,6 +172,7 @@ export interface IEventEmitterInterface extends Interface {
       BigNumberish,
       BigNumberish,
       BigNumberish,
+      BigNumberish,
       Event.LiquidationStruct
     ]
   ): string;
@@ -181,6 +182,7 @@ export interface IEventEmitterInterface extends Interface {
       AddressLike,
       AddressLike,
       AddressLike,
+      BigNumberish,
       BigNumberish,
       AddressLike,
       BigNumberish,
@@ -399,6 +401,7 @@ export interface IEventEmitter extends BaseContract {
       account: AddressLike,
       tokenIn: AddressLike,
       tokenOut: AddressLike,
+      positionId: BigNumberish,
       amountIn: BigNumberish,
       amountOut: BigNumberish,
       fee: BigNumberish,
@@ -413,6 +416,7 @@ export interface IEventEmitter extends BaseContract {
       withdrawer: AddressLike,
       baseToken: AddressLike,
       memeToken: AddressLike,
+      positionId: BigNumberish,
       withdrawAmount: BigNumberish,
       to: AddressLike,
       baseCollateral: BigNumberish,
@@ -574,6 +578,7 @@ export interface IEventEmitter extends BaseContract {
       account: AddressLike,
       tokenIn: AddressLike,
       tokenOut: AddressLike,
+      positionId: BigNumberish,
       amountIn: BigNumberish,
       amountOut: BigNumberish,
       fee: BigNumberish,
@@ -589,6 +594,7 @@ export interface IEventEmitter extends BaseContract {
       withdrawer: AddressLike,
       baseToken: AddressLike,
       memeToken: AddressLike,
+      positionId: BigNumberish,
       withdrawAmount: BigNumberish,
       to: AddressLike,
       baseCollateral: BigNumberish,

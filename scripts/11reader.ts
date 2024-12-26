@@ -17,7 +17,7 @@ async function main() {
     //console.dir(parsePool(pools[2]),  {depth: null, colors: true });
     console.dir(parsePool(pools[0]),  {depth: null, colors: true });
 
-    const positions = await getPositions(dataStore, reader, "0x189717188db6C85EA050f74Dd9Ab15a461D920e1");
+    const positions = await getPositions(dataStore, reader, "0xCA339bCb835CE2d35402350baEe6202Cd2C22445");
     console.dir(positions, {depth: null, colors: true });
 
     // //calcAmountOut

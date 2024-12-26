@@ -462,6 +462,11 @@ const _abi = [
       },
       {
         internalType: "uint256",
+        name: "positionId",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
         name: "amountIn",
         type: "uint256",
       },
@@ -524,6 +529,11 @@ const _abi = [
         internalType: "address",
         name: "memeToken",
         type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "positionId",
+        type: "uint256",
       },
       {
         internalType: "uint256",

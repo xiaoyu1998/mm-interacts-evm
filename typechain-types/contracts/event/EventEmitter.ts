@@ -133,6 +133,7 @@ export interface EventEmitterInterface extends Interface {
       BigNumberish,
       BigNumberish,
       BigNumberish,
+      BigNumberish,
       BigNumberish
     ]
   ): string;
@@ -190,6 +191,7 @@ export interface EventEmitterInterface extends Interface {
       BigNumberish,
       BigNumberish,
       BigNumberish,
+      BigNumberish,
       Event.LiquidationStruct
     ]
   ): string;
@@ -199,6 +201,7 @@ export interface EventEmitterInterface extends Interface {
       AddressLike,
       AddressLike,
       AddressLike,
+      BigNumberish,
       BigNumberish,
       AddressLike,
       BigNumberish,
@@ -401,6 +404,7 @@ export namespace LiquidationEvent {
   export type InputTuple = [
     liquidator: AddressLike,
     account: AddressLike,
+    positionId: BigNumberish,
     marginLevel: BigNumberish,
     marginLevelLiquidationThreshold: BigNumberish,
     totalCollateralUsd: BigNumberish,
@@ -410,6 +414,7 @@ export namespace LiquidationEvent {
   export type OutputTuple = [
     liquidator: string,
     account: string,
+    positionId: bigint,
     marginLevel: bigint,
     marginLevelLiquidationThreshold: bigint,
     totalCollateralUsd: bigint,
@@ -419,6 +424,7 @@ export namespace LiquidationEvent {
   export interface OutputObject {
     liquidator: string;
     account: string;
+    positionId: bigint;
     marginLevel: bigint;
     marginLevelLiquidationThreshold: bigint;
     totalCollateralUsd: bigint;
@@ -572,6 +578,7 @@ export namespace SwapEvent {
     account: AddressLike,
     tokenIn: AddressLike,
     tokenOut: AddressLike,
+    positionId: BigNumberish,
     amountIn: BigNumberish,
     amountOut: BigNumberish,
     fee: BigNumberish,
@@ -584,6 +591,7 @@ export namespace SwapEvent {
     account: string,
     tokenIn: string,
     tokenOut: string,
+    positionId: bigint,
     amountIn: bigint,
     amountOut: bigint,
     fee: bigint,
@@ -596,6 +604,7 @@ export namespace SwapEvent {
     account: string;
     tokenIn: string;
     tokenOut: string;
+    positionId: bigint;
     amountIn: bigint;
     amountOut: bigint;
     fee: bigint;
@@ -615,6 +624,7 @@ export namespace WithdrawEvent {
     withdrawer: AddressLike,
     baseToken: AddressLike,
     memeToken: AddressLike,
+    positionId: BigNumberish,
     withdrawAmount: BigNumberish,
     to: AddressLike,
     baseCollateral: BigNumberish,
@@ -626,6 +636,7 @@ export namespace WithdrawEvent {
     withdrawer: string,
     baseToken: string,
     memeToken: string,
+    positionId: bigint,
     withdrawAmount: bigint,
     to: string,
     baseCollateral: bigint,
@@ -637,6 +648,7 @@ export namespace WithdrawEvent {
     withdrawer: string;
     baseToken: string;
     memeToken: string;
+    positionId: bigint;
     withdrawAmount: bigint;
     to: string;
     baseCollateral: bigint;
@@ -758,6 +770,7 @@ export interface EventEmitter extends BaseContract {
     [
       liquidator: AddressLike,
       account: AddressLike,
+      positionId: BigNumberish,
       marginLevel: BigNumberish,
       marginLevelLiquidationThreshold: BigNumberish,
       totalCollateralUsd: BigNumberish,
@@ -826,6 +839,7 @@ export interface EventEmitter extends BaseContract {
       account: AddressLike,
       tokenIn: AddressLike,
       tokenOut: AddressLike,
+      positionId: BigNumberish,
       amountIn: BigNumberish,
       amountOut: BigNumberish,
       fee: BigNumberish,
@@ -840,6 +854,7 @@ export interface EventEmitter extends BaseContract {
       withdrawer: AddressLike,
       baseToken: AddressLike,
       memeToken: AddressLike,
+      positionId: BigNumberish,
       withdrawAmount: BigNumberish,
       to: AddressLike,
       baseCollateral: BigNumberish,
@@ -929,6 +944,7 @@ export interface EventEmitter extends BaseContract {
     [
       liquidator: AddressLike,
       account: AddressLike,
+      positionId: BigNumberish,
       marginLevel: BigNumberish,
       marginLevelLiquidationThreshold: BigNumberish,
       totalCollateralUsd: BigNumberish,
@@ -1002,6 +1018,7 @@ export interface EventEmitter extends BaseContract {
       account: AddressLike,
       tokenIn: AddressLike,
       tokenOut: AddressLike,
+      positionId: BigNumberish,
       amountIn: BigNumberish,
       amountOut: BigNumberish,
       fee: BigNumberish,
@@ -1017,6 +1034,7 @@ export interface EventEmitter extends BaseContract {
       withdrawer: AddressLike,
       baseToken: AddressLike,
       memeToken: AddressLike,
+      positionId: BigNumberish,
       withdrawAmount: BigNumberish,
       to: AddressLike,
       baseCollateral: BigNumberish,
@@ -1172,7 +1190,7 @@ export interface EventEmitter extends BaseContract {
       DepositEvent.OutputObject
     >;
 
-    "Liquidation(address,address,uint256,uint256,uint256,uint256,uint256)": TypedContractEvent<
+    "Liquidation(address,address,uint256,uint256,uint256,uint256,uint256,uint256)": TypedContractEvent<
       LiquidationEvent.InputTuple,
       LiquidationEvent.OutputTuple,
       LiquidationEvent.OutputObject
@@ -1227,7 +1245,7 @@ export interface EventEmitter extends BaseContract {
       RepayEvent.OutputObject
     >;
 
-    "Swap(address,address,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256)": TypedContractEvent<
+    "Swap(address,address,address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)": TypedContractEvent<
       SwapEvent.InputTuple,
       SwapEvent.OutputTuple,
       SwapEvent.OutputObject
@@ -1238,7 +1256,7 @@ export interface EventEmitter extends BaseContract {
       SwapEvent.OutputObject
     >;
 
-    "Withdraw(address,address,address,uint256,address,uint256,uint256,uint256,uint256)": TypedContractEvent<
+    "Withdraw(address,address,address,uint256,uint256,address,uint256,uint256,uint256,uint256)": TypedContractEvent<
       WithdrawEvent.InputTuple,
       WithdrawEvent.OutputTuple,
       WithdrawEvent.OutputObject
