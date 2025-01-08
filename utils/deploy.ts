@@ -68,7 +68,9 @@ export async function getContract(name) {
         name == "PoolStoreUtils" ||
         name == "PoolInterestRateStrategy" ||
         name == "PositionStoreUtils" ||
-        name == "EventEmitter"
+        name == "EventEmitter" ||
+        name == "FeeHandler"
+
     ) {
         const address = getContractAddress(name);
         return await contractAtOptions(name, address);

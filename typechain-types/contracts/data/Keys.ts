@@ -26,6 +26,7 @@ export interface KeysInterface extends Interface {
       | "DEBT_SAFETY_FACTOR"
       | "DEFAULT_INTEREST_RATE_STRATEGY"
       | "DEFAULT_POOL_CONFIGURATION"
+      | "LIQUIDATION_FEE"
       | "MARGIN_LEVELL_THRESHOLD"
       | "MAX_BORROW_RATE"
       | "POOL"
@@ -53,6 +54,10 @@ export interface KeysInterface extends Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "DEFAULT_POOL_CONFIGURATION",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "LIQUIDATION_FEE",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -99,6 +104,10 @@ export interface KeysInterface extends Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "DEFAULT_POOL_CONFIGURATION",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "LIQUIDATION_FEE",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -180,6 +189,8 @@ export interface Keys extends BaseContract {
 
   DEFAULT_POOL_CONFIGURATION: TypedContractMethod<[], [string], "view">;
 
+  LIQUIDATION_FEE: TypedContractMethod<[], [string], "view">;
+
   MARGIN_LEVELL_THRESHOLD: TypedContractMethod<[], [string], "view">;
 
   MAX_BORROW_RATE: TypedContractMethod<[], [string], "view">;
@@ -217,6 +228,9 @@ export interface Keys extends BaseContract {
   ): TypedContractMethod<[], [string], "view">;
   getFunction(
     nameOrSignature: "DEFAULT_POOL_CONFIGURATION"
+  ): TypedContractMethod<[], [string], "view">;
+  getFunction(
+    nameOrSignature: "LIQUIDATION_FEE"
   ): TypedContractMethod<[], [string], "view">;
   getFunction(
     nameOrSignature: "MARGIN_LEVELL_THRESHOLD"

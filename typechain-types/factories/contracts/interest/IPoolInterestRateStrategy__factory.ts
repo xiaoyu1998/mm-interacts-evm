@@ -23,6 +23,11 @@ const _abi = [
             name: "totalDebt",
             type: "uint256",
           },
+          {
+            internalType: "uint256",
+            name: "totalPoolBalanceBase",
+            type: "uint256",
+          },
         ],
         internalType: "struct InterestUtils.CalculateInterestRatesParams",
         name: "params",

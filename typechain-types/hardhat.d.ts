@@ -254,6 +254,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Router__factory>;
     getContractFactory(
+      name: "InterestRateTest",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.InterestRateTest__factory>;
+    getContractFactory(
       name: "IPoolERC20",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IPoolERC20__factory>;
@@ -587,6 +591,11 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.Router>;
     getContractAt(
+      name: "InterestRateTest",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.InterestRateTest>;
+    getContractAt(
       name: "IPoolERC20",
       address: string | ethers.Addressable,
       signer?: ethers.Signer
@@ -868,6 +877,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.Router>;
     deployContract(
+      name: "InterestRateTest",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.InterestRateTest>;
+    deployContract(
       name: "IPoolERC20",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.IPoolERC20>;
@@ -1200,6 +1213,11 @@ declare module "hardhat/types/runtime" {
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.Router>;
+    deployContract(
+      name: "InterestRateTest",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.InterestRateTest>;
     deployContract(
       name: "IPoolERC20",
       args: any[],

@@ -31,6 +31,8 @@ import type * as role from "./role";
 export type { role };
 import type * as router from "./router";
 export type { router };
+import type * as tests from "./tests";
+export type { tests };
 import type * as token from "./token";
 export type { token };
 import type * as utils from "./utils";

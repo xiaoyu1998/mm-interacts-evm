@@ -12,12 +12,18 @@ async function main() {
     const dataStore = await getContract("DataStore"); 
     const reader = await getContract("Reader"); 
 
+
+    console.dir(await getPools(dataStore, reader), {depth: null, colors: true });
+
     const poolCount = await reader.getPoolsCount(dataStore);
     const pools = await reader.getPools(dataStore, 0, poolCount);
-    //console.dir(parsePool(pools[2]),  {depth: null, colors: true });
-    console.dir(parsePool(pools[0]),  {depth: null, colors: true });
+    console.dir(parsePool(pools[6]),  {depth: null, colors: true });
+    // console.dir(parsePool(pools[1]),  {depth: null, colors: true });
+    // console.dir(parsePool(pools[2]),  {depth: null, colors: true });
+    // console.dir(parsePool(pools[3]),  {depth: null, colors: true });
 
-    const positions = await getPositions(dataStore, reader, "0xCA339bCb835CE2d35402350baEe6202Cd2C22445");
+    //const positions = await getPositions(dataStore, reader, owner.address);
+    const positions = await getPositions(dataStore, reader, "0x189717188db6C85EA050f74Dd9Ab15a461D920e1");
     console.dir(positions, {depth: null, colors: true });
 
     // //calcAmountOut

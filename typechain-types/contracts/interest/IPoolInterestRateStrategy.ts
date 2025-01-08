@@ -24,12 +24,18 @@ export declare namespace InterestUtils {
   export type CalculateInterestRatesParamsStruct = {
     totalPoolBalance: BigNumberish;
     totalDebt: BigNumberish;
+    totalPoolBalanceBase: BigNumberish;
   };
 
   export type CalculateInterestRatesParamsStructOutput = [
     totalPoolBalance: bigint,
-    totalDebt: bigint
-  ] & { totalPoolBalance: bigint; totalDebt: bigint };
+    totalDebt: bigint,
+    totalPoolBalanceBase: bigint
+  ] & {
+    totalPoolBalance: bigint;
+    totalDebt: bigint;
+    totalPoolBalanceBase: bigint;
+  };
 }
 
 export interface IPoolInterestRateStrategyInterface extends Interface {

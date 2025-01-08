@@ -76,6 +76,7 @@ export declare namespace ReaderPoolUtils {
     source: AddressLike;
     shortEnabled: boolean;
     createdTimestamp: BigNumberish;
+    unclaimedFee: BigNumberish;
   };
 
   export type GetPoolStructOutput = [
@@ -91,7 +92,8 @@ export declare namespace ReaderPoolUtils {
     price: bigint,
     source: string,
     shortEnabled: boolean,
-    createdTimestamp: bigint
+    createdTimestamp: bigint,
+    unclaimedFee: bigint
   ] & {
     assets: [
       ReaderPoolUtils.AssetStructOutput,
@@ -106,6 +108,7 @@ export declare namespace ReaderPoolUtils {
     source: string;
     shortEnabled: boolean;
     createdTimestamp: bigint;
+    unclaimedFee: bigint;
   };
 }
 

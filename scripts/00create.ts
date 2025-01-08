@@ -2,6 +2,7 @@ import { deployContract, contractAtWithCode, getContract, sendTxn } from "../uti
 import { bigNumberify, expandDecimals} from "../utils/math"
 import { usdtDecimals, uniDecimals, ethDecimals} from "../utils/constants";
 import { getPools, getTokens } from "../utils/reader"
+import { LIQUIDATION_KEEPER, FEE_KEEPER } from "../utils/keys"
 import { CreatePoolParamsStructOutput } from "../typechain-types/contracts/pool/PoolFactory";
 
 
@@ -12,6 +13,12 @@ async function main() {
     const dataStore = await getContract("DataStore"); 
     const reader = await getContract("Reader");  
 
+    //set owner as LIQUIDATION_KEEPER and treasury to FEE_KEEPER
+    const treasury = "0xBC34aF883e63A7E1be2439d8c8d3Db7695e306e2";
+    //const treasury = "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266";
+    await sendTxn(roleStore.grantRole(treasury, FEE_KEEPER), "roleStore.grantRole ${owner.address}");
+    await sendTxn(roleStore.grantRole(owner.address, LIQUIDATION_KEEPER), "roleStore.grantRole ${owner.address}");
+
     //create underlyingAssets
     const usdt = await deployContract("MintableToken", ["Tether", "USDT", usdtDecimals])
     const uni = await deployContract("MintableToken", ["UNI", "UNI", uniDecimals])
@@ -21,7 +28,7 @@ async function main() {
     await sendTxn(eth.mint(owner.address, expandDecimals(10000, ethDecimals)), "eth.mint");
 
     //configuration
-    const configuration = bigNumberify(0x12060046006400000000000000);
+    const configuration = bigNumberify(0x12061b58006400000000000000);
     const poolInterestRateStrategy = await getContract("PoolInterestRateStrategy");
     const config = await getContract("Config");
     const multicallArgs = [
@@ -33,6 +40,8 @@ async function main() {
         config.interface.encodeFunctionData("setDebtSafetyFactor", [expandDecimals(2, 27)]),//2x
         config.interface.encodeFunctionData("setShortLiquidityThreshold", [expandDecimals(1000000, 27)]),//1millon
         config.interface.encodeFunctionData("setMaxBorrowRate", [expandDecimals(8, 26)]),//80%
+        config.interface.encodeFunctionData("setTreasury", [treasury]),//80%
+        config.interface.encodeFunctionData("setLiquidationFee", [expandDecimals(1, usdtDecimals)]),//1usdt
     ];
     await sendTxn(config.multicall(multicallArgs), "config.multicall");
 
@@ -46,9 +55,7 @@ async function main() {
     // // pools configuration
     // const multicallArgs2 = [
     //     config.interface.encodeFunctionData("setSwapFeeFactor", [usdt.target, uni.target, 100]), //1%
-    //     config.interface.encodeFunctionData("setTreasuryFeeFactor", [usdt.target, uni.target, 70]), //0.7%
-    //     // config.interface.encodeFunctionData("setSwapFeeFactor", [usdt.target, eth.target, 100]), //1%
-    //     // config.interface.encodeFunctionData("setTreasuryFeeFactor", [usdt.target, eth.target, 70]), //0.7%
+    //     config.interface.encodeFunctionData("setTreasuryFeeFactor", [usdt.target, uni.target, 7000]), //70%
     // ];
     // await sendTxn(
     //     config.multicall(multicallArgs2),

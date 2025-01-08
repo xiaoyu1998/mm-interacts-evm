@@ -45,12 +45,18 @@ export declare namespace InterestUtils {
   export type CalculateInterestRatesParamsStruct = {
     totalPoolBalance: BigNumberish;
     totalDebt: BigNumberish;
+    totalPoolBalanceBase: BigNumberish;
   };
 
   export type CalculateInterestRatesParamsStructOutput = [
     totalPoolBalance: bigint,
-    totalDebt: bigint
-  ] & { totalPoolBalance: bigint; totalDebt: bigint };
+    totalDebt: bigint,
+    totalPoolBalanceBase: bigint
+  ] & {
+    totalPoolBalance: bigint;
+    totalDebt: bigint;
+    totalPoolBalanceBase: bigint;
+  };
 }
 
 export interface PoolInterestRateStrategyInterface extends Interface {
@@ -58,7 +64,6 @@ export interface PoolInterestRateStrategyInterface extends Interface {
     nameOrSignature:
       | "BALANCE10000"
       | "BALANCE1000000"
-      | "BALANCE5000"
       | "BALANCE50000"
       | "BALANCE500000"
       | "MAX_EXCESS_USAGE_RATIO"
@@ -78,10 +83,6 @@ export interface PoolInterestRateStrategyInterface extends Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "BALANCE1000000",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "BALANCE5000",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -132,10 +133,6 @@ export interface PoolInterestRateStrategyInterface extends Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "BALANCE1000000",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "BALANCE5000",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -228,8 +225,6 @@ export interface PoolInterestRateStrategy extends BaseContract {
 
   BALANCE1000000: TypedContractMethod<[], [bigint], "view">;
 
-  BALANCE5000: TypedContractMethod<[], [bigint], "view">;
-
   BALANCE50000: TypedContractMethod<[], [bigint], "view">;
 
   BALANCE500000: TypedContractMethod<[], [bigint], "view">;
@@ -265,9 +260,6 @@ export interface PoolInterestRateStrategy extends BaseContract {
   ): TypedContractMethod<[], [bigint], "view">;
   getFunction(
     nameOrSignature: "BALANCE1000000"
-  ): TypedContractMethod<[], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "BALANCE5000"
   ): TypedContractMethod<[], [bigint], "view">;
   getFunction(
     nameOrSignature: "BALANCE50000"

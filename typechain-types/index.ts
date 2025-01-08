@@ -126,6 +126,8 @@ export type { IExchangeRouter } from "./contracts/router/IExchangeRouter";
 export { IExchangeRouter__factory } from "./factories/contracts/router/IExchangeRouter__factory";
 export type { Router } from "./contracts/router/Router";
 export { Router__factory } from "./factories/contracts/router/Router__factory";
+export type { InterestRateTest } from "./contracts/tests/InterestRateTest";
+export { InterestRateTest__factory } from "./factories/contracts/tests/InterestRateTest__factory";
 export type { IPoolERC20 } from "./contracts/token/IPoolERC20";
 export { IPoolERC20__factory } from "./factories/contracts/token/IPoolERC20__factory";
 export type { IWNT } from "./contracts/token/IWNT";

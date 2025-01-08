@@ -64,6 +64,7 @@ export function parsePool(pool) {
         source: pool[7],
         shortEnabled:pool[8],
         createdTimestamp:pool[9],
+        unclaimedFee:pool[10],
     };
     return p;
 }

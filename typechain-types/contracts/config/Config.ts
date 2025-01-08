@@ -30,6 +30,7 @@ export interface ConfigInterface extends Interface {
       | "setDebtSafetyFactor"
       | "setDefaultInterestRateStrategy"
       | "setDefaultPoolConfiguration"
+      | "setLiquidationFee"
       | "setMarginLevelThreshold"
       | "setMaxBorrowRate"
       | "setShortLiquidityThreshold"
@@ -55,6 +56,10 @@ export interface ConfigInterface extends Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "setDefaultPoolConfiguration",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setLiquidationFee",
     values: [BigNumberish]
   ): string;
   encodeFunctionData(
@@ -99,6 +104,10 @@ export interface ConfigInterface extends Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "setDefaultPoolConfiguration",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setLiquidationFee",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -198,6 +207,12 @@ export interface Config extends BaseContract {
     "nonpayable"
   >;
 
+  setLiquidationFee: TypedContractMethod<
+    [liquidationFee: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
+
   setMarginLevelThreshold: TypedContractMethod<
     [threshold: BigNumberish],
     [void],
@@ -262,6 +277,9 @@ export interface Config extends BaseContract {
   getFunction(
     nameOrSignature: "setDefaultPoolConfiguration"
   ): TypedContractMethod<[configuration: BigNumberish], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "setLiquidationFee"
+  ): TypedContractMethod<[liquidationFee: BigNumberish], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "setMarginLevelThreshold"
   ): TypedContractMethod<[threshold: BigNumberish], [void], "nonpayable">;

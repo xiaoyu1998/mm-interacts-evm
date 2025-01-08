@@ -16,5 +16,6 @@ export * as reader from "./reader";
 export * as repay from "./repay";
 export * as role from "./role";
 export * as router from "./router";
+export * as tests from "./tests";
 export * as token from "./token";
 export * as utils from "./utils";
