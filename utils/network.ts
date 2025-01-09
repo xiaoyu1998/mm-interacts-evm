@@ -1,7 +1,8 @@
 export const deployedAddresses = {
 	localhost : "ignition/deployments/chain-31337/deployed_addresses.json",
 	localnet : "ignition/deployments/chain-1998/deployed_addresses.json",
-	arbitrumSepolia : "deployments/sepolia_deployed_addresses.json",
+	arbitrumSepolia : "deployments/arbitrum_sepolia_deployed_addresses.json",
+	baseSepolia : "deployments/base_sepolia_deployed_addresses.json",
 };
 
 export const webSocketUrl = {
