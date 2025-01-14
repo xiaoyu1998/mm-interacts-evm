@@ -3,6 +3,7 @@ export const deployedAddresses = {
 	localnet : "ignition/deployments/chain-1998/deployed_addresses.json",
 	arbitrumSepolia : "deployments/arbitrum_sepolia_deployed_addresses.json",
 	baseSepolia : "deployments/base_sepolia_deployed_addresses.json",
+	monadDevnet2 : "deployments/monad_devnet2_deployed_addresses.json",
 };
 
 export const webSocketUrl = {
