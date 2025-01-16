@@ -38,7 +38,7 @@ async function main() {
         config.interface.encodeFunctionData("setTreasury", [owner.address]),
         config.interface.encodeFunctionData("setMarginLevelThreshold", [expandDecimals(110, 25)]),//110%
         config.interface.encodeFunctionData("setDebtSafetyFactor", [expandDecimals(2, 27)]),//2x
-        config.interface.encodeFunctionData("setShortLiquidityThreshold", [expandDecimals(1000000, 27)]),//1millon
+        config.interface.encodeFunctionData("setShortLiquidityThreshold", [expandDecimals(10000000, 27)]),//10millon
         config.interface.encodeFunctionData("setMaxBorrowRate", [expandDecimals(8, 26)]),//80%
         config.interface.encodeFunctionData("setTreasury", [treasury]),//80%
         config.interface.encodeFunctionData("setLiquidationFee", [expandDecimals(1, usdtDecimals)]),//1usdt
@@ -54,6 +54,7 @@ async function main() {
 
     // // pools configuration
     // const multicallArgs2 = [
+    //     config.interface.encodeFunctionData("setShortEnabled", [usdt.target, uni.target, false]), //init short close
     //     config.interface.encodeFunctionData("setSwapFeeFactor", [usdt.target, uni.target, 100]), //1%
     //     config.interface.encodeFunctionData("setTreasuryFeeFactor", [usdt.target, uni.target, 7000]), //70%
     // ];
@@ -64,7 +65,7 @@ async function main() {
 
     const pools = await getPools(dataStore, reader);
     console.dir(pools, {depth: null, colors: true });
-    //console.log(pools[0].configuration.toString(16));
+    // console.log(pools[0].configuration.toString(16));
 
 }
 

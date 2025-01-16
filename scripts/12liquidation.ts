@@ -27,18 +27,33 @@ async function main() {
     ];
     await sendTxn(config.multicall(multicallArgs), "config.multicall");
 
-    //liquidation
-    const usdtBalanceBefore = await usdt.balanceOf(owner.address);
-    const paramsLiquidation: LiquidationUtils.LiquidationParamsStructOutput = {
-        account: owner.address,
-        positionId: bigNumberify(1)
-    };
-    const multicallArgs2 = [
-        exchangeRouter.interface.encodeFunctionData("executeLiquidation", [paramsLiquidation]),
-    ];
-    await sendTxn(exchangeRouter.multicall(multicallArgs2), "exchangeRouter.multicall");
-    const usdtBalanceAfter = await usdt.balanceOf(owner.address);
-    console.log(usdtBalanceBefore, usdtBalanceAfter);
+    // //liquidation
+    // const usdtBalanceBefore = await usdt.balanceOf(owner.address);
+    // const paramsLiquidation: LiquidationUtils.LiquidationParamsStructOutput = {
+    //     account: "0xe87069a64c32e3bf7a40b2ce2778995533359074",
+    //     positionId: bigNumberify(3)
+    // };
+    // const multicallArgs2 = [
+    //     exchangeRouter.interface.encodeFunctionData("executeLiquidation", [paramsLiquidation]),
+    // ];
+
+    // await sendTxn(exchangeRouter.multicall(multicallArgs2), "exchangeRouter.multicall");
+
+
+    // try {
+    //     const estimaterGas = exchangeRouter.multicall.estimateGas(multicallArgs2);
+    //     console.log("estimatedGas", estimatedGas);
+    // } catch (err){
+    //     for (const key in err) {
+    //         if (err.hasOwnProperty(key)) {
+    //             console.log(`${key}: ${err[key]}`);
+    //         }
+    //     }        
+    // }
+
+
+    // const usdtBalanceAfter = await usdt.balanceOf(owner.address);
+    // console.log(usdtBalanceBefore, usdtBalanceAfter);
 
 }
 

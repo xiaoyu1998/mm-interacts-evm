@@ -30,33 +30,33 @@ async function main() {
     const usdtAmount = expandDecimals(10000, usdtDecimals);
     const uniAmount = expandDecimals(1500, uniDecimals);
     const positionId = bigNumberify(1);
-    await sendTxn(usdt.approve(router.target, usdtAmount), `usdt.approve(${router.target})`) 
-    const paramsDeposit: DepositUtils.DepositParamsStructOutput = {
-        positionId: CREATE_POSITION_ID,
-        token0: usdtAddress,
-        token1: uniAddress,
-        tokenIndex: POOL_BASE,
-    };
-    const paramsBorrow: BorrowUtils.BorrowParamsStructOutput = {
-        positionId: positionId,
-        tokenIndex: POOL_MEME,
-        borrowAmount: uniAmount,
-    };
-    const paramsSwapInPosition: SwapInPositionUtils.SwapInPositionParamsStructOutput = {
-        positionId: positionId,
-        amount0In: bigNumberify(0),
-        amount1In: uniAmount,
-        amount0Out: usdtAmount,
-        amount1Out: bigNumberify(0)
-    };
-    const paramsClose: CloseUtils.CloseParamsStructOutput = {
-        positionId: positionId
+    // await sendTxn(usdt.approve(router.target, usdtAmount), `usdt.approve(${router.target})`) 
+    // const paramsDeposit: DepositUtils.DepositParamsStructOutput = {
+    //     positionId: positionId,
+    //     token0: usdtAddress,
+    //     token1: uniAddress,
+    //     tokenIndex: POOL_BASE,
+    // };
+    // const paramsBorrow: BorrowUtils.BorrowParamsStructOutput = {
+    //     positionId: positionId,
+    //     tokenIndex: POOL_MEME,
+    //     borrowAmount: uniAmount,
+    // };
+    // const paramsSwapInPosition: SwapInPositionUtils.SwapInPositionParamsStructOutput = {
+    //     positionId: positionId,
+    //     amount0In: bigNumberify(0),
+    //     amount1In: uniAmount,
+    //     amount0Out: usdtAmount,
+    //     amount1Out: bigNumberify(0)
+    // };
+    // const paramsClose: CloseUtils.CloseParamsStructOutput = {
+    //     positionId: positionId
     };
     const multicallArgs = [
-        exchangeRouter.interface.encodeFunctionData("sendTokens", [usdtAddress, pool0.bank, usdtAmount]),
-        exchangeRouter.interface.encodeFunctionData("executeDeposit", [paramsDeposit]),
-        exchangeRouter.interface.encodeFunctionData("executeBorrow", [paramsBorrow]),
-        exchangeRouter.interface.encodeFunctionData("executeSwapInPosition", [paramsSwapInPosition]),
+        // exchangeRouter.interface.encodeFunctionData("sendTokens", [usdtAddress, pool0.bank, usdtAmount]),
+        // exchangeRouter.interface.encodeFunctionData("executeDeposit", [paramsDeposit]),
+        // exchangeRouter.interface.encodeFunctionData("executeBorrow", [paramsBorrow]),
+        // exchangeRouter.interface.encodeFunctionData("executeSwapInPosition", [paramsSwapInPosition]),
         exchangeRouter.interface.encodeFunctionData("executeClose", [paramsClose]),
     ];
     await sendTxn(exchangeRouter.multicall(multicallArgs), "exchangeRouter.multicall");

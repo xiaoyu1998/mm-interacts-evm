@@ -35,10 +35,12 @@ async function main() {
         0
     ))[0];//the first one in tokenOut
     console.log(uniAmount);
+    console.log(uniAmount-expandDecimals(1, uniDecimals));
 
     await sendTxn(usdt.approve(router.target, usdtAmount), `usdt.approve(${router.target})`) 
     const paramsDeposit: DepositUtils.DepositParamsStructOutput = {
         positionId: CREATE_POSITION_ID,
+        //positionId: bigNumberify(1),
         token0: usdtAddress,
         token1: uniAddress,
         tokenIndex: POOL_BASE,
@@ -48,6 +50,8 @@ async function main() {
         tokenIndex: POOL_BASE,
         borrowAmount: usdtAmount,
     };
+
+    console.log(uniAmount-expandDecimals(1, uniDecimals));
     const paramsSwapInPosition: SwapInPositionUtils.SwapInPositionParamsStructOutput = {
         positionId: bigNumberify(1),
         amount0In: usdtAmount*bigNumberify(2),

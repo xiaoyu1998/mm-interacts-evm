@@ -33,6 +33,7 @@ export interface ConfigInterface extends Interface {
       | "setLiquidationFee"
       | "setMarginLevelThreshold"
       | "setMaxBorrowRate"
+      | "setShortEnabled"
       | "setShortLiquidityThreshold"
       | "setSwapFeeFactor"
       | "setTokenBase"
@@ -69,6 +70,10 @@ export interface ConfigInterface extends Interface {
   encodeFunctionData(
     functionFragment: "setMaxBorrowRate",
     values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setShortEnabled",
+    values: [AddressLike, AddressLike, boolean]
   ): string;
   encodeFunctionData(
     functionFragment: "setShortLiquidityThreshold",
@@ -116,6 +121,10 @@ export interface ConfigInterface extends Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "setMaxBorrowRate",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setShortEnabled",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -225,6 +234,12 @@ export interface Config extends BaseContract {
     "nonpayable"
   >;
 
+  setShortEnabled: TypedContractMethod<
+    [token0: AddressLike, token1: AddressLike, shortEnabled: boolean],
+    [void],
+    "nonpayable"
+  >;
+
   setShortLiquidityThreshold: TypedContractMethod<
     [shortLiquidityThreshold: BigNumberish],
     [void],
@@ -286,6 +301,13 @@ export interface Config extends BaseContract {
   getFunction(
     nameOrSignature: "setMaxBorrowRate"
   ): TypedContractMethod<[maxBorrowRate: BigNumberish], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "setShortEnabled"
+  ): TypedContractMethod<
+    [token0: AddressLike, token1: AddressLike, shortEnabled: boolean],
+    [void],
+    "nonpayable"
+  >;
   getFunction(
     nameOrSignature: "setShortLiquidityThreshold"
   ): TypedContractMethod<

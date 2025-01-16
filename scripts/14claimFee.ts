@@ -32,7 +32,6 @@ async function main() {
 
     console.dir(await getPools(dataStore, reader), {depth: null, colors: true });
     console.log(usdtBalanceBefore, usdtBalanceAfter);
-
 }
 
 

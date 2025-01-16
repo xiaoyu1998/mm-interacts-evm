@@ -194,6 +194,7 @@ export declare namespace ReaderPositionUtils {
 export interface ReaderInterface extends Interface {
   getFunction(
     nameOrSignature:
+      | "calcAmountIn"
       | "calcAmountOut"
       | "calcLiquidityOut"
       | "calcTokenPairOut"
@@ -208,6 +209,10 @@ export interface ReaderInterface extends Interface {
       | "getTreasury"
   ): FunctionFragment;
 
+  encodeFunctionData(
+    functionFragment: "calcAmountIn",
+    values: [AddressLike, AddressLike, AddressLike, BigNumberish, BigNumberish]
+  ): string;
   encodeFunctionData(
     functionFragment: "calcAmountOut",
     values: [AddressLike, AddressLike, AddressLike, BigNumberish, BigNumberish]
@@ -257,6 +262,10 @@ export interface ReaderInterface extends Interface {
     values: [AddressLike]
   ): string;
 
+  decodeFunctionResult(
+    functionFragment: "calcAmountIn",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "calcAmountOut",
     data: BytesLike
@@ -350,6 +359,18 @@ export interface Reader extends BaseContract {
     event?: TCEvent
   ): Promise<this>;
 
+  calcAmountIn: TypedContractMethod<
+    [
+      dataStore: AddressLike,
+      token0: AddressLike,
+      token1: AddressLike,
+      amountOut: BigNumberish,
+      tokenOutIndex: BigNumberish
+    ],
+    [[bigint, bigint, bigint]],
+    "view"
+  >;
+
   calcAmountOut: TypedContractMethod<
     [
       dataStore: AddressLike,
@@ -435,6 +456,19 @@ export interface Reader extends BaseContract {
     key: string | FunctionFragment
   ): T;
 
+  getFunction(
+    nameOrSignature: "calcAmountIn"
+  ): TypedContractMethod<
+    [
+      dataStore: AddressLike,
+      token0: AddressLike,
+      token1: AddressLike,
+      amountOut: BigNumberish,
+      tokenOutIndex: BigNumberish
+    ],
+    [[bigint, bigint, bigint]],
+    "view"
+  >;
   getFunction(
     nameOrSignature: "calcAmountOut"
   ): TypedContractMethod<
