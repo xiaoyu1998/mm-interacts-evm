@@ -29,6 +29,7 @@ export interface KeysInterface extends Interface {
       | "LIQUIDATION_FEE"
       | "MARGIN_LEVELL_THRESHOLD"
       | "MAX_BORROW_RATE"
+      | "MAX_DEPOSIT_RATE"
       | "POOL"
       | "POOL_LIST"
       | "POSITION"
@@ -36,6 +37,7 @@ export interface KeysInterface extends Interface {
       | "REENTRANCY_GUARD_STATUS"
       | "SHORT_LIQUIDITY_THRESHOLD"
       | "TOKEN_BASE"
+      | "TRADABLE_DEBT_MULTIPIER_FACTOR"
       | "TREASURY"
       | "WNT"
   ): FunctionFragment;
@@ -68,6 +70,10 @@ export interface KeysInterface extends Interface {
     functionFragment: "MAX_BORROW_RATE",
     values?: undefined
   ): string;
+  encodeFunctionData(
+    functionFragment: "MAX_DEPOSIT_RATE",
+    values?: undefined
+  ): string;
   encodeFunctionData(functionFragment: "POOL", values?: undefined): string;
   encodeFunctionData(functionFragment: "POOL_LIST", values?: undefined): string;
   encodeFunctionData(functionFragment: "POSITION", values?: undefined): string;
@@ -85,6 +91,10 @@ export interface KeysInterface extends Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "TOKEN_BASE",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "TRADABLE_DEBT_MULTIPIER_FACTOR",
     values?: undefined
   ): string;
   encodeFunctionData(functionFragment: "TREASURY", values?: undefined): string;
@@ -118,6 +128,10 @@ export interface KeysInterface extends Interface {
     functionFragment: "MAX_BORROW_RATE",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "MAX_DEPOSIT_RATE",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "POOL", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "POOL_LIST", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "POSITION", data: BytesLike): Result;
@@ -134,6 +148,10 @@ export interface KeysInterface extends Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "TOKEN_BASE", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "TRADABLE_DEBT_MULTIPIER_FACTOR",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "TREASURY", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "WNT", data: BytesLike): Result;
 }
@@ -195,6 +213,8 @@ export interface Keys extends BaseContract {
 
   MAX_BORROW_RATE: TypedContractMethod<[], [string], "view">;
 
+  MAX_DEPOSIT_RATE: TypedContractMethod<[], [string], "view">;
+
   POOL: TypedContractMethod<[], [string], "view">;
 
   POOL_LIST: TypedContractMethod<[], [string], "view">;
@@ -208,6 +228,8 @@ export interface Keys extends BaseContract {
   SHORT_LIQUIDITY_THRESHOLD: TypedContractMethod<[], [string], "view">;
 
   TOKEN_BASE: TypedContractMethod<[], [string], "view">;
+
+  TRADABLE_DEBT_MULTIPIER_FACTOR: TypedContractMethod<[], [string], "view">;
 
   TREASURY: TypedContractMethod<[], [string], "view">;
 
@@ -239,6 +261,9 @@ export interface Keys extends BaseContract {
     nameOrSignature: "MAX_BORROW_RATE"
   ): TypedContractMethod<[], [string], "view">;
   getFunction(
+    nameOrSignature: "MAX_DEPOSIT_RATE"
+  ): TypedContractMethod<[], [string], "view">;
+  getFunction(
     nameOrSignature: "POOL"
   ): TypedContractMethod<[], [string], "view">;
   getFunction(
@@ -258,6 +283,9 @@ export interface Keys extends BaseContract {
   ): TypedContractMethod<[], [string], "view">;
   getFunction(
     nameOrSignature: "TOKEN_BASE"
+  ): TypedContractMethod<[], [string], "view">;
+  getFunction(
+    nameOrSignature: "TRADABLE_DEBT_MULTIPIER_FACTOR"
   ): TypedContractMethod<[], [string], "view">;
   getFunction(
     nameOrSignature: "TREASURY"

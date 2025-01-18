@@ -15,7 +15,7 @@ async function main() {
     const dataStore = await getContract("DataStore"); 
     const reader = await getContract("Reader"); 
 
-    const pools =  await getPools(dataStore, reader);
+    let pools =  await getPools(dataStore, reader);
     const pool0 = pools[0]; 
     const usdtAddress = pool0.assets[0].token;
     const usdtDecimals = pool0.assets[0].decimals;
@@ -24,7 +24,7 @@ async function main() {
     const uniDecimals = pool0.assets[1].decimals;
     const uni = await contractAt("MintableToken", uniAddress);  
 
-    const usdtAmount = expandDecimals(10000, usdtDecimals);
+    const usdtAmount = expandDecimals(900000, usdtDecimals);
     await sendTxn(usdt.approve(router.target, usdtAmount), `usdt.approve(${router.target})`) 
 
     const paramsDeposit: DepositUtils.DepositParamsStructOutput = {
@@ -39,10 +39,25 @@ async function main() {
     ];
     await sendTxn(exchangeRouter.multicall(multicallArgs), "exchangeRouter.multicall");
 
-    console.dir(await getPools(dataStore, reader), {depth: null, colors: true });
-    console.dir(await getPositions(dataStore, reader, owner.address), {depth: null, colors: true });
-    // console.log("usdt", await usdt.balanceOf(pool0.bank))
-    // console.log("uni", await uni.balanceOf(pool0.bank))
+    console.dir(pools = await getPools(dataStore, reader), {depth: null, colors: true });
+    //console.dir(await getPositions(dataStore, reader, owner.address), {depth: null, colors: true });
+
+    // //const uniAmount = pools[0].memeMaxDepositAmount + bigNumberify(1);//expandDecimals(10000, uniDecimals);
+    // const uniAmount = pools[0].memeMaxDepositAmount ;//expandDecimals(10000, uniDecimals);
+    // await sendTxn(uni.approve(router.target, uniAmount), `uni.approve(${router.target})`) 
+
+    // const paramsDeposit2: DepositUtils.DepositParamsStructOutput = {
+    //     positionId: bigNumberify(1),
+    //     token0: usdtAddress,
+    //     token1: uniAddress,
+    //     tokenIndex: POOL_MEME,
+    // };
+    // const multicallArgs2 = [
+    //     exchangeRouter.interface.encodeFunctionData("sendTokens", [uniAddress, pool0.bank, uniAmount]),
+    //     exchangeRouter.interface.encodeFunctionData("executeDeposit", [paramsDeposit2]),
+    // ];
+    // await sendTxn(exchangeRouter.multicall(multicallArgs2), "exchangeRouter.multicall");
+    // console.dir(pools = await getPools(dataStore, reader), {depth: null, colors: true });
 
 }
 

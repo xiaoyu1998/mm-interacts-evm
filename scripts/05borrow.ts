@@ -27,7 +27,7 @@ async function main() {
     const usdtBalance0 = await usdt.balanceOf(owner.address);
     const usdtBalancePool0 = await usdt.balanceOf(pool0.bank);
 
-    const usdtAmount = expandDecimals(10000, usdtDecimals);
+    const usdtAmount = expandDecimals(720000, usdtDecimals);
     const paramsBorrow: BorrowUtils.BorrowParamsStructOutput = {
         positionId: bigNumberify(1),
         tokenIndex: POOL_BASE,

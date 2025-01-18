@@ -77,6 +77,7 @@ export declare namespace ReaderPoolUtils {
     shortEnabled: boolean;
     createdTimestamp: BigNumberish;
     unclaimedFee: BigNumberish;
+    memeMaxDepositAmount: BigNumberish;
   };
 
   export type GetPoolStructOutput = [
@@ -93,7 +94,8 @@ export declare namespace ReaderPoolUtils {
     source: string,
     shortEnabled: boolean,
     createdTimestamp: bigint,
-    unclaimedFee: bigint
+    unclaimedFee: bigint,
+    memeMaxDepositAmount: bigint
   ] & {
     assets: [
       ReaderPoolUtils.AssetStructOutput,
@@ -109,6 +111,7 @@ export declare namespace ReaderPoolUtils {
     shortEnabled: boolean;
     createdTimestamp: bigint;
     unclaimedFee: bigint;
+    memeMaxDepositAmount: bigint;
   };
 }
 

@@ -33,10 +33,12 @@ export interface ConfigInterface extends Interface {
       | "setLiquidationFee"
       | "setMarginLevelThreshold"
       | "setMaxBorrowRate"
+      | "setMaxDepositRate"
       | "setShortEnabled"
       | "setShortLiquidityThreshold"
       | "setSwapFeeFactor"
       | "setTokenBase"
+      | "setTradableDebtMultipierFactor"
       | "setTreasury"
       | "setTreasuryFeeFactor"
   ): FunctionFragment;
@@ -72,6 +74,10 @@ export interface ConfigInterface extends Interface {
     values: [BigNumberish]
   ): string;
   encodeFunctionData(
+    functionFragment: "setMaxDepositRate",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
     functionFragment: "setShortEnabled",
     values: [AddressLike, AddressLike, boolean]
   ): string;
@@ -86,6 +92,10 @@ export interface ConfigInterface extends Interface {
   encodeFunctionData(
     functionFragment: "setTokenBase",
     values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setTradableDebtMultipierFactor",
+    values: [BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "setTreasury",
@@ -124,6 +134,10 @@ export interface ConfigInterface extends Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "setMaxDepositRate",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "setShortEnabled",
     data: BytesLike
   ): Result;
@@ -137,6 +151,10 @@ export interface ConfigInterface extends Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "setTokenBase",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setTradableDebtMultipierFactor",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -234,6 +252,12 @@ export interface Config extends BaseContract {
     "nonpayable"
   >;
 
+  setMaxDepositRate: TypedContractMethod<
+    [maxDepositRate: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
+
   setShortEnabled: TypedContractMethod<
     [token0: AddressLike, token1: AddressLike, shortEnabled: boolean],
     [void],
@@ -253,6 +277,12 @@ export interface Config extends BaseContract {
   >;
 
   setTokenBase: TypedContractMethod<[token: AddressLike], [void], "nonpayable">;
+
+  setTradableDebtMultipierFactor: TypedContractMethod<
+    [multipierFactor: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
 
   setTreasury: TypedContractMethod<
     [treasury: AddressLike],
@@ -302,6 +332,9 @@ export interface Config extends BaseContract {
     nameOrSignature: "setMaxBorrowRate"
   ): TypedContractMethod<[maxBorrowRate: BigNumberish], [void], "nonpayable">;
   getFunction(
+    nameOrSignature: "setMaxDepositRate"
+  ): TypedContractMethod<[maxDepositRate: BigNumberish], [void], "nonpayable">;
+  getFunction(
     nameOrSignature: "setShortEnabled"
   ): TypedContractMethod<
     [token0: AddressLike, token1: AddressLike, shortEnabled: boolean],
@@ -325,6 +358,9 @@ export interface Config extends BaseContract {
   getFunction(
     nameOrSignature: "setTokenBase"
   ): TypedContractMethod<[token: AddressLike], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "setTradableDebtMultipierFactor"
+  ): TypedContractMethod<[multipierFactor: BigNumberish], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "setTreasury"
   ): TypedContractMethod<[treasury: AddressLike], [void], "nonpayable">;

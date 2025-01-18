@@ -65,6 +65,7 @@ export function parsePool(pool) {
         shortEnabled:pool[8],
         createdTimestamp:pool[9],
         unclaimedFee:pool[10],
+        memeMaxDepositAmount:pool[11],
     };
     return p;
 }

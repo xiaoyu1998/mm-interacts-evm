@@ -52,7 +52,7 @@ async function main() {
     // const usdtBalance1 = await usdt.balanceOf(owner.address);
     // const uniBalance1 = await uni.balanceOf(owner.address);
 
-    // // //remove
+    // //remove
     // const liquidity = await bank.balanceOf(owner.address);
     // const paramsRemove: LiquidityUtils.RemoveParamsStructOutput = {
     //     token0: usdtAddress,
@@ -66,13 +66,12 @@ async function main() {
     // await sendTxn(exchangeRouter.multicall(multicallArgs2), "exchangeRouter.multicall");
     // const usdtBalance2 = await usdt.balanceOf(owner.address);
     // const uniBalance2 = await uni.balanceOf(owner.address);
-
-    console.dir(await getPools(dataStore, reader), {depth: null, colors: true });
     // console.log("liquidity", liquidity); 
     // console.log("usdt", usdtBalance0, usdtBalance1, usdtBalance2); 
     // console.log("uni", uniBalance0, uniBalance1, uniBalance2); 
     console.log("usdtPool", await usdt.balanceOf(pool0.bank))
     console.log("uniPool", await uni.balanceOf(pool0.bank))
+    console.dir(await getPools(dataStore, reader), {depth: null, colors: true });
 
 }
 

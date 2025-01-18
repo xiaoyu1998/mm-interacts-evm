@@ -7,7 +7,7 @@ import { CreatePoolParamsStructOutput } from "../typechain-types/contracts/pool/
 
 
 async function main() {
-    const [owner] = await ethers.getSigners();
+    const [owner, user1] = await ethers.getSigners();
 
     const roleStore = await getContract("RoleStore"); 
     const dataStore = await getContract("DataStore"); 
@@ -24,6 +24,7 @@ async function main() {
     const uni = await deployContract("MintableToken", ["UNI", "UNI", uniDecimals])
     const eth = await deployContract("MintableToken", ["ETH", "ETH", ethDecimals])
     await sendTxn(usdt.mint(owner.address, expandDecimals(100000000, usdtDecimals)), "usdt.mint");
+    await sendTxn(usdt.mint(user1.address, expandDecimals(100000000, usdtDecimals)), "usdt.mint");
     await sendTxn(uni.mint(owner.address, expandDecimals(10000000, uniDecimals)), "uni.mint");
     await sendTxn(eth.mint(owner.address, expandDecimals(10000, ethDecimals)), "eth.mint");
 
@@ -39,8 +40,10 @@ async function main() {
         config.interface.encodeFunctionData("setMarginLevelThreshold", [expandDecimals(110, 25)]),//110%
         config.interface.encodeFunctionData("setDebtSafetyFactor", [expandDecimals(2, 27)]),//2x
         config.interface.encodeFunctionData("setShortLiquidityThreshold", [expandDecimals(10000000, 27)]),//10millon
+        config.interface.encodeFunctionData("setMaxDepositRate", [expandDecimals(1, 26)]),//10%
         config.interface.encodeFunctionData("setMaxBorrowRate", [expandDecimals(8, 26)]),//80%
-        config.interface.encodeFunctionData("setTreasury", [treasury]),//80%
+        config.interface.encodeFunctionData("setTradableDebtMultipierFactor", [expandDecimals(11, 26)]),//110%
+        config.interface.encodeFunctionData("setTreasury", [treasury]),
         config.interface.encodeFunctionData("setLiquidationFee", [expandDecimals(1, usdtDecimals)]),//1usdt
     ];
     await sendTxn(config.multicall(multicallArgs), "config.multicall");

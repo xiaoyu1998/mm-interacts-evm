@@ -29,6 +29,22 @@ const _abi = [
     type: "error",
   },
   {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "amount1",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "balance1",
+        type: "uint256",
+      },
+    ],
+    name: "Balance1Insufficient",
+    type: "error",
+  },
+  {
     inputs: [],
     name: "ClosePercentageExceeding",
     type: "error",
@@ -529,6 +545,22 @@ const _abi = [
     type: "error",
   },
   {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "maxDepositAmount",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "amountToDeposit",
+        type: "uint256",
+      },
+    ],
+    name: "MaxDepositExceeds",
+    type: "error",
+  },
+  {
     inputs: [],
     name: "MaxPositionId",
     type: "error",
@@ -758,7 +790,7 @@ const _abi = [
 ] as const;
 
 const _bytecode =
-  "0x60566050600b82828239805160001a6073146043577f4e487b7100000000000000000000000000000000000000000000000000000000600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220d72c749ea046883ad28dc5a1076fbe3ec5ce396554fade434e9c1c9f4da5f7ea64736f6c634300081c0033";
+  "0x60566050600b82828239805160001a6073146043577f4e487b7100000000000000000000000000000000000000000000000000000000600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea26469706673582212202792a9ca166b1d19f85258a4dac9243675816d6e5074d71607456e5ccf7ba2fa64736f6c634300081c0033";
 
 type ErrorsConstructorParams =
   | [signer?: Signer]
