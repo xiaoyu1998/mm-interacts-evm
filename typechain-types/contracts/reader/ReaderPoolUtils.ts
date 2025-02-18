@@ -78,6 +78,7 @@ export declare namespace ReaderPoolUtils {
     createdTimestamp: BigNumberish;
     unclaimedFee: BigNumberish;
     memeMaxDepositAmount: BigNumberish;
+    averagePrice: BigNumberish;
   };
 
   export type GetPoolStructOutput = [
@@ -95,7 +96,8 @@ export declare namespace ReaderPoolUtils {
     shortEnabled: boolean,
     createdTimestamp: bigint,
     unclaimedFee: bigint,
-    memeMaxDepositAmount: bigint
+    memeMaxDepositAmount: bigint,
+    averagePrice: bigint
   ] & {
     assets: [
       ReaderPoolUtils.AssetStructOutput,
@@ -112,6 +114,43 @@ export declare namespace ReaderPoolUtils {
     createdTimestamp: bigint;
     unclaimedFee: bigint;
     memeMaxDepositAmount: bigint;
+    averagePrice: bigint;
+  };
+
+  export type AssetInfoStruct = {
+    token: AddressLike;
+    symbol: string;
+    decimals: BigNumberish;
+    borrowIndex: BigNumberish;
+  };
+
+  export type AssetInfoStructOutput = [
+    token: string,
+    symbol: string,
+    decimals: bigint,
+    borrowIndex: bigint
+  ] & { token: string; symbol: string; decimals: bigint; borrowIndex: bigint };
+
+  export type GetPoolInfoStruct = {
+    assets: [ReaderPoolUtils.AssetInfoStruct, ReaderPoolUtils.AssetInfoStruct];
+    priceDecimals: BigNumberish;
+    price: BigNumberish;
+  };
+
+  export type GetPoolInfoStructOutput = [
+    assets: [
+      ReaderPoolUtils.AssetInfoStructOutput,
+      ReaderPoolUtils.AssetInfoStructOutput
+    ],
+    priceDecimals: bigint,
+    price: bigint
+  ] & {
+    assets: [
+      ReaderPoolUtils.AssetInfoStructOutput,
+      ReaderPoolUtils.AssetInfoStructOutput
+    ];
+    priceDecimals: bigint;
+    price: bigint;
   };
 }
 
@@ -123,6 +162,8 @@ export interface ReaderPoolUtilsInterface extends Interface {
       | "calcLiquidityOut"
       | "calcTokenPairOut"
       | "getPools"
+      | "getPoolsInfo(address,uint256,uint256)"
+      | "getPoolsInfo(address,bytes32[])"
   ): FunctionFragment;
 
   encodeFunctionData(
@@ -145,6 +186,14 @@ export interface ReaderPoolUtilsInterface extends Interface {
     functionFragment: "getPools",
     values: [AddressLike, BigNumberish, BigNumberish]
   ): string;
+  encodeFunctionData(
+    functionFragment: "getPoolsInfo(address,uint256,uint256)",
+    values: [AddressLike, BigNumberish, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getPoolsInfo(address,bytes32[])",
+    values: [AddressLike, BytesLike[]]
+  ): string;
 
   decodeFunctionResult(
     functionFragment: "calcAmountIn",
@@ -163,6 +212,14 @@ export interface ReaderPoolUtilsInterface extends Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "getPools", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "getPoolsInfo(address,uint256,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getPoolsInfo(address,bytes32[])",
+    data: BytesLike
+  ): Result;
 }
 
 export interface ReaderPoolUtils extends BaseContract {
@@ -261,6 +318,18 @@ export interface ReaderPoolUtils extends BaseContract {
     "view"
   >;
 
+  "getPoolsInfo(address,uint256,uint256)": TypedContractMethod<
+    [dataStore: AddressLike, start: BigNumberish, end: BigNumberish],
+    [ReaderPoolUtils.GetPoolInfoStructOutput[]],
+    "view"
+  >;
+
+  "getPoolsInfo(address,bytes32[])": TypedContractMethod<
+    [dataStore: AddressLike, poolKeys: BytesLike[]],
+    [ReaderPoolUtils.GetPoolInfoStructOutput[]],
+    "view"
+  >;
+
   getFunction<T extends ContractMethod = ContractMethod>(
     key: string | FunctionFragment
   ): T;
@@ -321,6 +390,20 @@ export interface ReaderPoolUtils extends BaseContract {
   ): TypedContractMethod<
     [dataStore: AddressLike, start: BigNumberish, end: BigNumberish],
     [ReaderPoolUtils.GetPoolStructOutput[]],
+    "view"
+  >;
+  getFunction(
+    nameOrSignature: "getPoolsInfo(address,uint256,uint256)"
+  ): TypedContractMethod<
+    [dataStore: AddressLike, start: BigNumberish, end: BigNumberish],
+    [ReaderPoolUtils.GetPoolInfoStructOutput[]],
+    "view"
+  >;
+  getFunction(
+    nameOrSignature: "getPoolsInfo(address,bytes32[])"
+  ): TypedContractMethod<
+    [dataStore: AddressLike, poolKeys: BytesLike[]],
+    [ReaderPoolUtils.GetPoolInfoStructOutput[]],
     "view"
   >;
 

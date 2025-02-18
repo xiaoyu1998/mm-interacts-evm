@@ -102,6 +102,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.EventEmitter__factory>;
     getContractFactory(
+      name: "EventUtils",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.EventUtils__factory>;
+    getContractFactory(
       name: "IEventEmitter",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IEventEmitter__factory>;
@@ -274,6 +278,14 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.TokenUtils__factory>;
     getContractFactory(
+      name: "TwapStoreUtils",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.TwapStoreUtils__factory>;
+    getContractFactory(
+      name: "TwapUtils",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.TwapUtils__factory>;
+    getContractFactory(
       name: "BasicMulticall",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.BasicMulticall__factory>;
@@ -401,6 +413,11 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.EventEmitter>;
     getContractAt(
+      name: "EventUtils",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.EventUtils>;
+    getContractAt(
       name: "IEventEmitter",
       address: string | ethers.Addressable,
       signer?: ethers.Signer
@@ -615,6 +632,16 @@ declare module "hardhat/types/runtime" {
       address: string | ethers.Addressable,
       signer?: ethers.Signer
     ): Promise<Contracts.TokenUtils>;
+    getContractAt(
+      name: "TwapStoreUtils",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TwapStoreUtils>;
+    getContractAt(
+      name: "TwapUtils",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TwapUtils>;
     getContractAt(
       name: "BasicMulticall",
       address: string | ethers.Addressable,
@@ -725,6 +752,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.EventEmitter>;
     deployContract(
+      name: "EventUtils",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.EventUtils>;
+    deployContract(
       name: "IEventEmitter",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.IEventEmitter>;
@@ -896,6 +927,14 @@ declare module "hardhat/types/runtime" {
       name: "TokenUtils",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.TokenUtils>;
+    deployContract(
+      name: "TwapStoreUtils",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.TwapStoreUtils>;
+    deployContract(
+      name: "TwapUtils",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.TwapUtils>;
     deployContract(
       name: "BasicMulticall",
       signerOrOptions?: ethers.Signer | DeployContractOptions
@@ -1024,6 +1063,11 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.EventEmitter>;
     deployContract(
+      name: "EventUtils",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.EventUtils>;
+    deployContract(
       name: "IEventEmitter",
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
@@ -1238,6 +1282,16 @@ declare module "hardhat/types/runtime" {
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.TokenUtils>;
+    deployContract(
+      name: "TwapStoreUtils",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.TwapStoreUtils>;
+    deployContract(
+      name: "TwapUtils",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.TwapUtils>;
     deployContract(
       name: "BasicMulticall",
       args: any[],

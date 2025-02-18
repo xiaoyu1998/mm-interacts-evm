@@ -78,6 +78,7 @@ export declare namespace ReaderPoolUtils {
     createdTimestamp: BigNumberish;
     unclaimedFee: BigNumberish;
     memeMaxDepositAmount: BigNumberish;
+    averagePrice: BigNumberish;
   };
 
   export type GetPoolStructOutput = [
@@ -95,7 +96,8 @@ export declare namespace ReaderPoolUtils {
     shortEnabled: boolean,
     createdTimestamp: bigint,
     unclaimedFee: bigint,
-    memeMaxDepositAmount: bigint
+    memeMaxDepositAmount: bigint,
+    averagePrice: bigint
   ] & {
     assets: [
       ReaderPoolUtils.AssetStructOutput,
@@ -112,6 +114,95 @@ export declare namespace ReaderPoolUtils {
     createdTimestamp: bigint;
     unclaimedFee: bigint;
     memeMaxDepositAmount: bigint;
+    averagePrice: bigint;
+  };
+
+  export type AssetInfoStruct = {
+    token: AddressLike;
+    symbol: string;
+    decimals: BigNumberish;
+    borrowIndex: BigNumberish;
+  };
+
+  export type AssetInfoStructOutput = [
+    token: string,
+    symbol: string,
+    decimals: bigint,
+    borrowIndex: bigint
+  ] & { token: string; symbol: string; decimals: bigint; borrowIndex: bigint };
+
+  export type GetPoolInfoStruct = {
+    assets: [ReaderPoolUtils.AssetInfoStruct, ReaderPoolUtils.AssetInfoStruct];
+    priceDecimals: BigNumberish;
+    price: BigNumberish;
+  };
+
+  export type GetPoolInfoStructOutput = [
+    assets: [
+      ReaderPoolUtils.AssetInfoStructOutput,
+      ReaderPoolUtils.AssetInfoStructOutput
+    ],
+    priceDecimals: bigint,
+    price: bigint
+  ] & {
+    assets: [
+      ReaderPoolUtils.AssetInfoStructOutput,
+      ReaderPoolUtils.AssetInfoStructOutput
+    ];
+    priceDecimals: bigint;
+    price: bigint;
+  };
+}
+
+export declare namespace Pool {
+  export type AssetStruct = {
+    token: AddressLike;
+    borrowIndex: BigNumberish;
+    borrowRate: BigNumberish;
+    totalCollateral: BigNumberish;
+    totalCollateralWithDebt: BigNumberish;
+    totalDebtScaled: BigNumberish;
+    unclaimedFee: BigNumberish;
+  };
+
+  export type AssetStructOutput = [
+    token: string,
+    borrowIndex: bigint,
+    borrowRate: bigint,
+    totalCollateral: bigint,
+    totalCollateralWithDebt: bigint,
+    totalDebtScaled: bigint,
+    unclaimedFee: bigint
+  ] & {
+    token: string;
+    borrowIndex: bigint;
+    borrowRate: bigint;
+    totalCollateral: bigint;
+    totalCollateralWithDebt: bigint;
+    totalDebtScaled: bigint;
+    unclaimedFee: bigint;
+  };
+
+  export type PropsStruct = {
+    assets: [Pool.AssetStruct, Pool.AssetStruct];
+    bank: AddressLike;
+    interestRateStrategy: AddressLike;
+    configuration: BigNumberish;
+    lastUpdateTimestamp: BigNumberish;
+  };
+
+  export type PropsStructOutput = [
+    assets: [Pool.AssetStructOutput, Pool.AssetStructOutput],
+    bank: string,
+    interestRateStrategy: string,
+    configuration: bigint,
+    lastUpdateTimestamp: bigint
+  ] & {
+    assets: [Pool.AssetStructOutput, Pool.AssetStructOutput];
+    bank: string;
+    interestRateStrategy: string;
+    configuration: bigint;
+    lastUpdateTimestamp: bigint;
   };
 }
 
@@ -206,8 +297,13 @@ export interface ReaderInterface extends Interface {
       | "getMarginLevelThreshold"
       | "getPools(address)"
       | "getPools(address,uint256,uint256)"
+      | "getPools2"
       | "getPoolsCount"
-      | "getPositions"
+      | "getPoolsInfo(address)"
+      | "getPoolsInfo(address,uint256,uint256)"
+      | "getPoolsInfo(address,bytes32[])"
+      | "getPositions(address,bytes32[])"
+      | "getPositions(address,address)"
       | "getTokenBase"
       | "getTreasury"
   ): FunctionFragment;
@@ -249,11 +345,31 @@ export interface ReaderInterface extends Interface {
     values: [AddressLike, BigNumberish, BigNumberish]
   ): string;
   encodeFunctionData(
+    functionFragment: "getPools2",
+    values: [AddressLike, BytesLike[]]
+  ): string;
+  encodeFunctionData(
     functionFragment: "getPoolsCount",
     values: [AddressLike]
   ): string;
   encodeFunctionData(
-    functionFragment: "getPositions",
+    functionFragment: "getPoolsInfo(address)",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getPoolsInfo(address,uint256,uint256)",
+    values: [AddressLike, BigNumberish, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getPoolsInfo(address,bytes32[])",
+    values: [AddressLike, BytesLike[]]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getPositions(address,bytes32[])",
+    values: [AddressLike, BytesLike[]]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getPositions(address,address)",
     values: [AddressLike, AddressLike]
   ): string;
   encodeFunctionData(
@@ -301,12 +417,29 @@ export interface ReaderInterface extends Interface {
     functionFragment: "getPools(address,uint256,uint256)",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "getPools2", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "getPoolsCount",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "getPositions",
+    functionFragment: "getPoolsInfo(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getPoolsInfo(address,uint256,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getPoolsInfo(address,bytes32[])",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getPositions(address,bytes32[])",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getPositions(address,address)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -439,13 +572,43 @@ export interface Reader extends BaseContract {
     "view"
   >;
 
+  getPools2: TypedContractMethod<
+    [dataStore: AddressLike, poolKeys: BytesLike[]],
+    [Pool.PropsStructOutput[]],
+    "view"
+  >;
+
   getPoolsCount: TypedContractMethod<
     [dataStore: AddressLike],
     [bigint],
     "view"
   >;
 
-  getPositions: TypedContractMethod<
+  "getPoolsInfo(address)": TypedContractMethod<
+    [dataStore: AddressLike],
+    [ReaderPoolUtils.GetPoolInfoStructOutput[]],
+    "view"
+  >;
+
+  "getPoolsInfo(address,uint256,uint256)": TypedContractMethod<
+    [dataStore: AddressLike, start: BigNumberish, end: BigNumberish],
+    [ReaderPoolUtils.GetPoolInfoStructOutput[]],
+    "view"
+  >;
+
+  "getPoolsInfo(address,bytes32[])": TypedContractMethod<
+    [dataStore: AddressLike, poolKeys: BytesLike[]],
+    [ReaderPoolUtils.GetPoolInfoStructOutput[]],
+    "view"
+  >;
+
+  "getPositions(address,bytes32[])": TypedContractMethod<
+    [dataStore: AddressLike, positionKeys: BytesLike[]],
+    [ReaderPositionUtils.GetPositionStructOutput[]],
+    "view"
+  >;
+
+  "getPositions(address,address)": TypedContractMethod<
     [dataStore: AddressLike, account: AddressLike],
     [ReaderPositionUtils.GetPositionStructOutput[]],
     "view"
@@ -534,10 +697,45 @@ export interface Reader extends BaseContract {
     "view"
   >;
   getFunction(
+    nameOrSignature: "getPools2"
+  ): TypedContractMethod<
+    [dataStore: AddressLike, poolKeys: BytesLike[]],
+    [Pool.PropsStructOutput[]],
+    "view"
+  >;
+  getFunction(
     nameOrSignature: "getPoolsCount"
   ): TypedContractMethod<[dataStore: AddressLike], [bigint], "view">;
   getFunction(
-    nameOrSignature: "getPositions"
+    nameOrSignature: "getPoolsInfo(address)"
+  ): TypedContractMethod<
+    [dataStore: AddressLike],
+    [ReaderPoolUtils.GetPoolInfoStructOutput[]],
+    "view"
+  >;
+  getFunction(
+    nameOrSignature: "getPoolsInfo(address,uint256,uint256)"
+  ): TypedContractMethod<
+    [dataStore: AddressLike, start: BigNumberish, end: BigNumberish],
+    [ReaderPoolUtils.GetPoolInfoStructOutput[]],
+    "view"
+  >;
+  getFunction(
+    nameOrSignature: "getPoolsInfo(address,bytes32[])"
+  ): TypedContractMethod<
+    [dataStore: AddressLike, poolKeys: BytesLike[]],
+    [ReaderPoolUtils.GetPoolInfoStructOutput[]],
+    "view"
+  >;
+  getFunction(
+    nameOrSignature: "getPositions(address,bytes32[])"
+  ): TypedContractMethod<
+    [dataStore: AddressLike, positionKeys: BytesLike[]],
+    [ReaderPositionUtils.GetPositionStructOutput[]],
+    "view"
+  >;
+  getFunction(
+    nameOrSignature: "getPositions(address,address)"
   ): TypedContractMethod<
     [dataStore: AddressLike, account: AddressLike],
     [ReaderPositionUtils.GetPositionStructOutput[]],

@@ -15,6 +15,11 @@ async function main() {
     const dataStore = await getContract("DataStore"); 
     const reader = await getContract("Reader"); 
 
+    const pools =  await getPools(dataStore, reader);
+    const pool0 = pools[0];
+    console.log("pooKey", poolKey(pool0.assets[POOL_BASE].token, pool0.assets[POOL_MEME].token));
+
+
     // const poolStoreUtils = await getContract("PoolStoreUtils"); 
     // console.dir(
     //   await poolStoreUtils.get(
@@ -49,36 +54,35 @@ async function main() {
     //console.log(await roleStore.hasRole(owner.address, LIQUIDATION_KEEPER));
     //console.dir(await getPools(dataStore, reader), {depth: null, colors: true });
 
-    const poolCount = await reader.getPoolsCount(dataStore);
-    const pools = await reader.getPools(dataStore, 0, poolCount);
+    // const poolCount = await reader.getPoolsCount(dataStore);
+    // const pools = await reader.getPools(dataStore, 0, poolCount);
     //console.dir(parsePool(pools[0]),  {depth: null, colors: true });
 
-    // const positions = await getPositions(dataStore, reader, "0xe87069a64c32e3bf7a40b2ce2778995533359074");
-    // // const positions = await getPositions(dataStore, reader, "0x189717188db6C85EA050f74Dd9Ab15a461D920e1");
+    // const positions = await getPositions(dataStore, reader, "0x90518217d485843b87e2aca5af4af0ef928eeebd");
     // console.dir(positions, {depth: null, colors: true });
 
-    //calcAmountOut
-    const pool0 = pools[0];
-    const usdtAddress = pool0.assets[POOL_BASE].token;
-    const usdtDecimals = pool0.assets[POOL_BASE].decimals;
-    const uniAddress = pool0.assets[POOL_MEME].token;
-    const uniDecimals = pool0.assets[POOL_MEME].decimals;
-    const Out = await reader.calcAmountOut(
-        dataStore,
-        usdtAddress,
-        uniAddress,
-        expandDecimals(10000, usdtDecimals),
-        0
-    );
-    console.log("amountOut",Out[0], "fee", Out[1], "priceImpact", Out[2]);
-    const In = await reader.calcAmountIn(
-        dataStore,
-        usdtAddress,
-        uniAddress,
-        Out[0],
-        1
-    );
-    console.log("amountIn",In[0], "fee", In[1], "priceImpact", In[2]);
+    // //calcAmountOut
+    // const pool0 = pools[0];
+    // const usdtAddress = pool0.assets[POOL_BASE].token;
+    // const usdtDecimals = pool0.assets[POOL_BASE].decimals;
+    // const uniAddress = pool0.assets[POOL_MEME].token;
+    // const uniDecimals = pool0.assets[POOL_MEME].decimals;
+    // const Out = await reader.calcAmountOut(
+    //     dataStore,
+    //     usdtAddress,
+    //     uniAddress,
+    //     expandDecimals(10000, usdtDecimals),
+    //     0
+    // );
+    // console.log("amountOut",Out[0], "fee", Out[1], "priceImpact", Out[2]);
+    // const In = await reader.calcAmountIn(
+    //     dataStore,
+    //     usdtAddress,
+    //     uniAddress,
+    //     Out[0],
+    //     1
+    // );
+    // console.log("amountIn",In[0], "fee", In[1], "priceImpact", In[2]);
 
 
     // //calcLiquidityOut

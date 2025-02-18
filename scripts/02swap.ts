@@ -1,12 +1,16 @@
 import { contractAt, getContract, sendTxn } from "../utils/deploy"
 import { bigNumberify, expandDecimals} from "../utils/math"
-import { getPools } from "../utils/reader"
+import { getPools, getPoolsInfo } from "../utils/reader"
 
 import { SwapUtils } from "../typechain-types/contracts/exchange/SwapHandler";
+import { time } from "@nomicfoundation/hardhat-network-helpers";
 
 
 async function main() {
     const [owner] = await ethers.getSigners();
+
+    const period = BigInt(20 * 60);
+    await time.increase(period);
 
     const exchangeRouter = await getContract("ExchangeRouter"); 
     const router = await getContract("Router");
@@ -49,6 +53,7 @@ async function main() {
 
 
     console.dir(await getPools(dataStore, reader), {depth: null, colors: true });
+    console.dir(await getPoolsInfo(dataStore, reader), {depth: null, colors: true });
 
     const usdtBalance1 = await usdt.balanceOf(owner.address);
     const uniBalance1 = await uni.balanceOf(owner.address);

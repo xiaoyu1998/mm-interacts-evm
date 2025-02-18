@@ -41,6 +41,7 @@ export interface ConfigInterface extends Interface {
       | "setTradableDebtMultipierFactor"
       | "setTreasury"
       | "setTreasuryFeeFactor"
+      | "setTwapPeriod"
   ): FunctionFragment;
 
   encodeFunctionData(functionFragment: "dataStore", values?: undefined): string;
@@ -105,6 +106,10 @@ export interface ConfigInterface extends Interface {
     functionFragment: "setTreasuryFeeFactor",
     values: [AddressLike, AddressLike, BigNumberish]
   ): string;
+  encodeFunctionData(
+    functionFragment: "setTwapPeriod",
+    values: [BigNumberish]
+  ): string;
 
   decodeFunctionResult(functionFragment: "dataStore", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "multicall", data: BytesLike): Result;
@@ -163,6 +168,10 @@ export interface ConfigInterface extends Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "setTreasuryFeeFactor",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setTwapPeriod",
     data: BytesLike
   ): Result;
 }
@@ -296,6 +305,12 @@ export interface Config extends BaseContract {
     "nonpayable"
   >;
 
+  setTwapPeriod: TypedContractMethod<
+    [period: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
+
   getFunction<T extends ContractMethod = ContractMethod>(
     key: string | FunctionFragment
   ): T;
@@ -371,6 +386,9 @@ export interface Config extends BaseContract {
     [void],
     "nonpayable"
   >;
+  getFunction(
+    nameOrSignature: "setTwapPeriod"
+  ): TypedContractMethod<[period: BigNumberish], [void], "nonpayable">;
 
   filters: {};
 }

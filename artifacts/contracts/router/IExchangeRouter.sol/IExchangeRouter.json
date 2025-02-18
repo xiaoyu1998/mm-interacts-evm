@@ -149,6 +149,31 @@
           "components": [
             {
               "internalType": "address",
+              "name": "account",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "positionId",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct LiquidationUtils.LiquidationParams[]",
+          "name": "params",
+          "type": "tuple[]"
+        }
+      ],
+      "name": "executeLiquidationBatch",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
               "name": "token0",
               "type": "address"
             },

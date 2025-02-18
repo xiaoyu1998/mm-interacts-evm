@@ -1,7 +1,8 @@
 import { contractAt, getContract, sendTxn } from "../utils/deploy"
 import { bigNumberify, expandDecimals} from "../utils/math"
 import { POOL_BASE, POOL_MEME,CREATE_POSITION_ID, REPAYMENT_PARTIAL} from "../utils/constants";
-import { getPools, getPositions } from "../utils/reader"
+import { getPools, getPositions, getPoolsInfo } from "../utils/reader"
+import { poolKey } from "../utils/hash"
 
 import { SwapUtils } from "../typechain-types/contracts/exchange/SwapHandler";
 
@@ -18,6 +19,7 @@ async function main() {
 
     const pools =  await getPools(dataStore, reader);
     const pool0 = pools[0];
+    console.log("pooKey", poolKey(pool0.assets[POOL_BASE].token, pool0.assets[POOL_MEME].token));
     const usdtAddress = pool0.assets[POOL_BASE].token;
     const usdtDecimals = pool0.assets[POOL_BASE].decimals;
     const usdt = await contractAt("MintableToken", usdtAddress);
@@ -34,8 +36,8 @@ async function main() {
         usdtAmount*bigNumberify(2),
         0
     ))[0];//the first one in tokenOut
-    console.log(uniAmount);
-    console.log(uniAmount-expandDecimals(1, uniDecimals));
+    // console.log(uniAmount);
+    // console.log(uniAmount-expandDecimals(1, uniDecimals));
 
     await sendTxn(usdt.approve(router.target, usdtAmount), `usdt.approve(${router.target})`) 
     const paramsDeposit: DepositUtils.DepositParamsStructOutput = {
@@ -51,7 +53,7 @@ async function main() {
         borrowAmount: usdtAmount,
     };
 
-    console.log(uniAmount-expandDecimals(1, uniDecimals));
+    // console.log(uniAmount-expandDecimals(1, uniDecimals));
     const paramsSwapInPosition: SwapInPositionUtils.SwapInPositionParamsStructOutput = {
         positionId: bigNumberify(1),
         amount0In: usdtAmount*bigNumberify(2),
@@ -76,6 +78,7 @@ async function main() {
     }
 
     console.dir(await getPools(dataStore, reader), {depth: null, colors: true });
+    console.dir(await getPoolsInfo(dataStore, reader), {depth: null, colors: true });
     console.dir(await getPositions(dataStore, reader, owner.address), {depth: null, colors: true });
 
 }

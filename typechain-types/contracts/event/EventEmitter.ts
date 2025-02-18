@@ -55,6 +55,7 @@ export interface EventEmitterInterface extends Interface {
       | "emitLiquidation"
       | "emitPoolCreated"
       | "emitPoolUpdated"
+      | "emitPosition"
       | "emitRemove"
       | "emitRepay"
       | "emitSwap"
@@ -72,6 +73,7 @@ export interface EventEmitterInterface extends Interface {
       | "Liquidation"
       | "PoolCreated"
       | "PoolUpdated"
+      | "Position"
       | "Remove"
       | "Repay"
       | "Swap"
@@ -159,6 +161,20 @@ export interface EventEmitterInterface extends Interface {
     ]
   ): string;
   encodeFunctionData(
+    functionFragment: "emitPosition",
+    values: [
+      AddressLike,
+      BigNumberish,
+      AddressLike,
+      AddressLike,
+      BigNumberish,
+      BigNumberish,
+      BigNumberish,
+      BigNumberish,
+      BigNumberish
+    ]
+  ): string;
+  encodeFunctionData(
     functionFragment: "emitRemove",
     values: [
       AddressLike,
@@ -233,6 +249,10 @@ export interface EventEmitterInterface extends Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "emitPoolUpdated",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "emitPosition",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "emitRemove", data: BytesLike): Result;
@@ -489,6 +509,46 @@ export namespace PoolUpdatedEvent {
     borrowRate: bigint;
     liquidityIndex: bigint;
     borrowIndex: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace PositionEvent {
+  export type InputTuple = [
+    account: AddressLike,
+    actionType: BigNumberish,
+    baseToken: AddressLike,
+    memeToken: AddressLike,
+    positionId: BigNumberish,
+    baseCollateral: BigNumberish,
+    baseDebtScaled: BigNumberish,
+    memeCollateral: BigNumberish,
+    memeDebtScaled: BigNumberish
+  ];
+  export type OutputTuple = [
+    account: string,
+    actionType: bigint,
+    baseToken: string,
+    memeToken: string,
+    positionId: bigint,
+    baseCollateral: bigint,
+    baseDebtScaled: bigint,
+    memeCollateral: bigint,
+    memeDebtScaled: bigint
+  ];
+  export interface OutputObject {
+    account: string;
+    actionType: bigint;
+    baseToken: string;
+    memeToken: string;
+    positionId: bigint;
+    baseCollateral: bigint;
+    baseDebtScaled: bigint;
+    memeCollateral: bigint;
+    memeDebtScaled: bigint;
   }
   export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
   export type Filter = TypedDeferredTopicFilter<Event>;
@@ -806,6 +866,22 @@ export interface EventEmitter extends BaseContract {
     "nonpayable"
   >;
 
+  emitPosition: TypedContractMethod<
+    [
+      account: AddressLike,
+      actionType: BigNumberish,
+      baseToken: AddressLike,
+      memeToken: AddressLike,
+      positionId: BigNumberish,
+      baseCollateral: BigNumberish,
+      baseDebtScaled: BigNumberish,
+      memeCollateral: BigNumberish,
+      memeDebtScaled: BigNumberish
+    ],
+    [void],
+    "nonpayable"
+  >;
+
   emitRemove: TypedContractMethod<
     [
       remover: AddressLike,
@@ -982,6 +1058,23 @@ export interface EventEmitter extends BaseContract {
     "nonpayable"
   >;
   getFunction(
+    nameOrSignature: "emitPosition"
+  ): TypedContractMethod<
+    [
+      account: AddressLike,
+      actionType: BigNumberish,
+      baseToken: AddressLike,
+      memeToken: AddressLike,
+      positionId: BigNumberish,
+      baseCollateral: BigNumberish,
+      baseDebtScaled: BigNumberish,
+      memeCollateral: BigNumberish,
+      memeDebtScaled: BigNumberish
+    ],
+    [void],
+    "nonpayable"
+  >;
+  getFunction(
     nameOrSignature: "emitRemove"
   ): TypedContractMethod<
     [
@@ -1106,6 +1199,13 @@ export interface EventEmitter extends BaseContract {
     PoolUpdatedEvent.OutputObject
   >;
   getEvent(
+    key: "Position"
+  ): TypedContractEvent<
+    PositionEvent.InputTuple,
+    PositionEvent.OutputTuple,
+    PositionEvent.OutputObject
+  >;
+  getEvent(
     key: "Remove"
   ): TypedContractEvent<
     RemoveEvent.InputTuple,
@@ -1221,6 +1321,17 @@ export interface EventEmitter extends BaseContract {
       PoolUpdatedEvent.InputTuple,
       PoolUpdatedEvent.OutputTuple,
       PoolUpdatedEvent.OutputObject
+    >;
+
+    "Position(address,uint256,address,address,uint256,uint256,uint256,uint256,uint256)": TypedContractEvent<
+      PositionEvent.InputTuple,
+      PositionEvent.OutputTuple,
+      PositionEvent.OutputObject
+    >;
+    Position: TypedContractEvent<
+      PositionEvent.InputTuple,
+      PositionEvent.OutputTuple,
+      PositionEvent.OutputObject
     >;
 
     "Remove(address,address,address,uint256,address,uint256,uint256)": TypedContractEvent<

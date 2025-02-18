@@ -2,4 +2,5 @@
 /* tslint:disable */
 /* eslint-disable */
 export type { EventEmitter } from "./EventEmitter";
+export type { EventUtils } from "./EventUtils";
 export type { IEventEmitter } from "./IEventEmitter";

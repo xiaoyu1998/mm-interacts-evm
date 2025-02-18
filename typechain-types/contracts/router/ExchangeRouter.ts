@@ -210,6 +210,7 @@ export interface ExchangeRouterInterface extends Interface {
       | "executeClose"
       | "executeDeposit"
       | "executeLiquidation"
+      | "executeLiquidationBatch"
       | "executeRemove"
       | "executeRepay"
       | "executeSwap"
@@ -258,6 +259,10 @@ export interface ExchangeRouterInterface extends Interface {
   encodeFunctionData(
     functionFragment: "executeLiquidation",
     values: [LiquidationUtils.LiquidationParamsStruct]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "executeLiquidationBatch",
+    values: [LiquidationUtils.LiquidationParamsStruct[]]
   ): string;
   encodeFunctionData(
     functionFragment: "executeRemove",
@@ -338,6 +343,10 @@ export interface ExchangeRouterInterface extends Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "executeLiquidation",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "executeLiquidationBatch",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -467,6 +476,12 @@ export interface ExchangeRouter extends BaseContract {
     "payable"
   >;
 
+  executeLiquidationBatch: TypedContractMethod<
+    [params: LiquidationUtils.LiquidationParamsStruct[]],
+    [void],
+    "payable"
+  >;
+
   executeRemove: TypedContractMethod<
     [params: LiquidityUtils.RemoveParamsStruct],
     [void],
@@ -567,6 +582,13 @@ export interface ExchangeRouter extends BaseContract {
     nameOrSignature: "executeLiquidation"
   ): TypedContractMethod<
     [params: LiquidationUtils.LiquidationParamsStruct],
+    [void],
+    "payable"
+  >;
+  getFunction(
+    nameOrSignature: "executeLiquidationBatch"
+  ): TypedContractMethod<
+    [params: LiquidationUtils.LiquidationParamsStruct[]],
     [void],
     "payable"
   >;

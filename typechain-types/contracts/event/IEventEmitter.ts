@@ -53,6 +53,7 @@ export interface IEventEmitterInterface extends Interface {
       | "emitLiquidation"
       | "emitPoolCreated"
       | "emitPoolUpdated"
+      | "emitPosition"
       | "emitRemove"
       | "emitRepay"
       | "emitSwap"
@@ -140,6 +141,20 @@ export interface IEventEmitterInterface extends Interface {
     ]
   ): string;
   encodeFunctionData(
+    functionFragment: "emitPosition",
+    values: [
+      AddressLike,
+      BigNumberish,
+      AddressLike,
+      AddressLike,
+      BigNumberish,
+      BigNumberish,
+      BigNumberish,
+      BigNumberish,
+      BigNumberish
+    ]
+  ): string;
+  encodeFunctionData(
     functionFragment: "emitRemove",
     values: [
       AddressLike,
@@ -213,6 +228,10 @@ export interface IEventEmitterInterface extends Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "emitPoolUpdated",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "emitPosition",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "emitRemove", data: BytesLike): Result;
@@ -363,6 +382,22 @@ export interface IEventEmitter extends BaseContract {
       borrowRate: BigNumberish,
       liquidityIndex: BigNumberish,
       borrowIndex: BigNumberish
+    ],
+    [void],
+    "nonpayable"
+  >;
+
+  emitPosition: TypedContractMethod<
+    [
+      account: AddressLike,
+      actionType: BigNumberish,
+      baseToken: AddressLike,
+      memeToken: AddressLike,
+      positionId: BigNumberish,
+      baseCollateral: BigNumberish,
+      baseDebtScaled: BigNumberish,
+      memeCollateral: BigNumberish,
+      memeDebtScaled: BigNumberish
     ],
     [void],
     "nonpayable"
@@ -537,6 +572,23 @@ export interface IEventEmitter extends BaseContract {
       borrowRate: BigNumberish,
       liquidityIndex: BigNumberish,
       borrowIndex: BigNumberish
+    ],
+    [void],
+    "nonpayable"
+  >;
+  getFunction(
+    nameOrSignature: "emitPosition"
+  ): TypedContractMethod<
+    [
+      account: AddressLike,
+      actionType: BigNumberish,
+      baseToken: AddressLike,
+      memeToken: AddressLike,
+      positionId: BigNumberish,
+      baseCollateral: BigNumberish,
+      baseDebtScaled: BigNumberish,
+      memeCollateral: BigNumberish,
+      memeDebtScaled: BigNumberish
     ],
     [void],
     "nonpayable"

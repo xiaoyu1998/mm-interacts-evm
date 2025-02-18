@@ -18,4 +18,5 @@ export * as role from "./role";
 export * as router from "./router";
 export * as tests from "./tests";
 export * as token from "./token";
+export * as twap from "./twap";
 export * as utils from "./utils";

@@ -339,6 +339,59 @@ const _abi = [
     inputs: [
       {
         internalType: "address",
+        name: "account",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "actionType",
+        type: "uint256",
+      },
+      {
+        internalType: "address",
+        name: "baseToken",
+        type: "address",
+      },
+      {
+        internalType: "address",
+        name: "memeToken",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "positionId",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "baseCollateral",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "baseDebtScaled",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "memeCollateral",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "memeDebtScaled",
+        type: "uint256",
+      },
+    ],
+    name: "emitPosition",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
         name: "remover",
         type: "address",
       },

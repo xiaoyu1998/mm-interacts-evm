@@ -1,27 +1,50 @@
 
 import { 
+    Pool,
     ReaderPoolUtils,
     ReaderPositionUtils
 } from "../typechain-types/contracts/reader/Reader";
 import { POOL_BASE, POOL_MEME } from "../utils/constants";
 
-// export function parseToken(token) {
-//     const t: ReaderPoolUtils.GetTokenStructOutput = {
-//         token: token[0],
-//         symbol: token[1],
-//         decimals: Number(token[2])
-//     };
-//     return t;
-// }
+export function parsePool2(pool) {
+    const p: Pool.PropsStructOutput = {
+        assets:[
+            {
+                token:pool[0][0][0],
+                borrowIndex:pool[0][0][1],
+                borrowRate:pool[0][0][2],
+                totalCollateral:pool[0][0][3],
+                totalCollateralWithDebt:pool[0][0][4],
+                totalScaledDebt:pool[0][0][5],
+                unclaimedFee:pool[0][0][6],
+            },
+            {
+                token:pool[0][1][0],
+                borrowIndex:pool[0][1][1],
+                borrowRate:pool[0][1][2],
+                totalCollateral:pool[0][1][3],
+                totalCollateralWithDebt:pool[0][1][4],
+                totalScaledDebt:pool[0][1][5],
+                unclaimedFee:pool[0][1][6],
+            }
+        ],
+        bank: pool[1],
+        interestRateStrategy: pool[2],
+        configuration: pool[3],
+        lastUpdateTimestamp:pool[4],
+    };
+    return p;
+}
 
-// export async function getTokens(dataStore, reader) {
-//     const tokens = await reader.getTokens(dataStore);
-//     let ts = [];
-//     for (let i = 0; i < tokens.length; i++) {
-//          ts[i] = parseToken(tokens[i]);
-//     }
-//     return ts;
-// }
+export async function getPools2(dataStore, reader, poolKeys) {
+    //console.log(poolKeys);
+    const pools = await reader.getPools2(dataStore, poolKeys);
+    let ps = [];
+    for (let i = 0; i < pools.length; i++) {
+         ps[i] = parsePool2(pools[i]);
+    }
+    return ps;
+}
 
 export function parsePool(pool) {
     const p: ReaderPoolUtils.GetPoolStructOutput = {
@@ -66,6 +89,7 @@ export function parsePool(pool) {
         createdTimestamp:pool[9],
         unclaimedFee:pool[10],
         memeMaxDepositAmount:pool[11],
+        averagePrice:pool[12],
     };
     return p;
 }
@@ -75,6 +99,37 @@ export async function getPools(dataStore, reader) {
     let ps = [];
     for (let i = 0; i < pools.length; i++) {
          ps[i] = parsePool(pools[i]);
+    }
+    return ps;
+}
+
+export function parsePoolInfo(pool) {
+    const p: ReaderPoolUtils.GetPoolInfoStructOutput = {
+        assets:[
+            {
+                token:pool[0][0][0],
+                symbol:pool[0][0][1],
+                decimals:pool[0][0][2],
+                borrowIndex:pool[0][0][3],
+            },
+            {
+                token:pool[0][1][0],
+                symbol:pool[0][1][1],
+                decimals:pool[0][1][2],
+                borrowIndex:pool[0][1][3],
+            }
+        ],
+        priceDecimals: pool[1],
+        price: pool[2],
+    };
+    return p;
+}
+
+export async function getPoolsInfo(dataStore, reader) {
+    const pools = await reader.getPoolsInfo(dataStore);
+    let ps = [];
+    for (let i = 0; i < pools.length; i++) {
+         ps[i] = parsePoolInfo(pools[i]);
     }
     return ps;
 }

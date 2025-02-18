@@ -1,4 +1,5 @@
 
+// const { ethers } = require("hardhat");
 const { AbiCoder, keccak256, toUtf8Bytes } = ethers;
 
 export function hashData(dataTypes, dataValues) {

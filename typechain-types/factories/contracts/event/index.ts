@@ -2,4 +2,5 @@
 /* tslint:disable */
 /* eslint-disable */
 export { EventEmitter__factory } from "./EventEmitter__factory";
+export { EventUtils__factory } from "./EventUtils__factory";
 export { IEventEmitter__factory } from "./IEventEmitter__factory";

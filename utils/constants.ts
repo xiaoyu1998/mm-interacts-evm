@@ -5,6 +5,7 @@ export const FeePercentageFactor = BigInt(1000000);
 export const usdtDecimals = 6;
 export const uniDecimals = 18;
 export const ethDecimals = 18;
+export const tokenDecimals = 18;
 
 export const PERCENTAGE_FACTOR = BigInt(10)**BigInt(4);
 export const HALF_PERCENTAGE_FACTOR = (BigInt(5)*BigInt(10)**BigInt(3));

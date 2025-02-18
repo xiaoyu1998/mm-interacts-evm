@@ -329,6 +329,22 @@ const _abi = [
     inputs: [
       {
         internalType: "uint256",
+        name: "amountToWithdraw",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "collateral",
+        type: "uint256",
+      },
+    ],
+    name: "InsufficientCollateralForWidthdraw",
+    type: "error",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
         name: "amountToBorrow",
         type: "uint256",
       },
@@ -339,22 +355,6 @@ const _abi = [
       },
     ],
     name: "InsufficientReverveForBorrow",
-    type: "error",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "amountToWithdraw",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "availableReserve",
-        type: "uint256",
-      },
-    ],
-    name: "InsufficientReverveForWithdraw",
     type: "error",
   },
   {
@@ -790,7 +790,7 @@ const _abi = [
 ] as const;
 
 const _bytecode =
-  "0x60566050600b82828239805160001a6073146043577f4e487b7100000000000000000000000000000000000000000000000000000000600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea26469706673582212202792a9ca166b1d19f85258a4dac9243675816d6e5074d71607456e5ccf7ba2fa64736f6c634300081c0033";
+  "0x60566050600b82828239805160001a6073146043577f4e487b7100000000000000000000000000000000000000000000000000000000600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea26469706673582212201e5828d4bbd96ebc3d3cfbc6be456d73af22d5951ea1ae6bd4cceee7604230b064736f6c634300081c0033";
 
 type ErrorsConstructorParams =
   | [signer?: Signer]

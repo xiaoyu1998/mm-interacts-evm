@@ -27,6 +27,13 @@ export async function deployContract(name, args, contractOptions = {}) {
     return contract;
 }
 
+export async function deployContract2(deployer, name, args, contractOptions = {}) {
+    let contractFactory = await ethers.getContractFactory(name, contractOptions);
+    let contract = await contractFactory.connect(deployer).deploy(...args);
+    await contract.waitForDeployment();
+    return contract;
+}
+
 export async function contractAt(name, address, provider) {
     let contractFactory = await ethers.getContractFactory(name);
     if (provider) {
@@ -69,7 +76,8 @@ export async function getContract(name) {
         name == "PoolInterestRateStrategy" ||
         name == "PositionStoreUtils" ||
         name == "EventEmitter" ||
-        name == "FeeHandler"
+        name == "FeeHandler" ||
+        name == "TwapUtils"
 
     ) {
         const address = getContractAddress(name);
@@ -93,10 +101,12 @@ export async function getContract(name) {
 
     if (name == "ReaderPoolUtils") {
         const poolStoreUtils = await getContract("PoolStoreUtils");
+        const twapUtils = await getContract("TwapUtils");
         const address = getContractAddress(name);
         return await contractAtOptions(name, address, {
             libraries: {
-                PoolStoreUtils: poolStoreUtils
+                PoolStoreUtils: poolStoreUtils,
+                TwapUtils: twapUtils,
             },         
         });
     }
@@ -105,23 +115,26 @@ export async function getContract(name) {
         const poolStoreUtils = await getContract("PoolStoreUtils");
         const positionStoreUtils = await getContract("PositionStoreUtils");
         const readerPoolUtils = await getContract("ReaderPoolUtils");
+        const twapUtils = await getContract("TwapUtils");
         const address = getContractAddress(name);
         return await contractAtOptions(name, address, {
             libraries: {
                 PoolStoreUtils: poolStoreUtils,
                 PositionStoreUtils: positionStoreUtils,
                 ReaderPoolUtils: readerPoolUtils,
+                TwapUtils: twapUtils,
             },         
         });
     }
 
     if (name == "LiquidityHandler") {
         const poolStoreUtils = await getContract("PoolStoreUtils");
-
+        const twapUtils = await getContract("TwapUtils");
         const address = getContractAddress(name);
         return await contractAtOptions(name, address, {
             libraries: {
                 PoolStoreUtils: poolStoreUtils,
+                TwapUtils: twapUtils,
             },        
         });       
     }
@@ -129,11 +142,13 @@ export async function getContract(name) {
     if (name == "SwapHandler") {
         const poolStoreUtils = await getContract("PoolStoreUtils");
         const positionStoreUtils = await getContract("PositionStoreUtils");
+        const twapUtils = await getContract("TwapUtils");
         const address = getContractAddress(name);
         return await contractAtOptions(name, address, {
             libraries: {
                 PoolStoreUtils: poolStoreUtils,
                 PositionStoreUtils: positionStoreUtils,
+                TwapUtils: twapUtils,
             },        
         });       
     }
@@ -153,12 +168,13 @@ export async function getContract(name) {
     if (name == "BorrowHandler") {
         const poolStoreUtils = await getContract("PoolStoreUtils");
         const positionStoreUtils = await getContract("PositionStoreUtils");
-
+        const twapUtils = await getContract("TwapUtils");
         const address = getContractAddress(name);
         return await contractAtOptions(name, address, {
             libraries: {
                 PoolStoreUtils: poolStoreUtils,
                 PositionStoreUtils: positionStoreUtils,
+                TwapUtils: twapUtils,
             },        
         });       
     }
@@ -166,12 +182,13 @@ export async function getContract(name) {
     if (name == "WithdrawHandler") {
         const poolStoreUtils = await getContract("PoolStoreUtils");
         const positionStoreUtils = await getContract("PositionStoreUtils");
-
+        const twapUtils = await getContract("TwapUtils");
         const address = getContractAddress(name);
         return await contractAtOptions(name, address, {
             libraries: {
                 PoolStoreUtils: poolStoreUtils,
                 PositionStoreUtils: positionStoreUtils,
+                TwapUtils: twapUtils,
             },        
         });       
     }
@@ -192,12 +209,13 @@ export async function getContract(name) {
     if (name == "CloseHandler") {
         const poolStoreUtils = await getContract("PoolStoreUtils");
         const positionStoreUtils = await getContract("PositionStoreUtils");
-
+        const twapUtils = await getContract("TwapUtils");
         const address = getContractAddress(name);
         return await contractAtOptions(name, address, {
             libraries: {
                 PoolStoreUtils: poolStoreUtils,
                 PositionStoreUtils: positionStoreUtils,
+                TwapUtils: twapUtils,
             },        
         });       
     }
@@ -205,12 +223,13 @@ export async function getContract(name) {
     if (name == "LiquidationHandler") {
         const poolStoreUtils = await getContract("PoolStoreUtils");
         const positionStoreUtils = await getContract("PositionStoreUtils");
-
+        const twapUtils = await getContract("TwapUtils");
         const address = getContractAddress(name);
         return await contractAtOptions(name, address, {
             libraries: {
                 PoolStoreUtils: poolStoreUtils,
                 PositionStoreUtils: positionStoreUtils,
+                TwapUtils: twapUtils,
             },        
         });       
     }

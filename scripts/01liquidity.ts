@@ -1,7 +1,7 @@
 import { contractAt, getContract, sendTxn } from "../utils/deploy"
 import { bigNumberify, expandDecimals} from "../utils/math"
 import { usdtDecimals, uniDecimals, ethDecimals} from "../utils/constants";
-import { getPools, getTokens } from "../utils/reader"
+import { getPools, getPoolsInfo } from "../utils/reader"
 
 import { LiquidityUtils } from "../typechain-types/contracts/exchange/LiquidityHandler";
 
@@ -72,6 +72,7 @@ async function main() {
     console.log("usdtPool", await usdt.balanceOf(pool0.bank))
     console.log("uniPool", await uni.balanceOf(pool0.bank))
     console.dir(await getPools(dataStore, reader), {depth: null, colors: true });
+    console.dir(await getPoolsInfo(dataStore, reader), {depth: null, colors: true });
 
 }
 

@@ -35,5 +35,7 @@ import type * as tests from "./tests";
 export type { tests };
 import type * as token from "./token";
 export type { token };
+import type * as twap from "./twap";
+export type { twap };
 import type * as utils from "./utils";
 export type { utils };
