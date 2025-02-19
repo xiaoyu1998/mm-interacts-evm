@@ -45,7 +45,7 @@ async function main() {
         config.interface.encodeFunctionData("setTradableDebtMultipierFactor", [expandDecimals(11, 26)]),//110%
         config.interface.encodeFunctionData("setTreasury", [treasury]),
         config.interface.encodeFunctionData("setLiquidationFee", [expandDecimals(1, usdtDecimals)]),//1usdt
-        config.interface.encodeFunctionData("setTwapPeriod", [600]),//10 minutes
+        config.interface.encodeFunctionData("setTwapPeriod", [60]),//1 minutes
     ];
     await sendTxn(config.multicall(multicallArgs), "config.multicall");
 
